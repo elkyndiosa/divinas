@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+.container-global{
+    max-width: 1500px !important;
+    width: 100% !important;
+}
+.content-error {
+    min-height: 30px;
+    height: auto;
+    padding: 5px 0px 0px 0px;
+  }
+.error-details {
+color: #e91e60 !important;
+}
+.v-application a {
+  text-decoration: none !important;
+}
+.text-primary-headers{
+  font-family: 'Parisienne', cursive !important;
+  font-size: 60px;
+  line-height: 1.2;
+}

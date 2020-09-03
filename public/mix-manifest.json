@@ -1,0 +1,18 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/account.js": "/account.js",
+    "/contact.js": "/contact.js",
+    "/dashboard.js": "/dashboard.js",
+    "/favorites.js": "/favorites.js",
+    "/form-user.js": "/form-user.js",
+    "/handler-layout.js": "/handler-layout.js",
+    "/home.js": "/home.js",
+    "/images.js": "/images.js",
+    "/not-found-page.js": "/not-found-page.js",
+    "/ation.js": "/ation.js",
+    "/ations.js": "/ations.js",
+    "/vendors~contact~form-user.js": "/vendors~contact~form-user.js",
+    "/vendors~images~publications~videos.js": "/vendors~images~publications~videos.js",
+    "/videos.js": "/videos.js"
+}

@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{242:function(t,s,e){"use strict";e.r(s);var a={name:"BaseCard"},n=e(1),i=Object(n.a)(a,(function(){var t=this.$createElement;return(this._self._c||t)("v-card",this._g(this._b({attrs:{flat:"",tile:""}},"v-card",this.$attrs,!1),this.$listeners),[this._t("default")],2)}),[],!1,null,null,null);s.default=i.exports}}]);

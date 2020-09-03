@@ -1,0 +1,14 @@
+.slide-image-enter-active, .slide-image-leave-active{
+  transition: all .2s;
+}
+.slide-image-leave-to{
+  transform: translateX(-50px);
+  opacity: 0;
+}
+.slide-image-enter{
+  transform: translateX(50px);
+  opacity: 0;
+}
+.slide-image-enter-to, .slide-image-leave{
+  opacity: 1;
+}
