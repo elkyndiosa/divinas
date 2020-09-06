@@ -33,12 +33,17 @@
           >Filtrar</v-btn>
         </v-col>
       </v-row>
-
+      <v-progress-linear
+        indeterminate
+        color="primary"
+        v-if="busy"
+      ></v-progress-linear>
       <feed-card
       v-for="(item, index) in publications" :key="index"
         :size="3"
         :value="item"
         @addFavorities="addFavorities"
+        v-else
       />
     </v-row>
   </v-container>
@@ -54,7 +59,8 @@ export default {
   data: () => ({
     layout: [1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
     page: 1,
-    publications: []
+    publications: [],
+    busy: false,
   }),
   computed: {
     pages() {
@@ -78,16 +84,16 @@ export default {
     this.getPublications();
   },
   methods: {
-    getPublications(){
-    var url =  '/api/publication/';
-       axios
-        .get(url)
-        .then((response) => {
-          this.publications = response.data;
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
+    async getPublications(){
+        this.busy = true
+        var url =  '/api/publication/';
+        try {
+            var response = await axios.get(url)
+            this.publications = response.data;
+        } catch(error) {
+            console.log(error.response.data);
+        }
+        this.busy = false
     },
     addFavorities(uuid){
         this.$emit("addFavorities", uuid);

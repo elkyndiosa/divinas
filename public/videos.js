@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Videos: function Videos() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/publication/VideoComponent.vue */ "./resources/js/components/publication/VideoComponent.vue"));
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/publication/VideoComponent.vue */ "./resources/js/components/publication/VideoComponent.vue"));
     },
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
   },

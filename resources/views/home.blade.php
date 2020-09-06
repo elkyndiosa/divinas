@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
     <title>DivinasPrepagos</title>
-    
+
         <!--  Essential META Tags Socials -->
         <meta property="og:title" content="Divinas Prepagos">
         <meta property="og:description" content="Prepagos Medellin">
@@ -27,6 +27,8 @@
         {{-- <meta name="twitter:image" content=" "--}}
         <meta name="twitter:image:alt" content="DivinasPrepagos">
         <meta name="twitter:site" content="@website-username">
+
+        <link  rel="icon"   href="{{ asset('images/favicon.jpeg') }}" type="image/png" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

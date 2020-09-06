@@ -1,7 +1,13 @@
 <template>
   <div class="full-width mt-3 m-auto d-flex justify-center flex-wrap">
+    <v-col cols="12" v-if="busy">
+        <v-progress-linear
+            indeterminate
+            color="primary"
+        ></v-progress-linear>
+    </v-col>
     <v-col cols="12" v-if="images.length >= 1" class="d-flex justify-center flex-wrap" style="max-width: 100%" >
-      <v-col cols="6" sm="4" md="3" lg="2" v-for="(item, index) in images" :key="index">
+      <v-col cols="6" sm="4" md="3" v-for="(item, index) in images" :key="index">
         <v-card
           class="portrait"
           :img="'/uploads/images/'+item.path"
@@ -25,12 +31,12 @@
           height="400"
           v-model="indexImage"
         >
-          <v-carousel-item v-for="(slide, i) in imagesArray" :key="i" :src="'/uploads/images/'+slide"></v-carousel-item>
+        <v-carousel-item v-for="(slide, i) in imagesArray" :key="i" :src="'/uploads/images/'+slide" contain></v-carousel-item>
         </v-carousel>
         <v-list two-line>
           <v-list-item v-if="userData">
             <v-list-item-avatar>
-              <v-img  :src="'/uploads/images/'+userData.image_profile"></v-img>
+              <v-img  :src="'/uploads/images/'+userData.image_profile" contain></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>{{userData.name}}</v-list-item-title>
@@ -52,6 +58,7 @@ export default {
   props: ["search", "uuid", "userData", "dash"],
   data() {
     return {
+      busy: false,
       images: [],
       imagesArray: [],
       dialog: false,
@@ -59,7 +66,7 @@ export default {
     };
   },
   mounted() {
-    
+
     switch (this.search) {
       case "allUser":
         this.getImages();
@@ -74,7 +81,7 @@ export default {
     }
   },
   computed: {
-   
+
   },
   methods: {
     openCarousel(index) {
@@ -84,19 +91,18 @@ export default {
     redirectWhatsapp(whatsapp){
       window.open("https://api.whatsapp.com/send?phone="+whatsapp+"&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
     },
-    getImagesPublication() {
-      setTimeout(() => {
+    async getImagesPublication() {
+        this.busy = true
         let url = "/api/images/publication/" + this.uuid;
-        axios
-          .get(url)
-          .then((response) => {
+        try {
+            var response = await axios.get(url)
             this.images = response.data;
             this.getImagesArray(this.images)
-          })
-          .catch((error) => {
+        } catch(error) {
             console.log(error);
-          });
-      }, 1000);
+        }
+        this.busy = false
+
     },
     getImages() {
       var url = "/api/images";

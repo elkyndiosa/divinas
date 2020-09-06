@@ -1,47 +1,48 @@
 <template>
   <v-col cols="6" md="4" lg="3">
-    <base-card :height="300" color="grey lighten-1" dark v-if="value != ''">
-      <v-img
-        :src="'/uploads/images/'+JSON.parse(value.imgages_path)"
-        height="100%"
-        gradient="rgba(0, 0, 0, .12), rgba(0, 0, 0, .12)"
-      >
+    <base-card :height="480" outlined v-if="value != ''">
+        <img
+            :src="'/uploads/images/'+JSON.parse(value.imgages_path)"
+            height="40%"
+            width="100%"
+            gradient="rgba(0, 0, 0, .12), rgba(0, 0, 0, .12)"
+            contain
+        />
         <v-card-title @click="showPublication(value.uuid)" style="cursor: pointer">
-          <v-row class="fill-height text-right ma-0">
+            <v-row class="fill-height text-right ma-0">
             <v-col cols="12">
-              <v-col cols="12" class="d-flex justify-space-between pa-0">
+                <v-col cols="12" class="d-flex justify-space-between pa-0">
                 <v-icon
-                  class="material-icons"
-                  color="yellow"
-                  v-if="value.user.status == 1"
+                    class="material-icons"
+                    color="yellow"
+                    v-if="value.user.status == 1"
                 >verified_user</v-icon>
-                
-              </v-col>
+                <div v-else class="my-3"></div>
+                </v-col>
 
-              <h3 class="title font-weight-bold mb-2">{{ value.title }}</h3>
+                <p class="text-h6">{{value.user.name}}</p>
+                <h3 class="title font-weight-bold mb-2">{{ value.title }}</h3>
 
-              <div class="caption">
+                <div class="caption">
                 <p>Publicado:</p>
                 <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
-                <p class="text-h4">{{value.user.name}}</p>
-              </div>
+                </div>
             </v-col>
-          </v-row>
+            </v-row>
         </v-card-title>
         <v-card-actions class="pa-0" style="position:absolute;bottom:0px;width:100%;">
-          <v-col cols="12" class="pa-0 d-flex justify-content-end">
+            <v-col cols="12" class="pa-0 d-flex justify-content-end">
             <v-spacer></v-spacer>
             <v-btn
-              fab
-              text
-              @click="!isFavorite ? addFavorities(value) : removeFavorities(value)"
-              :color="isFavorite ? 'primary' : 'white'"
+                fab
+                text
+                @click="!isFavorite ? addFavorities(value) : removeFavorities(value)"
+                :color="isFavorite ? 'primary' : 'grey lighten-1'"
             >
-              <v-icon class="material-icons">favorite</v-icon>
+                <v-icon class="material-icons">favorite</v-icon>
             </v-btn>
-          </v-col>
+            </v-col>
         </v-card-actions>
-      </v-img>
     </base-card>
   </v-col>
 </template>
@@ -83,7 +84,7 @@ export default {
       }
       return false;
     },
-    
+
   },
   methods: {
     showPublication(uuid) {

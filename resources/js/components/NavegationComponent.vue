@@ -11,15 +11,12 @@
           class="px-0 px-sm-12 container-nav mx-auto"
           z-index="0"
         >
-          <v-avatar class="mr-3" color="grey lighten-5" size="50">
-            <v-img
-              contain
-              max-height="70%"
-              src=""
-            ></v-img>
-          </v-avatar>
           <router-link :to="{name: 'home'}">
-            <v-toolbar-title class=" text-h6 black--text">Divinas Prepagos</v-toolbar-title>
+            <img
+              height="60"
+              width="200"
+              src="images/logo.jpg"
+            />
           </router-link>
           <v-spacer></v-spacer>
 <!-- inicio -->
@@ -76,7 +73,7 @@
     </nav>
     <!-- <v-navigation-drawer v-model="menu" v-if="menu" :right="true" absolute temporary dark>
       <v-list dense nav>
-        <v-list-item v-if="guest"> 
+        <v-list-item v-if="guest">
           <v-list-item-content>
             <v-list-item-title>No has iniciado session</v-list-item-title>
           </v-list-item-content>

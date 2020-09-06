@@ -363,13 +363,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   components: {
     FeedCard: function FeedCard() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
     },
     FormPublication: function FormPublication() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/FormPublication.vue */ "./resources/js/components/FormPublication.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/FormPublication.vue */ "./resources/js/components/FormPublication.vue"));
     },
     Gallery: function Gallery() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
     },
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -595,7 +595,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.icon-card {\r\n  position: absolute;\r\n  left: 20px;\r\n  bottom: 20px;\n}\n.icon-card i {\r\n  font-size: 100px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.icon-card {\n  position: absolute;\n  left: 20px;\n  bottom: 20px;\n}\n.icon-card i {\n  font-size: 100px !important;\n}\n", ""]);
 
 // exports
 
