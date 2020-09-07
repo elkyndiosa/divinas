@@ -9,6 +9,7 @@ use App\Http\Controllers\Image\Requests\ImageSaveRequest;
 use App\Image;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Image as ImageEditor;
 
 class ImageController extends Controller
 {
@@ -31,23 +32,22 @@ class ImageController extends Controller
     public function getByPublication(User $uuid){
         return $this->imageRepo->getByPublication($uuid);
     }
-    public function create(ImageSaveRequest $request){
-
-        if (!empty($_FILES)) {
-
-            $file = $_FILES['file'];
-            $name_file = $file['name'];
-            $tmp_name_file = $file['tmp_name'];
+    public function create(ImageSaveRequest $request)
+    {
+        if($request->file('file')) {
+            $file = $request->file;
+            $original_name = $file->getClientOriginalName();
             $replace = array(" ", "(", ")");
-            $image_path = time().str_replace($replace,"", $name_file);
-            if (!is_dir('uploads/images')) {
-                mkdir('uploads/images', 0777, true);
-            }
+            $name = time().str_replace($replace, "", $original_name);
+            $image = ImageEditor::make($file);
+            $image->resize(1440, 1024);
+            $image->insert(public_path('images/marca.png'), 'center');
+            $image->save(public_path('uploads/images/'.$name));
+            return $this->saveName($name);
+        }
 
-            move_uploaded_file($tmp_name_file, 'uploads/images/' . $image_path);
-
-            return $this->saveName( $image_path);
-        } else { echo 'error: no file'; }
+        $message = 'No ha enviado ninguna imagen';
+        return response()->json(compact('message'), 401);
     }
     public function saveName($name){
         return Image::create([
