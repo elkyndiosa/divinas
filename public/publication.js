@@ -9,8 +9,69 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -71,12 +132,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
+Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["uuid"],
   components: {
     Gallery: function Gallery() {
-      return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
     },
     TableData: function TableData() {
       return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
@@ -85,13 +146,15 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
   data: function data() {
     return {
       media: 'fotos',
+      busy: false,
       data: {
         publication: {
           imgages_path: null
         },
         user: {
           uuid: ""
-        }
+        },
+        servicios: []
       }
     };
   },
@@ -103,12 +166,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
     getUuid: function getUuid() {
       return;
     },
-    images: function images() {
-      if (!this.data.publication.imgages_path) {
-        return [];
-      }
-
-      return JSON.parse(this.data.publication.imgages_path);
+    image: function image() {
+      return this.data.user.image_profile;
     }
   },
   watch: {},
@@ -125,12 +184,40 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
     getPublication: function getPublication() {
       var _this = this;
 
-      var url = "/api/publication/" + this.uuid;
-      axios.get(url).then(function (response) {
-        _this.data = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.busy = true;
+                url = "/api/publication/" + _this.uuid;
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.get(url);
+
+              case 5:
+                response = _context.sent;
+                _this.data = response.data;
+                console.log(resposne.data);
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0);
+
+              case 13:
+                _this.busy = false;
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 10]]);
+      }))();
     }
   }
 });
@@ -451,106 +538,152 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-app",
+    "v-container",
+    { attrs: { fluid: "" } },
     [
       _c(
-        "v-main",
-        { staticClass: "mt-12 container-global ma-auto" },
+        "v-row",
+        { attrs: { "justify-sm": "center", "justify-md": "end" } },
         [
           _c(
-            "v-container",
-            {
-              staticClass:
-                "full-height d-flex justify-center flex-wrap align-center",
-              attrs: { fluid: "" }
-            },
+            "v-col",
+            { attrs: { cols: "12", sm: "8", md: "6" } },
             [
               _c(
-                "v-col",
-                { staticClass: "mt-6", attrs: { cols: "12", md: "6" } },
+                "v-card",
+                { attrs: { flat: "" } },
                 [
-                  _vm.images.length > 0
-                    ? _c("v-img", {
-                        staticClass: "rounded-lg",
-                        attrs: {
-                          src: "uploads/images/" + _vm.images[0],
-                          "max-height": "500px"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "6" } },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "black--text text-capitalize text-left text-h5 font-weight-bold mt-6"
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.data.publication.name) +
-                          " - " +
-                          _vm._s(_vm.data.publication.years)
+                  _vm.busy
+                    ? _c(
+                        "v-card-text",
+                        [
+                          _c("v-skeleton-loader", {
+                            ref: "skeleton",
+                            staticClass: "mx-auto",
+                            attrs: {
+                              type: "list-item-avatar-two-line",
+                              height: "100"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-skeleton-loader", {
+                            ref: "skeleton",
+                            staticClass: "mx-auto",
+                            attrs: { type: "paragraph", height: "100" }
+                          })
+                        ],
+                        1
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "grey--text darken-2 text-capitalize text-left text-subtitle-2 font-weight-light mb-6"
-                    },
-                    [
-                      _vm._v(
-                        "Publicacion " +
-                          _vm._s(
-                            _vm
-                              .moment(_vm.data.publication.created_at)
-                              .startOf("hour")
-                              .format("DD-MMMM-YYYY")
+                    : _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-list-item",
+                            { attrs: { "two-line": "" } },
+                            [
+                              _c(
+                                "v-list-item-avatar",
+                                { attrs: { height: "100", width: "100" } },
+                                [
+                                  _vm.data.publication.imgages_path
+                                    ? _c("v-img", {
+                                        attrs: {
+                                          src:
+                                            "/uploads/images/" +
+                                            JSON.parse(
+                                              _vm.data.publication.imgages_path
+                                            )[0]
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c(
+                                    "v-list-item-title",
+                                    {
+                                      staticClass:
+                                        "black--text text-capitalize text-h4 font-weight-bold"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                              " +
+                                          _vm._s(_vm.data.publication.name) +
+                                          "\n                          "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list-item-subtitle",
+                                    {
+                                      staticClass:
+                                        "grey--text text-capitalize text-h6 font-weight-bold"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                              Publicacion " +
+                                          _vm._s(
+                                            _vm
+                                              .moment(
+                                                _vm.data.publication.created_at
+                                              )
+                                              .startOf("hour")
+                                              .format("DD-MMMM-YYYY")
+                                          ) +
+                                          "\n                          "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              staticClass:
+                                "black--text text-none text-justify text-body-1",
+                              staticStyle: { "line-height": "25px" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(_vm.data.publication.description) +
+                                  "\n                  "
+                              )
+                            ]
                           )
-                      )
-                    ]
-                  ),
+                        ],
+                        1
+                      ),
                   _vm._v(" "),
                   _c(
-                    "p",
-                    {
-                      staticClass:
-                        "black--text text-none text-justify text-body-1",
-                      staticStyle: { "line-height": "25px" }
-                    },
-                    [_vm._v(_vm._s(_vm.data.publication.description))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    {
-                      staticClass: "d-flex justify-end",
-                      attrs: { cols: "12" }
-                    },
+                    "v-card-actions",
                     [
+                      _c("v-spacer"),
+                      _vm._v(" "),
                       _c(
                         "v-btn",
                         {
-                          staticClass: "ml-4",
-                          attrs: { color: "red", dark: "" }
+                          staticClass: "mx-2",
+                          attrs: {
+                            disabled: _vm.busy,
+                            color: "red",
+                            href: "tel:3145780315",
+                            dark: !_vm.busy
+                          }
                         },
                         [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "white--text",
-                              attrs: { href: "tel:3145780315" }
-                            },
-                            [_vm._v("Llamar")]
+                          _vm._v(
+                            "\n                      Llamar\n                  "
                           )
                         ]
                       ),
@@ -558,8 +691,8 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "ml-4",
-                          attrs: { color: "success" },
+                          staticClass: "mx-2",
+                          attrs: { disabled: _vm.busy, color: "success" },
                           on: {
                             click: function($event) {
                               return _vm.redirectWhatsapp(
@@ -568,21 +701,49 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Whatsapp")]
+                        [
+                          _vm._v(
+                            "\n                      Whatsapp\n                  "
+                          )
+                        ]
                       )
                     ],
                     1
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticStyle: { width: "100%" } },
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-row",
+        { attrs: { justify: "center" } },
+        [
+          _vm.busy
+            ? _c(
+                "v-col",
+                { attrs: { cols: "12 ", md: "10" } },
+                _vm._l(6, function(n) {
+                  return _c("v-skeleton-loader", {
+                    key: n,
+                    ref: "skeleton",
+                    refInFor: true,
+                    staticClass: "mx-auto",
+                    attrs: { type: "text", height: "50" }
+                  })
+                }),
+                1
+              )
+            : _c(
+                "v-col",
+                { attrs: { cols: "12" } },
                 [
                   _c("table-data", {
-                    staticStyle: { width: "100%" },
                     attrs: {
                       userDataTable: _vm.data.publication,
                       times: _vm.data.times
@@ -590,23 +751,27 @@ var render = function() {
                   })
                 ],
                 1
-              ),
+              )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      !_vm.busy
+        ? _c(
+            "v-row",
+            [
+              _c("v-col", { attrs: { cols: "12" } }, [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v("Mis servicios")
+                ])
+              ]),
               _vm._v(" "),
               _c(
-                "v-row",
-                { staticStyle: { width: "100%" } },
+                "v-col",
+                { attrs: { cols: "12" } },
                 [
-                  _c("v-col", { attrs: { cols: "12" } }, [
-                    _c("h4", { staticClass: "text-center" }, [
-                      _vm._v("Mis servicios")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "12" } },
-                    [
-                      _c(
+                  _vm.data.services.length > 0
+                    ? _c(
                         "v-chip-group",
                         {
                           attrs: { column: "", "active-class": "primary--text" }
@@ -617,86 +782,84 @@ var render = function() {
                             { key: index, attrs: { disabled: "" } },
                             [
                               _vm._v(
-                                "\n               " +
+                                "\n           " +
                                   _vm._s(item.name) +
-                                  "\n            "
+                                  "\n        "
                               )
                             ]
                           )
                         }),
                         1
                       )
-                    ],
-                    1
-                  )
+                    : _c("v-subheader", [
+                        _vm._v("\n          Sin servicios.\n      ")
+                      ])
                 ],
                 1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "v-row",
+        [
+          _c(
+            "v-col",
+            {
+              staticClass: "d-flex justify-center pb-0",
+              attrs: { cols: "12" }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  class: _vm.media == "fotos" ? "red white--text" : "",
+                  attrs: { elevation: "0", color: "transparent" },
+                  on: {
+                    click: function($event) {
+                      _vm.media = "fotos"
+                    }
+                  }
+                },
+                [_vm._v("Fotos")]
               ),
               _vm._v(" "),
               _c(
-                "v-row",
+                "v-btn",
+                {
+                  class: _vm.media == "videos" ? "red white--text" : "",
+                  attrs: { elevation: "0", color: "transparent" },
+                  on: {
+                    click: function($event) {
+                      _vm.media = "videos"
+                    }
+                  }
+                },
+                [_vm._v("Videos")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12" } },
+            [
+              _c(
+                "transition",
+                { attrs: { name: "slide-image", mode: "out-in" } },
                 [
-                  _c(
-                    "v-col",
-                    {
-                      staticClass: "d-flex justify-center pb-0",
-                      attrs: { cols: "12" }
-                    },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          class: _vm.media == "fotos" ? "red white--text" : "",
-                          attrs: { elevation: "0", color: "transparent" },
-                          on: {
-                            click: function($event) {
-                              _vm.media = "fotos"
-                            }
-                          }
-                        },
-                        [_vm._v("Fotos")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          class: _vm.media == "videos" ? "red white--text" : "",
-                          attrs: { elevation: "0", color: "transparent" },
-                          on: {
-                            click: function($event) {
-                              _vm.media = "videos"
-                            }
-                          }
-                        },
-                        [_vm._v("Videos")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "12" } },
-                    [
-                      _c(
-                        "transition",
-                        { attrs: { name: "slide-image", mode: "out-in" } },
-                        [
-                          _vm.media == "fotos"
-                            ? _c("gallery", {
-                                attrs: {
-                                  userData: _vm.data.publication,
-                                  uuid: _vm.data.user.uuid,
-                                  search: "publication"
-                                }
-                              })
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
+                  _vm.media == "fotos"
+                    ? _c("gallery", {
+                        attrs: {
+                          userData: _vm.data.user,
+                          uuid: _vm.data.user.uuid,
+                          search: "publication"
+                        }
+                      })
+                    : _vm._e()
                 ],
                 1
               )

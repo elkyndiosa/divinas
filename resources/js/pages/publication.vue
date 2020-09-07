@@ -1,31 +1,83 @@
 <template >
-   <v-app>
-    <v-main class="mt-12 container-global ma-auto">
-      <v-container class="full-height d-flex justify-center flex-wrap align-center" fluid>
-        <v-col cols="12" md="6" class="mt-6">
-          <v-img
-            v-if="images.length > 0"
-            :src="'uploads/images/'+images[0]"
-            max-height="500px"
-            class="rounded-lg"
-          >
-          </v-img>
-        </v-col>
-        <v-col cols="12" md="6">
-          <div class="black--text text-capitalize text-left text-h5 font-weight-bold mt-6">{{data.publication.name}} - {{data.publication.years}}</div>
-          <div class="grey--text darken-2 text-capitalize text-left text-subtitle-2 font-weight-light mb-6">Publicacion {{moment(data.publication.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</div>
-
-          <p class="black--text text-none text-justify text-body-1" style="line-height: 25px;">{{data.publication.description}}</p>
-          <v-col cols="12" class="d-flex justify-end">
-            <v-btn class="ml-4" color="red" dark ><a :href="'tel:3145780315'" class="white--text">Llamar</a></v-btn>
-            <v-btn @click="redirectWhatsapp(data.publication.whatsapp)" class="ml-4" color="success">Whatsapp</v-btn>
-          </v-col>
-
-        </v-col>
-        <v-row style="width: 100%" >
-          <table-data :userDataTable="data.publication" :times="data.times" style="width: 100%" ></table-data>
+      <v-container fluid>
+        <v-row justify-sm="center" justify-md="end">
+            <v-col cols="12" sm="8" md="6">
+                <v-card flat>
+                    <v-card-text v-if="busy">
+                        <v-skeleton-loader
+                            ref="skeleton"
+                            type="list-item-avatar-two-line"
+                            class="mx-auto"
+                            height="100"
+                        ></v-skeleton-loader>
+                        <v-skeleton-loader
+                            ref="skeleton"
+                            type="paragraph"
+                            class="mx-auto"
+                            height="100"
+                        ></v-skeleton-loader>
+                    </v-card-text>
+                    <v-card-text v-else>
+                        <v-list-item two-line>
+                            <v-list-item-avatar height="100" width="100">
+                                <v-img
+                                    v-if="data.publication.imgages_path"
+                                    :src="'/uploads/images/'+JSON.parse(data.publication.imgages_path)[0]"
+                                ></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title class="black--text text-capitalize text-h4 font-weight-bold">
+                                    {{ data.publication.name }}
+                                </v-list-item-title>
+                                <v-list-item-subtitle class="grey--text text-capitalize text-h6 font-weight-bold">
+                                    Publicacion {{ moment(data.publication.created_at).startOf('hour').format('DD-MMMM-YYYY') }}
+                                </v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <p class="black--text text-none text-justify text-body-1" style="line-height: 25px;">
+                            {{ data.publication.description }}
+                        </p>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn 
+                            class="mx-2"
+                            :disabled="busy" 
+                            color="red" 
+                            :href="'tel:3145780315'"  
+                            :dark="!busy"
+                        >
+                            Llamar
+                        </v-btn>
+                        <v-btn 
+                            @click="redirectWhatsapp(data.publication.whatsapp)" 
+                            class="mx-2" 
+                            :disabled="busy"
+                            color="success"
+                        >
+                            Whatsapp
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
         </v-row>
-        <v-row style="width: 100%" >
+        <v-row justify="center">
+            <v-col cols="12 " md="10" v-if="busy">
+                <v-skeleton-loader
+
+                    ref="skeleton"
+                    type="text"
+                    class="mx-auto"
+                    height="50"
+                    v-for="n in 6"
+                    :key="n"
+                ></v-skeleton-loader>
+            </v-col>
+            <v-col cols="12" v-else>
+                <table-data :userDataTable="data.publication" :times="data.times"></table-data>
+            </v-col>
+        </v-row>
+        <v-row v-if="!busy">
           <v-col cols="12">
             <h4 class="text-center">Mis servicios</h4>
           </v-col>
@@ -33,11 +85,15 @@
             <v-chip-group
               column
               active-class="primary--text"
+              v-if="data.services.length > 0"
             >
               <v-chip v-for="(item, index) in data.services" :key="index" disabled>
                  {{item.name}}
               </v-chip>
             </v-chip-group>
+            <v-subheader v-else>
+                Sin servicios.
+            </v-subheader>
           </v-col>
         </v-row>
         <v-row>
@@ -48,14 +104,11 @@
           <v-col cols="12">
 
           <transition name="slide-image" mode="out-in">
-            <gallery v-if="media == 'fotos'" :userData="data.publication" :uuid="data.user.uuid"  search="publication"></gallery>
+            <gallery v-if="media == 'fotos'" :userData="data.user" :uuid="data.user.uuid"  search="publication"></gallery>
           </transition>
           </v-col>
         </v-row>
-
       </v-container>
-    </v-main>
-  </v-app>
 </template>
 <script>
 import moment from 'moment'
@@ -69,13 +122,15 @@ export default {
   data() {
     return {
       media: 'fotos',
+      busy: false,
       data: {
             publication: {
                 imgages_path: null
             },
             user: {
                 uuid: ""
-            }
+            },
+            servicios: []
       }
     };
   },
@@ -87,14 +142,12 @@ export default {
     getUuid(){
       return ;
     },
-    images() {
-        if(!this.data.publication.imgages_path) {
-            return []
-        }
-        return JSON.parse(this.data.publication.imgages_path)
+    image() {
+        return this.data.user.image_profile
     }
   },
   watch: {
+      
   },
   methods: {
     redirectWhatsapp(whatsapp){
@@ -106,14 +159,17 @@ export default {
         console.log(error)
       })
     },
-    getPublication(){
-      let url = "/api/publication/"+this.uuid;
-      axios.get(url).then(response => {
-        this.data= response.data;
-      }).catch(error => {
-        console.log(error)
-      })
-
+    async getPublication(){
+        this.busy = true
+        let url = "/api/publication/"+this.uuid;
+        try {
+            let response = await axios.get(url)
+            this.data= response.data;
+            console.log(resposne.data)
+        } catch(error) {
+            console.log(error)
+        }
+        this.busy = false
     }
   },
 };

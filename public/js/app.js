@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~images~publications~videos","publication":"publication","images":"images","videos":"videos","publications":"publications","dashboard":"dashboard","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact~form-user":"vendors~contact~form-user","contact":"contact","form-user":"form-user"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~images~publications~videos","images":"images","videos":"videos","publication":"publication","publications":"publications","dashboard":"dashboard","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact~form-user":"vendors~contact~form-user","contact":"contact","form-user":"form-user"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -81972,7 +81972,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(15), __webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
