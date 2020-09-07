@@ -1,11 +1,10 @@
 <template>
   <v-col cols="6" md="4" lg="3">
     <base-card :height="480" outlined v-if="value != ''">
-        <img
-            :src="'/uploads/images/'+JSON.parse(value.imgages_path)"
+        <v-img
+            :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
             height="40%"
             width="100%"
-            gradient="rgba(0, 0, 0, .12), rgba(0, 0, 0, .12)"
             contain
         />
         <v-card-title @click="showPublication(value.uuid)" style="cursor: pointer">
@@ -15,12 +14,12 @@
                 <v-icon
                     class="material-icons"
                     color="yellow"
-                    v-if="value.user.status == 1"
+                    v-if="value.status == 1"
                 >verified_user</v-icon>
                 <div v-else class="my-3"></div>
                 </v-col>
 
-                <p class="text-h6">{{value.user.name}}</p>
+                <p class="text-h6">{{value.name}}</p>
                 <h3 class="title font-weight-bold mb-2">{{ value.title }}</h3>
 
                 <div class="caption">

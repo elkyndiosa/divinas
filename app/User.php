@@ -53,7 +53,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Image::class);
     }
-    public function Publications()
+    public function publications()
     {
         return $this->hasMany(Publication::class);
     }

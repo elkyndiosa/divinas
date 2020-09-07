@@ -7,9 +7,10 @@
           color="white"
           elevation="1"
           transition="fade-transition"
-          scroll-target="#scrolling-techniques-7"
           class="px-0 px-sm-12 container-nav mx-auto"
           z-index="0"
+          clipped-left
+          app
         >
           <router-link :to="{name: 'home'}">
             <img

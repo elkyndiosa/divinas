@@ -278,6 +278,8 @@
                       v-model="price"
                       label="Valor por hora"
                       class="purple-input"
+                      type="number"
+                      :rules="rules"
                       outlined
                       dense
                     />

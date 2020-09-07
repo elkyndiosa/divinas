@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\Image\ImageRepository; 
+use App\Http\Controllers\Image\ImageRepository;
 use App\Http\Controllers\Image\Requests\ImageSaveRequest;
 use App\Image;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class ImageController extends Controller 
+class ImageController extends Controller
 {
 
-    private $imageRepo;    
+    private $imageRepo;
     /**
-     * __construct create user and repository 
+     * __construct create user and repository
      *
      * @param  mixed $user
      * @param  mixed $userRepo
@@ -32,8 +32,8 @@ class ImageController extends Controller
         return $this->imageRepo->getByPublication($uuid);
     }
     public function create(ImageSaveRequest $request){
-       
-        if (!empty($_FILES)) {    
+
+        if (!empty($_FILES)) {
 
             $file = $_FILES['file'];
             $name_file = $file['name'];
@@ -43,9 +43,9 @@ class ImageController extends Controller
             if (!is_dir('uploads/images')) {
                 mkdir('uploads/images', 0777, true);
             }
-            
+
             move_uploaded_file($tmp_name_file, 'uploads/images/' . $image_path);
-            
+
             return $this->saveName( $image_path);
         } else { echo 'error: no file'; }
     }

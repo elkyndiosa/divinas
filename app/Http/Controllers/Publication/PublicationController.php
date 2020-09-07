@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Publication;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\Publication\PublicationRepository; 
+use App\Http\Controllers\Publication\PublicationRepository;
 use App\Http\Controllers\Publication\Requests\PublicationSaveRequest;
 use App\Publication;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class PublicationController extends Controller 
+class PublicationController extends Controller
 {
 
-    private $publicationRepo;    
+    private $publicationRepo;
     /**
-     * __construct create user and repository 
+     * __construct create user and repository
      *
      * @param  mixed $user
      * @param  mixed $userRepo
@@ -33,7 +33,9 @@ class PublicationController extends Controller
         return $this->publicationRepo->getByUser($uuid);
     }
     public function store(PublicationSaveRequest $request){
-        return $this->publicationRepo->create($request);
+        $this->publicationRepo->create($request);
+        $message = 'La publicacion ha sido creada.';
+        return response()->json(compact('message'), 201);
     }
     public function update(){
         // return Image::create([
@@ -45,9 +47,9 @@ class PublicationController extends Controller
         // $this->authorize('userIsOwner', $uuid);
         // return $this->imageRepo->destroy($uuid);
     }
-    public function show(Publication $publication){
-        // return $publication;
+    public function show($uuid/*Publication $publication*/){
+        //return $uuid;
         // $this->authorize('userIsOwner', $uuid);
-        return $this->publicationRepo->show($publication);
+        return $this->publicationRepo->show($uuid);
     }
 }

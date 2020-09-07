@@ -9,7 +9,7 @@ class ServiceRepository
 {
     private $service;
     /**
-     * __construct create user and repository 
+     * __construct create user and repository
      *
      * @param  mixed $user
      * @param  mixed $userRepo
@@ -18,15 +18,15 @@ class ServiceRepository
     public function __construct(Service $service)
     {
         $this->service = $service;
-    }    
+    }
     public function index(){
         $services = Service::all();
         $servicesUser = Auth::user()->Services;
         return response()->json([
             'services' => $services,
             'servicesUser' => $servicesUser
-        ]);
+        ], 200);
     }
 
-    
+
 }

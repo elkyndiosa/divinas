@@ -6,7 +6,7 @@
     left
     absolute
     :src="barImage"
-    mobile-break-point="700"
+    mobile-breakpoint="700"
     app
     permanent
     expand-on-hover
@@ -53,7 +53,7 @@
 
     <v-list
         dense
-        
+
       >
         <v-list-item
           v-for="item in items"
@@ -121,7 +121,7 @@
     }),
 
     computed: {
-      
+
       computedItems () {
         return this.items
       },
@@ -134,7 +134,7 @@
     },
 
     methods: {
-    
+
     },
   }
 </script>

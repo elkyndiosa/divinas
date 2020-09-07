@@ -11,8 +11,8 @@ function auth(){
 }
 function guardRoute(to, from, next)
 {
-    
-	if(auth()){ 
+
+	if(auth()){
         if(JSON.parse(user.content).role_id == 2){
             next(); // allow to enter route
         }else{
@@ -25,9 +25,9 @@ function guardRoute(to, from, next)
 function guardRouteGuest(to, from, next)
 {
 	if(auth()){
-		next('/'); 
+		next('/');
 	}else{
-		next(); 
+		next();
 	}
 }
 /**
@@ -98,7 +98,7 @@ export const routes = [
         meta: { layout: 'dash' },
         beforeEnter : guardRoute,
         component: () =>
-            import(/* webpackChunkName: "publications" */ '../pages/publications.vue'),
+            import(/* webpackChunkName: "publications" */ '../pages/publications/publications.vue'),
         props: true
 
     },

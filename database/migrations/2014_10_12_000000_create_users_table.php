@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nikc')->nullable(); 
-            $table->integer('years')->nullable(); 
+            $table->string('nikc')->nullable();
+            $table->integer('years')->nullable();
             $table->string('email')->unique();
             $table->foreignId('role_id')->constrained();
             $table->integer('status')->default(0);
@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->float('height')->default(0);
             $table->string('whatsapp')->unique()->nullable();
             $table->string('phone')->nullable();
-            $table->boolean('delivery')->default(null)->nullable();
-            $table->boolean('have_site')->default(null)->nullable();
+            $table->boolean('delivery')->default(false);
+            $table->boolean('have_site')->default(false);
             $table->longText('description')->nullable();
             $table->string('image_profile')->nullable();
             $table->foreignId('house_id')->nullable()->constrained();

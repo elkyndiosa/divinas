@@ -14,7 +14,7 @@ class City extends Model
     protected $fillable = [
         'name',
     ];
-    public function Barrios()
+    public function barrios()
     {
         return $this->hasMany(Barrio::class);
     }

@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     DrawerComponent: function DrawerComponent() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/dashboard/DrawerComponent.vue */ "./resources/js/components/dashboard/DrawerComponent.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/dashboard/DrawerComponent.vue */ "./resources/js/components/dashboard/DrawerComponent.vue"));
     }
   }
 });
@@ -162,20 +162,9 @@ var render = function() {
       _c("drawer-component"),
       _vm._v(" "),
       _c(
-        "v-content",
+        "v-main",
         { attrs: { app: "" } },
-        [
-          _c(
-            "v-container",
-            {
-              staticClass: "pa-0",
-              staticStyle: { height: "auto", overflow: "hidden" },
-              attrs: { fluid: "" }
-            },
-            [_c("router-view")],
-            1
-          )
-        ],
+        [_c("v-container", { attrs: { fluid: "" } }, [_c("router-view")], 1)],
         1
       )
     ],
@@ -208,7 +197,7 @@ var render = function() {
     "v-app",
     [
       _c(
-        "v-content",
+        "v-main",
         { attrs: { app: "" } },
         [
           _c(

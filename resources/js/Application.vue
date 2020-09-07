@@ -1,12 +1,10 @@
 <template>
-  <div>
     <v-app>
       <navegation/>
         <transition name='slide-page' mode='out-in'>
               <router-view :key="$route.fullPath"></router-view>
         </transition>
     </v-app>
-  </div>
 </template>
 
 <script>

@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","account":"account","dashboard":"dashboard","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact~form-user":"vendors~contact~form-user","contact":"contact","form-user":"form-user","vendors~images~publications~videos":"vendors~images~publications~videos","images":"images","publications":"publications","videos":"videos"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","account":"account","dashboard":"dashboard","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact~form-user":"vendors~contact~form-user","contact":"contact","form-user":"form-user","vendors~images~publications~videos":"vendors~images~publications~videos","publications":"publications","images":"images","videos":"videos"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2033,8 +2033,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2053,6 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2257,7 +2256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css?bdb9":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css":
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vuetify/dist/vuetify.min.css ***!
   \***********************************************************************************************************************************/
@@ -2288,7 +2287,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -20619,20 +20618,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-app",
     [
+      _c("navegation"),
+      _vm._v(" "),
       _c(
-        "v-app",
-        [
-          _c("navegation"),
-          _vm._v(" "),
-          _c(
-            "transition",
-            { attrs: { name: "slide-page", mode: "out-in" } },
-            [_c("router-view", { key: _vm.$route.fullPath })],
-            1
-          )
-        ],
+        "transition",
+        { attrs: { name: "slide-page", mode: "out-in" } },
+        [_c("router-view", { key: _vm.$route.fullPath })],
         1
       )
     ],
@@ -20676,8 +20669,9 @@ var render = function() {
                 color: "white",
                 elevation: "1",
                 transition: "fade-transition",
-                "scroll-target": "#scrolling-techniques-7",
-                "z-index": "0"
+                "z-index": "0",
+                "clipped-left": "",
+                app: ""
               }
             },
             [
@@ -79785,7 +79779,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vuetify.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css?bdb9");
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vuetify.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -81978,7 +81972,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
@@ -82000,7 +81994,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications.vue */ "./resources/js/pages/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e(0), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {

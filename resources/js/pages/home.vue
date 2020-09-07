@@ -1,5 +1,5 @@
 <template >
-  <div class="mt-16">
+  <div>
       <banner />
     <articles @addFavorities="addFavorities">
     </articles>
@@ -9,8 +9,8 @@
     <footer-component/>
   <v-dialog
       v-model="alert"
-      scrollable 
-      persistent 
+      scrollable
+      persistent
       max-width="600"
     >
       <v-card>
@@ -66,7 +66,7 @@ export default {
         this.$store.state.favorities.push(uuid);
         const parsed = JSON.stringify(this.$store.state.favorities);
         localStorage.favorities = parsed;
-        api/increment/favorites/{uuid} 
+        api/increment/favorites/{uuid}
         let url = '/api/increment/favorites/'+this.data.user.uuid;
       axios.get(url).then(response =>{
         console.log(response)
@@ -74,7 +74,7 @@ export default {
         console.log(error)
       })
     }
-    
+
   },
 };
 </script>

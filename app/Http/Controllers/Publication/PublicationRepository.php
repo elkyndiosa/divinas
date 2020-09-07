@@ -6,12 +6,13 @@ use App\DataUser;
 use App\Publication;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PublicationRepository
 {
     private $publication;
     /**
-     * __construct create user and repository 
+     * __construct create user and repository
      *
      * @param  mixed $user
      * @param  mixed $userRepo
@@ -20,35 +21,68 @@ class PublicationRepository
     public function __construct(Publication $publication)
     {
         $this->publication = $publication;
-    }    
+    }
     public function create($data){
-        Publication::create([
+        $time_id = $this->saveTime($data);
+        $publication = Publication::create([
             'description' => $data->description,
+            'name' => $data->name,
             'price' => $data->price,
             'imgages_path' => json_encode($data->images),
             'videos_path' => '[]',
             'user_id'=> Auth::user()->id,
-
+            'email' => $data->email,
+            'phone' => $data->phone,
+            'nikc' => $data->nikc,
+            'whatsapp' => $data->whatsapp,
+            'height' => $data->height,
+            'weight' => $data->weight,
+            'delivery' => $data->delivery,
+            'fave_site' => $data->have_site,
+            'barrio_id' => $data->barrio_id,
+            'city_id' => $data->city_id,
+            'time_id' => $time_id,
+            'years' => $data->years
         ]);
-        return response()->json([
-            'message' => 'Your data has been successfully created',
-            'status' => 201
-        ], 201);
+
+        $this->saveServices($publication, $data);
     }
+
+    public function saveTime($data){
+            $dataToCreate =[
+                'every_day' => $data->dataAdd['every_day'],
+                'every_single_day' => $data->dataAdd['every_single_day'],
+                'input' => $data->dataAdd['input'],
+                'input_day' => $data->dataAdd['input_day'],
+                'output' => $data->dataAdd['output'],
+                'output_day' => $data->dataAdd['output_day'],
+            ];
+            $flight = Time::create($dataToCreate);
+            return $flight->id;
+    }
+
+    public function saveServices($publication, $data){
+        foreach ($data->services as $services) {
+             $dataToCreate =[
+                 'publication_id' => $publication->id,
+                 'service_id' => $services['id'],
+             ];
+             DB::table('publications_services')->insert($dataToCreate);
+        }
+     }
+
     public function getByUser($user){
-        return $user->Publications;
+        return $user->publications;
     }
     public function index(){
-        $publications = Publication::orderBy('id','desc')->get();
-        foreach ($publications as $publication) {
-            $publication->User;
-        }
+        $publications = Publication::with('user')->orderBy('id','desc')->get();
         return $publications;
     }
-     public function show($publication){
-        $user = $publication->User;
-        $time = Time::where('id', '=', $user->time_id)->first();
-        $services =$user->Services;
+     public function show($uuid){
+        $publication = Publication::where('uuid', $uuid)->first();
+        $user = $publication->user;
+        $time = Time::where('id', '=', $publication->time_id)->first();
+        $services = $publication->services;
         $this->incrementViews($user->id);
         return response()->json([
             'user' => $user,
@@ -58,14 +92,14 @@ class PublicationRepository
         ]);
     }
     public function incrementViews($userId){
-            $data = DataUser::where('user_id', '=', $userId)->first();
-            if(isset($data)){
-                $data->increment('views');// increase one count
-            }else{
-                $data = new DataUser();
-                $data->views = 1;
-                $data->user_id = $userId;
-                $data->save();
-            }
+        $data = DataUser::where('user_id', '=', $userId)->first();
+        if(isset($data)){
+            $data->increment('views');// increase one count
+        }else{
+            $data = new DataUser();
+            $data->views = 1;
+            $data->user_id = $userId;
+            $data->save();
+        }
     }
 }

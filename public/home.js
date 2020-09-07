@@ -57,18 +57,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Banner: function Banner() {
-      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/home/Banner.vue */ "./resources/js/components/home/Banner.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/home/Banner.vue */ "./resources/js/components/home/Banner.vue"));
     },
     About: function About() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/home/About.vue */ "./resources/js/components/home/About.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/home/About.vue */ "./resources/js/components/home/About.vue"));
     },
     Articles: function Articles() {
-      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/home/Articles.vue */ "./resources/js/components/home/Articles.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/home/Articles.vue */ "./resources/js/components/home/Articles.vue"));
     },
     // Social: () => import('../components/home/Social.vue'),
     // Subscribe: () => import('../components/home/Subscribe.vue'),
     FooterComponent: function FooterComponent() {
-      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/home/Footer.vue */ "./resources/js/components/home/Footer.vue"));
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/home/Footer.vue */ "./resources/js/components/home/Footer.vue"));
     }
   },
   data: function data() {
@@ -116,7 +116,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mt-16" },
     [
       _c("banner"),
       _vm._v(" "),

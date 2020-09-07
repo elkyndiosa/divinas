@@ -16,10 +16,10 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email'); 
+            $table->string('email');
             $table->string('phone');
             $table->string('whatsapp');
-            $table->longText('message')->default('undefined');
+            $table->longText('message')->nullable();
             $table->foreignId('user_id')->constrained()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

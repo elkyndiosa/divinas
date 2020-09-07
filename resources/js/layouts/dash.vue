@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <drawer-component/>
-    <v-content app>
-      <v-container fluid class="pa-0" style="height: auto; overflow: hidden;">
+    <v-main app>
+      <v-container fluid>
         <router-view />
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

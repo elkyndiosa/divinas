@@ -7,7 +7,7 @@ class CityRepository
 {
     private $city;
     /**
-     * __construct create user and repository 
+     * __construct create user and repository
      *
      * @param  mixed $user
      * @param  mixed $userRepo
@@ -16,14 +16,11 @@ class CityRepository
     public function __construct(City $city)
     {
         $this->city = $city;
-    }    
+    }
     public function index(){
-        $cities = City::all();
-        foreach ($cities as $city) {
-            $city->Barrios;
-        }
+        $cities = City::with('barrios')->get();
         return $cities;
     }
 
-    
+
 }

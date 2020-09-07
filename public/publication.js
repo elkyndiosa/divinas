@@ -76,21 +76,21 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
   props: ["uuid"],
   components: {
     Gallery: function Gallery() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
     },
     TableData: function TableData() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
     }
   },
   data: function data() {
     return {
       media: 'fotos',
       data: {
+        publication: {
+          imgages_path: null
+        },
         user: {
           uuid: ""
-        },
-        publication: {
-          imgages_path: ""
         }
       }
     };
@@ -102,12 +102,20 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
   computed: {
     getUuid: function getUuid() {
       return;
+    },
+    images: function images() {
+      if (!this.data.publication.imgages_path) {
+        return [];
+      }
+
+      return JSON.parse(this.data.publication.imgages_path);
     }
   },
+  watch: {},
   methods: {
     redirectWhatsapp: function redirectWhatsapp(whatsapp) {
       window.open("https://api.whatsapp.com/send?phone=" + whatsapp + "&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
-      var url = '/api/increment/clickwatsapp/' + this.data.user.uuid;
+      var url = '/api/increment/clickwatsapp/' + this.publication.user.uuid;
       axios.get(url).then(function (response) {
         console.log(response);
       })["catch"](function (rerro) {
@@ -461,13 +469,11 @@ var render = function() {
                 "v-col",
                 { staticClass: "mt-6", attrs: { cols: "12", md: "6" } },
                 [
-                  this.data.publication.imgages_path != ""
+                  _vm.images.length > 0
                     ? _c("v-img", {
                         staticClass: "rounded-lg",
                         attrs: {
-                          src:
-                            "/uploads/images/" +
-                            JSON.parse(_vm.data.publication.imgages_path),
+                          src: "uploads/images/" + _vm.images[0],
                           "max-height": "500px"
                         }
                       })
@@ -488,9 +494,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.data.user.name) +
+                        _vm._s(_vm.data.publication.name) +
                           " - " +
-                          _vm._s(_vm.data.user.years)
+                          _vm._s(_vm.data.publication.years)
                       )
                     ]
                   ),
@@ -503,10 +509,10 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "Miembro desde " +
+                        "Publicacion " +
                           _vm._s(
                             _vm
-                              .moment(_vm.data.user.created_at)
+                              .moment(_vm.data.publication.created_at)
                               .startOf("hour")
                               .format("DD-MMMM-YYYY")
                           )
@@ -557,7 +563,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               return _vm.redirectWhatsapp(
-                                _vm.data.user.whatsapp
+                                _vm.data.publication.whatsapp
                               )
                             }
                           }
@@ -578,7 +584,7 @@ var render = function() {
                   _c("table-data", {
                     staticStyle: { width: "100%" },
                     attrs: {
-                      userDataTable: _vm.data.user,
+                      userDataTable: _vm.data.publication,
                       times: _vm.data.times
                     }
                   })
@@ -679,7 +685,7 @@ var render = function() {
                           _vm.media == "fotos"
                             ? _c("gallery", {
                                 attrs: {
-                                  userData: _vm.data.user,
+                                  userData: _vm.data.publication,
                                   uuid: _vm.data.user.uuid,
                                   search: "publication"
                                 }

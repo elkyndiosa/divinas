@@ -59,14 +59,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BaseCard: function BaseCard() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./base/Card */ "./resources/js/components/base/Card.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./base/Card */ "./resources/js/components/base/Card.vue"));
     }
   },
   name: "FeedCard",
@@ -506,12 +505,12 @@ var render = function() {
             "base-card",
             { attrs: { height: 480, outlined: "" } },
             [
-              _c("img", {
+              _c("v-img", {
                 attrs: {
-                  src: "/uploads/images/" + JSON.parse(_vm.value.imgages_path),
+                  src:
+                    "/uploads/images/" + JSON.parse(_vm.value.imgages_path)[0],
                   height: "40%",
                   width: "100%",
-                  gradient: "rgba(0, 0, 0, .12), rgba(0, 0, 0, .12)",
                   contain: ""
                 }
               }),
@@ -542,7 +541,7 @@ var render = function() {
                               attrs: { cols: "12" }
                             },
                             [
-                              _vm.value.user.status == 1
+                              _vm.value.status == 1
                                 ? _c(
                                     "v-icon",
                                     {
@@ -557,7 +556,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("p", { staticClass: "text-h6" }, [
-                            _vm._v(_vm._s(_vm.value.user.name))
+                            _vm._v(_vm._s(_vm.value.name))
                           ]),
                           _vm._v(" "),
                           _c(
