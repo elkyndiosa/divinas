@@ -1,18 +1,20 @@
 <template >
-  <div class="mt-16 pt-16 d-flex justify-center flex-wrap">
-    <h4 class="text-h4 text-center font-weight-bold">Mis Imagenes</h4>
-    <v-col cols="12">
-      <vue-dropzone 
-      ref="myVueDropzone" 
-      id="dropzone" 
-      :options="dropzoneOptions"
-      @vdropzone-success="cleanFiles()"
-      ></vue-dropzone>
-    </v-col> 
-    <transition name="slide-image" mode="out-in">
-      <gallery dash="true" :key="galleryKey" :userData="user" search="allUser"></gallery>
-    </transition>
-  </div>
+    <v-container fluid>
+        <v-row justify="center">
+            <h4 class="text-h4">Mis Imagenes</h4>
+            <v-col cols="12">
+            <vue-dropzone
+                ref="myVueDropzone"
+                id="dropzone"
+                :options="dropzoneOptions"
+                @vdropzone-success="cleanFiles()"
+            ></vue-dropzone>
+            </v-col>
+            <transition name="slide-image" mode="out-in">
+                <gallery dash="true" :key="galleryKey" :userData="user" search="allUser"></gallery>
+            </transition>
+        </v-row>
+    </v-container>
 </template>
 <script>
   import vue2Dropzone from 'vue2-dropzone'
@@ -43,7 +45,7 @@ export default {
       this.$refs.myVueDropzone.removeAllFiles();
       this.galleryKey += 1;
     },
-    
+
   },
 };
 </script>

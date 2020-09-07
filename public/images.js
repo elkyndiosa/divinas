@@ -29,6 +29,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -81,38 +83,43 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "mt-16 pt-16 d-flex justify-center flex-wrap" },
+    "v-container",
+    { attrs: { fluid: "" } },
     [
-      _c("h4", { staticClass: "text-h4 text-center font-weight-bold" }, [
-        _vm._v("Mis Imagenes")
-      ]),
-      _vm._v(" "),
       _c(
-        "v-col",
-        { attrs: { cols: "12" } },
+        "v-row",
+        { attrs: { justify: "center" } },
         [
-          _c("vue-dropzone", {
-            ref: "myVueDropzone",
-            attrs: { id: "dropzone", options: _vm.dropzoneOptions },
-            on: {
-              "vdropzone-success": function($event) {
-                return _vm.cleanFiles()
-              }
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "transition",
-        { attrs: { name: "slide-image", mode: "out-in" } },
-        [
-          _c("gallery", {
-            key: _vm.galleryKey,
-            attrs: { dash: "true", userData: _vm.user, search: "allUser" }
-          })
+          _c("h4", { staticClass: "text-h4" }, [_vm._v("Mis Imagenes")]),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12" } },
+            [
+              _c("vue-dropzone", {
+                ref: "myVueDropzone",
+                attrs: { id: "dropzone", options: _vm.dropzoneOptions },
+                on: {
+                  "vdropzone-success": function($event) {
+                    return _vm.cleanFiles()
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "transition",
+            { attrs: { name: "slide-image", mode: "out-in" } },
+            [
+              _c("gallery", {
+                key: _vm.galleryKey,
+                attrs: { dash: "true", userData: _vm.user, search: "allUser" }
+              })
+            ],
+            1
+          )
         ],
         1
       )
