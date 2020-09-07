@@ -3,16 +3,13 @@
     id="core-navigation-drawer"
     v-model="drawer"
     :dark="barColor !== 'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)'"
-    left
-    absolute
     :src="barImage"
-    mobile-breakpoint="700"
     app
     permanent
-    expand-on-hover
+    clipped
+    :expand-on-hover="$vuetify.breakpoint.mdAndUp"
+    :mini-variant="!$vuetify.breakpoint.mdAndUp"
     width="300"
-    v-bind="$attrs"
-    style="top: 55px; height: 100%;"
   >
     <template v-slot:img="props">
       <v-img
@@ -31,18 +28,19 @@
         <v-list-item-avatar
           class="align-self-center"
           color="white"
-          contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
-            max-height="30"
+            :src="'/uploads/images/'+user.image_profile"
+            width="100%"
+            height="100%"
+            contain
           />
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title
             class="text-subtitle-1"
-            v-text="profile.title"
+            v-text="user.name"
           />
         </v-list-item-content>
 

@@ -84,8 +84,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     expandOnHover: {
@@ -204,52 +202,45 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-navigation-drawer",
-    _vm._b(
-      {
-        staticStyle: { top: "55px", height: "100%" },
-        attrs: {
-          id: "core-navigation-drawer",
-          dark:
-            _vm.barColor !== "rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)",
-          left: "",
-          absolute: "",
-          src: _vm.barImage,
-          "mobile-breakpoint": "700",
-          app: "",
-          permanent: "",
-          "expand-on-hover": "",
-          width: "300"
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "img",
-            fn: function(props) {
-              return [
-                _c(
-                  "v-img",
-                  _vm._b(
-                    { attrs: { gradient: "to bottom, " + _vm.barColor } },
-                    "v-img",
-                    props,
-                    false
-                  )
-                )
-              ]
-            }
-          }
-        ]),
-        model: {
-          value: _vm.drawer,
-          callback: function($$v) {
-            _vm.drawer = $$v
-          },
-          expression: "drawer"
-        }
+    {
+      attrs: {
+        id: "core-navigation-drawer",
+        dark:
+          _vm.barColor !== "rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)",
+        src: _vm.barImage,
+        app: "",
+        permanent: "",
+        clipped: "",
+        "expand-on-hover": _vm.$vuetify.breakpoint.mdAndUp,
+        "mini-variant": !_vm.$vuetify.breakpoint.mdAndUp,
+        width: "300"
       },
-      "v-navigation-drawer",
-      _vm.$attrs,
-      false
-    ),
+      scopedSlots: _vm._u([
+        {
+          key: "img",
+          fn: function(props) {
+            return [
+              _c(
+                "v-img",
+                _vm._b(
+                  { attrs: { gradient: "to bottom, " + _vm.barColor } },
+                  "v-img",
+                  props,
+                  false
+                )
+              )
+            ]
+          }
+        }
+      ]),
+      model: {
+        value: _vm.drawer,
+        callback: function($$v) {
+          _vm.drawer = $$v
+        },
+        expression: "drawer"
+      }
+    },
     [
       _vm._v(" "),
       _c("v-divider", { staticClass: "mb-1" }),
@@ -264,16 +255,14 @@ var render = function() {
             [
               _c(
                 "v-list-item-avatar",
-                {
-                  staticClass: "align-self-center",
-                  attrs: { color: "white", contain: "" }
-                },
+                { staticClass: "align-self-center", attrs: { color: "white" } },
                 [
                   _c("v-img", {
                     attrs: {
-                      src:
-                        "https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico",
-                      "max-height": "30"
+                      src: "/uploads/images/" + _vm.user.image_profile,
+                      width: "100%",
+                      height: "100%",
+                      contain: ""
                     }
                   })
                 ],
@@ -285,7 +274,7 @@ var render = function() {
                 [
                   _c("v-list-item-title", {
                     staticClass: "text-subtitle-1",
-                    domProps: { textContent: _vm._s(_vm.profile.title) }
+                    domProps: { textContent: _vm._s(_vm.user.name) }
                   })
                 ],
                 1
