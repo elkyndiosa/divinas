@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~images~publications~videos","images":"images","videos":"videos","publication":"publication","publications":"publications","dashboard":"dashboard","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact~form-user":"vendors~contact~form-user","contact":"contact","form-user":"form-user"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~images~publications~videos","15":"form-user","images":"images","videos":"videos","publication":"publication","publications":"publications","dashboard":"dashboard","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2051,7 +2051,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -20676,9 +20675,7 @@ var render = function() {
             },
             [
               _c("router-link", { attrs: { to: { name: "home" } } }, [
-                _c("img", {
-                  attrs: { height: "60", width: "200", src: "/images/logo.jpg" }
-                })
+                _c("img", { attrs: { width: "200", src: "/images/logo.png" } })
               ]),
               _vm._v(" "),
               _c("v-spacer"),
@@ -81575,10 +81572,7 @@ var app = new Vue({
   store: _plugins_store_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   vuetify: _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   el: "#app",
-  template: "<Application/>",
-  created: function created() {
-    console.log('Created vue instance');
-  }
+  template: "<Application/>"
 });
 
 
@@ -81698,7 +81692,6 @@ if (_user.content) {
   var currentUser = JSON.parse(_user.content);
 }
 
-console.log(_user.content, 'aqui');
 var metaToken = document.head.querySelector('meta[name="csrf-token"]');
 var token = {
   "_token": metaToken.content
@@ -81934,7 +81927,7 @@ var routes = [{
   },
   beforeEnter: guardRouteGuest,
   component: function component() {
-    return Promise.all(/*! import() | form-user */[__webpack_require__.e("vendors~contact~form-user"), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
+    return Promise.all(/*! import() | form-user */[__webpack_require__.e(16), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
   },
   props: true
 }, {
@@ -81944,7 +81937,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact~form-user"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../pages/contact.vue */ "./resources/js/pages/contact.vue"));
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../pages/contact.vue */ "./resources/js/pages/contact.vue"));
   }
 }, {
   path: '/dashboard',
@@ -81954,7 +81947,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(15), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
+    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(16), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
   }
 }, {
   path: '/favorites',
@@ -81972,7 +81965,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(15), __webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(16), __webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
@@ -81994,7 +81987,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e(15), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e(16), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {

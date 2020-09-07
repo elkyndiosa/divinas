@@ -45,13 +45,30 @@
                             v-for="(slide, i) in imagesArray" 
                             :key="i" 
                             :src="'/uploads/images/'+slide"
+                            aspect-ratio="1"
+                            class="grey lighten-2"
                         >
+                            <template v-slot:placeholder>
+                                <v-row
+                                    class="fill-height ma-0"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <v-progress-circular indeterminate color="grey lighten-5">
+                                    </v-progress-circular>
+                                </v-row>
+                            </template>
                         </v-carousel-item>
                     </v-carousel>
                     <v-list two-line>
                         <v-list-item v-if="userData">
                             <v-list-item-avatar>
-                                <v-img  :src="'/uploads/images/'+userData.image_profile" contain></v-img>
+                                <v-img  
+                                    :src="'/uploads/images/'+userData.image_profile"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                >
+                                </v-img>
                             </v-list-item-avatar>
                             <v-list-item-content>
                             <v-list-item-title>{{userData.name}}</v-list-item-title>
@@ -132,7 +149,6 @@ export default {
             try {
                 var response = await axios.get(url)
                 this.images = response.data;
-                console.log(response.data)
             } catch(error) {
                 console.log(error);
             }

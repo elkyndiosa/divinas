@@ -14,9 +14,8 @@
         >
           <router-link :to="{name: 'home'}">
             <img
-              height="60"
               width="200"
-              src="/images/logo.jpg"
+              src="/images/logo.png"
             />
           </router-link>
           <v-spacer></v-spacer>

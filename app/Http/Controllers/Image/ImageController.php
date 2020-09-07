@@ -41,7 +41,7 @@ class ImageController extends Controller
             $name = time().str_replace($replace, "", $original_name);
             $image = ImageEditor::make($file);
             $image->resize(1440, 1024);
-            $image->insert(public_path('images/marca.png'), 'center');
+            $image->insert(public_path('images/marca.png'), 'bottom');
             $image->save(public_path('uploads/images/'.$name));
             return $this->saveName($name);
         }

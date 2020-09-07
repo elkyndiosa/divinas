@@ -87,6 +87,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ["search", "uuid", "userData", "dash"],
@@ -151,7 +168,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!_this.uuid) {
-                  _context.next = 15;
+                  _context.next = 14;
                   break;
                 }
 
@@ -164,24 +181,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 response = _context.sent;
                 _this.images = response.data;
-                console.log(response.data);
-                _context.next = 14;
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 14:
+              case 13:
                 _this.busy = false;
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 11]]);
+        }, _callee, null, [[3, 10]]);
       }))();
     },
     getImages: function getImages() {
@@ -410,7 +426,44 @@ var render = function() {
                     _vm._l(_vm.imagesArray, function(slide, i) {
                       return _c("v-carousel-item", {
                         key: i,
-                        attrs: { src: "/uploads/images/" + slide }
+                        staticClass: "grey lighten-2",
+                        attrs: {
+                          src: "/uploads/images/" + slide,
+                          "aspect-ratio": "1"
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "placeholder",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "v-row",
+                                    {
+                                      staticClass: "fill-height ma-0",
+                                      attrs: {
+                                        align: "center",
+                                        justify: "center"
+                                      }
+                                    },
+                                    [
+                                      _c("v-progress-circular", {
+                                        attrs: {
+                                          indeterminate: "",
+                                          color: "grey lighten-5"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
                       })
                     }),
                     1
@@ -428,11 +481,12 @@ var render = function() {
                                 "v-list-item-avatar",
                                 [
                                   _c("v-img", {
+                                    staticClass: "grey lighten-2",
                                     attrs: {
                                       src:
                                         "/uploads/images/" +
                                         _vm.userData.image_profile,
-                                      contain: ""
+                                      "aspect-ratio": "1"
                                     }
                                   })
                                 ],

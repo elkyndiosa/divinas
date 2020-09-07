@@ -31,10 +31,10 @@
         >
           <v-img
             :src="'/uploads/images/'+user.image_profile"
-            width="100%"
-            height="100%"
-            contain
-          />
+            aspect-ratio="1"
+            class="grey lighten-2"
+          >
+         </v-img>
         </v-list-item-avatar>
 
         <v-list-item-content>

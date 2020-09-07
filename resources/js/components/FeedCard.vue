@@ -1,43 +1,60 @@
 <template>
   <v-col cols="6" md="4" lg="3">
-    <base-card :height="450" outlined v-if="value != ''">
-        <v-img
-            :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
-            height="60%"
-            width="100%"
-        />
-        <v-card-text class="m-0 py-1 px-3" @click="showPublication(value.uuid)" style="cursor: pointer">
-            <v-toolbar class="px-0" flat dense color="white">
-                <v-icon
-                    class="material-icons"
-                    color="yellow"
-                    v-if="value.status == 1"
-                >
-                    verified_user
-                </v-icon>
-                <v-spacer></v-spacer>
-                <v-toolbar-title>
-                    {{value.name}}
-                </v-toolbar-title>
-            </v-toolbar>
-            <p class="text-end" style="width: 100%;">
-                <strong>Publicado:</strong>
-                <br/>
-                <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
-            </p>
-        </v-card-text>
-        <v-card-actions class="m-0 py-0">
-            <v-spacer></v-spacer>
-            <v-btn
-                fab
-                text
-                @click="!isFavorite ? addFavorities(value) : removeFavorities(value)"
-                :color="isFavorite ? 'primary' : 'grey lighten-1'"
+    <v-hover v-slot:default="{ hover }">
+        <base-card :height="450" :elevation="hover ? 20 : 2" rounded v-if="value != ''">
+            <v-img
+                :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
+                height="60%"
+                width="100%"
+                aspect-ratio="1"
+                class="grey lighten-2"
+                style="cursor: pointer"
+                @click="showPublication(value.uuid)"
             >
-                <v-icon class="material-icons">favorite</v-icon>
-            </v-btn>
-        </v-card-actions>
-    </base-card>
+                <template v-slot:placeholder>
+                    <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                    >
+                        <v-progress-circular indeterminate color="grey lighten-5">
+                        </v-progress-circular>
+                    </v-row>
+                </template>
+            </v-img>
+            <v-card-text class="m-0 py-1 px-3" @click="showPublication(value.uuid)" style="cursor: pointer">
+                <v-toolbar class="px-0" flat dense color="white">
+                    <v-icon
+                        class="material-icons"
+                        color="yellow"
+                        v-if="value.status == 1"
+                    >
+                        verified_user
+                    </v-icon>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-title>
+                        {{value.name}}
+                    </v-toolbar-title>
+                </v-toolbar>
+                <p class="text-end" style="width: 100%;">
+                    <strong>Publicado:</strong>
+                    <br/>
+                    <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
+                </p>
+            </v-card-text>
+            <v-card-actions class="m-0 py-0">
+                <v-spacer></v-spacer>
+                <v-btn
+                    fab
+                    text
+                    @click="!isFavorite ? addFavorities(value) : removeFavorities(value)"
+                    :color="isFavorite ? 'primary' : 'grey lighten-1'"
+                >
+                    <v-icon class="material-icons">favorite</v-icon>
+                </v-btn>
+            </v-card-actions>
+        </base-card>
+    </v-hover>
   </v-col>
 </template>
 
@@ -66,7 +83,7 @@ export default {
     return {};
   },
   mounted(){
-    console.log(this.value)
+    //console.log(this.value)
   },
   computed: {
     isFavorite() {

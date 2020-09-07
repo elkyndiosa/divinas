@@ -81,7 +81,7 @@ export default {
   },
   methods: {
      getHour(hour){
-       console.log(hour)
+       //console.log(hour)
        var lateNight = ''
        var hourOnly = parseInt(hour.substring(0, 3))
        if(hourOnly > 12){
@@ -94,15 +94,13 @@ export default {
        }else{
          lateNight = 'AM';
        }
-         console.log(hour.substring(2, 5))
+         //console.log(hour.substring(2, 5))
 
       return hourOnly + hour.substring(2, 5) +' '+ lateNight; // retorna 'ma'
     }
   },
   mounted() {
-    setTimeout(() => {
-      console.log(this.times)
-    }, 2000);
+    
   },
 
 };

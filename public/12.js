@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     getHour: function getHour(hour) {
-      console.log(hour);
+      //console.log(hour)
       var lateNight = '';
       var hourOnly = parseInt(hour.substring(0, 3));
 
@@ -99,19 +99,13 @@ __webpack_require__.r(__webpack_exports__);
         lateNight = 'AM';
       } else {
         lateNight = 'AM';
-      }
+      } //console.log(hour.substring(2, 5))
 
-      console.log(hour.substring(2, 5));
+
       return hourOnly + hour.substring(2, 5) + ' ' + lateNight; // retorna 'ma'
     }
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    setTimeout(function () {
-      console.log(_this.times);
-    }, 2000);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),

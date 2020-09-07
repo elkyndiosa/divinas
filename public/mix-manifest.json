@@ -14,5 +14,6 @@
     "/ations.js": "/ations.js",
     "/vendors~contact~form-user.js": "/vendors~contact~form-user.js",
     "/vendors~images~publications~videos.js": "/vendors~images~publications~videos.js",
-    "/videos.js": "/videos.js"
+    "/videos.js": "/videos.js",
+    "/vendors~contact.js": "/vendors~contact.js"
 }

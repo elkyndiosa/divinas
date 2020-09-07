@@ -2,7 +2,7 @@ let user = document.head.querySelector('meta[name="user"]')
 if(user.content){
     let currentUser = JSON.parse(user.content);
 }
-console.log(user.content, 'aqui')
+
 let metaToken = document.head.querySelector('meta[name="csrf-token"]');
 let token = {"_token": metaToken.content};
 module.exports = {

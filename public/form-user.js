@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["form-user"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/login-signup/LoginComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************!*\
@@ -9,14 +9,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -70,40 +62,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("required", _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["required"]), {}, {
-  message: "This field is required"
-}));
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("max", {
-  validate: function validate(value, args) {
-    return value.length <= args.length;
-  },
-  params: ["length"],
-  message: "The name must be less than {length} characters"
-});
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
-  validate: function validate(value, args) {
-    return value.length >= args.length;
-  },
-  params: ["length"],
-  message: "The password must have more than {length} characters"
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationProvider"]
+  props: {
+    sending: Boolean
   },
   data: function data() {
     return {
@@ -112,12 +73,18 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
         email_field: {
           value: "",
           label: "Correo electronico",
-          type: "email"
+          type: "email",
+          rules: [function (v) {
+            return !!v || 'El email es requerido.';
+          }]
         },
         password_field: {
           value: "",
           label: "Contraseña",
-          type: "password"
+          type: "password",
+          rules: [function (v) {
+            return !!v || 'La contraseña es requerida.';
+          }]
         },
         remember_check: {
           value: false
@@ -127,7 +94,9 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
   },
   methods: {
     login: function login() {
-      this.$emit("login", this.login_form);
+      if (this.$refs.form.validate()) {
+        this.$emit("login", this.login_form);
+      }
     }
   }
 });
@@ -143,14 +112,6 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -228,44 +189,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("required", _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["required"]), {}, {
-  message: "Este campo es requerido"
-}));
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("max", {
-  validate: function validate(value, args) {
-    return value.length <= args.length;
-  },
-  params: ["length"],
-  message: "Tu nombre debe tener menos de {length} caracteres"
-});
-Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
-  validate: function validate(value, args) {
-    return value.length >= args.length;
-  },
-  params: ["length"],
-  message: "Tu contrseña debe tener mas de {length} caracteres"
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationProvider"]
+  props: {
+    sending: Boolean
   },
   data: function data() {
     return {
@@ -280,15 +206,32 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
       singup_form: {
         name_field: {
           value: "",
-          type: "text"
+          type: "text",
+          rules: [function (v) {
+            return !!v || 'El nombre es requerido.';
+          }, function (v) {
+            return v.length <= 64 || 'El nombre debe ser de 64 caracteres maximo.';
+          }]
         },
         email_field: {
           value: "",
-          type: "email"
+          type: "email",
+          rules: [function (v) {
+            return !!v || 'El email es requerido.';
+          }, function (v) {
+            return v.length <= 64 || 'El email debe ser de 64 caracteres maximo.';
+          }, function (v) {
+            return /.+@.+\..+/.test(v) || 'Ingrese un email valido.';
+          }]
         },
         password_field: {
           value: "",
-          type: "password"
+          type: "password",
+          rules: [function (v) {
+            return !!v || 'La contraseña es requerida.';
+          }, function (v) {
+            return v.length >= 8 || 'La contraseña debe ser de almenos 8 caracteres.';
+          }]
         },
         remember_check: {
           value: false
@@ -302,7 +245,9 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
   created: function created() {},
   methods: {
     register: function register() {
-      this.$emit("register", this.singup_form);
+      if (this.$refs.form.validate()) {
+        this.$emit("register", this.singup_form);
+      }
     }
   }
 });
@@ -318,12 +263,16 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["extend"])("min", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_login_signup_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/login-signup/LoginComponent.vue */ "./resources/js/components/login-signup/LoginComponent.vue");
-/* harmony import */ var _components_login_signup_SignupComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/login-signup/SignupComponent.vue */ "./resources/js/components/login-signup/SignupComponent.vue");
-//
-//
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_login_signup_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/login-signup/LoginComponent.vue */ "./resources/js/components/login-signup/LoginComponent.vue");
+/* harmony import */ var _components_login_signup_SignupComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/login-signup/SignupComponent.vue */ "./resources/js/components/login-signup/SignupComponent.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -404,13 +353,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    LoginComponent: _components_login_signup_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SignupComponent: _components_login_signup_SignupComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LoginComponent: _components_login_signup_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SignupComponent: _components_login_signup_SignupComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ["type"],
   name: "login-form",
   data: function data() {
     return {
+      busy: false,
       errorServer: "",
       snackbar: false,
       formLogin: true,
@@ -454,35 +404,91 @@ __webpack_require__.r(__webpack_exports__);
     login: function login(loginData) {
       var _this2 = this;
 
-      var url = "/login";
-      var formData = new FormData();
-      formData.append("email", loginData.email_field.value);
-      formData.append("password", loginData.password_field.value);
-      formData.append("remember", loginData.remember_check);
-      axios.post(url, formData).then(function (response) {
-        location.href = "/dashboard";
-      })["catch"](function (error) {
-        _this2.errorServer = "Incorrect data, please check!";
-        _this2.snackbar = true;
-        console.log(error.response.data);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this2.busy = true;
+                url = "/login";
+                formData = new FormData();
+                formData.append("email", loginData.email_field.value);
+                formData.append("password", loginData.password_field.value);
+                formData.append("remember", loginData.remember_check);
+                _context.prev = 6;
+                _context.next = 9;
+                return axios.post(url, formData);
+
+              case 9:
+                response = _context.sent;
+                location.href = "/dashboard";
+                _context.next = 19;
+                break;
+
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](6);
+                _this2.errorServer = "Incorrect data, please check!";
+                _this2.snackbar = true;
+                console.log(_context.t0.response.data);
+                _this2.busy = false;
+
+              case 19:
+                ;
+
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[6, 13]]);
+      }))();
     },
     register: function register(signupData) {
       var _this3 = this;
 
-      var url = "/register";
-      var formData = new FormData();
-      formData.append("name", signupData.name_field.value);
-      formData.append("email", signupData.email_field.value);
-      formData.append("password", signupData.password_field.value);
-      formData.append("type", signupData.type.value);
-      axios.post(url, formData).then(function (response) {
-        location.href = "/dashboard";
-      })["catch"](function (error) {
-        _this3.errorServer = "Incorrect data, please check!";
-        _this3.snackbar = true;
-        console.log(error.response);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var url, formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this3.busy = true;
+                url = "/register";
+                formData = new FormData();
+                formData.append("name", signupData.name_field.value);
+                formData.append("email", signupData.email_field.value);
+                formData.append("password", signupData.password_field.value);
+                formData.append("type", signupData.type.value);
+                _context2.prev = 7;
+                _context2.next = 10;
+                return axios.post(url, formData);
+
+              case 10:
+                response = _context2.sent;
+                location.href = "/dashboard";
+                _context2.next = 20;
+                break;
+
+              case 14:
+                _context2.prev = 14;
+                _context2.t0 = _context2["catch"](7);
+                _this3.errorServer = "Incorrect data, please check!";
+                _this3.snackbar = true;
+                console.log(_context2.t0.response);
+                _this3.busy = false;
+
+              case 20:
+                ;
+
+              case 21:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[7, 14]]);
+      }))();
     }
   }
 });
@@ -553,157 +559,124 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-100" }, [
-    _c("h2", { staticClass: "primary--text text-center font-weight-bold" }, [
-      _vm._v("Entrar a Divinas Prepagos")
-    ]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass:
-          "mt-8 px-2 px-md-8  w-100 d-flex flex-column justify-center flex-wrap",
-        attrs: { action: "login_form", method: "POST", "arial-label": "Login" }
-      },
-      [
-        _c("validation-provider", {
-          attrs: { rules: "required|max:64" },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var errors = ref.errors
-                return [
-                  _c("v-text-field", {
-                    staticClass: "ma-auto",
-                    staticStyle: { width: "75%" },
-                    attrs: {
-                      label: _vm.login_form.email_field.label,
-                      "prepend-inner-icon": "email",
-                      dense: "",
-                      "single-line": "",
-                      filled: "",
-                      "hide-details": ""
-                    },
-                    model: {
-                      value: _vm.login_form.email_field.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.login_form.email_field, "value", $$v)
-                      },
-                      expression: "login_form.email_field.value"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content-error text-center" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "error-details",
-                        staticStyle: { lineHeigth: "1" }
-                      },
-                      [_vm._v(_vm._s(errors[0]))]
-                    )
-                  ])
-                ]
-              }
+  return _c(
+    "div",
+    { staticClass: "w-100" },
+    [
+      _c("h2", { staticClass: "primary--text text-center font-weight-bold" }, [
+        _vm._v("Entrar a Divinas Prepagos")
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          staticClass:
+            "mt-8 px-2 px-md-8  w-100 d-flex flex-column justify-center flex-wrap",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
             }
-          ])
-        }),
-        _vm._v(" "),
-        _c("validation-provider", {
-          attrs: { rules: "required|min:8" },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var errors = ref.errors
-                return [
-                  _c("v-text-field", {
-                    staticClass: "ma-auto",
-                    staticStyle: { width: "75%" },
-                    attrs: {
-                      label: _vm.login_form.password_field.label,
-                      "prepend-inner-icon": "lock",
-                      "append-icon": _vm.showPassword
-                        ? "visibility"
-                        : "visibility_off",
-                      type: _vm.showPassword ? "text" : "password",
-                      "single-line": "",
-                      filled: "",
-                      "hide-details": "",
-                      dense: ""
-                    },
-                    on: {
-                      "click:append": function($event) {
-                        _vm.showPassword = !_vm.showPassword
-                      }
-                    },
-                    model: {
-                      value: _vm.login_form.password_field.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.login_form.password_field, "value", $$v)
-                      },
-                      expression: "login_form.password_field.value"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content-error text-center" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "error-details",
-                        staticStyle: { lineHeigth: "1" }
-                      },
-                      [_vm._v(_vm._s(errors[0]))]
-                    )
-                  ])
-                ]
-              }
-            }
-          ])
-        }),
-        _vm._v(" "),
-        _c(
-          "v-btn",
-          {
-            staticClass: "text-capitalize w-50 ma-auto",
-            attrs: { color: "white", elevation: "0", small: "" }
-          },
-          [_vm._v("Olvido su contraseña?")]
-        ),
-        _vm._v(" "),
-        _c("v-checkbox", {
-          staticClass: "mt-2 ma-auto mb-0",
-          attrs: { "hide-details": "", label: "Recuerdame" },
-          model: {
-            value: _vm.login_form.remember_check.value,
-            callback: function($$v) {
-              _vm.$set(_vm.login_form.remember_check, "value", $$v)
-            },
-            expression: "login_form.remember_check.value"
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "v-card-actions",
-          { staticClass: "mt-6" },
-          [
-            _c(
-              "v-btn",
-              {
-                staticClass: "text-capitalize px-12 py-4 ma-auto",
-                attrs: { color: "primary", dark: "", large: "", rounded: "" },
-                on: { click: _vm.login }
+        },
+        [
+          _c("v-text-field", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              label: _vm.login_form.email_field.label,
+              "prepend-inner-icon": "email",
+              dense: "",
+              "single-line": "",
+              rules: _vm.login_form.email_field.rules,
+              filled: ""
+            },
+            model: {
+              value: _vm.login_form.email_field.value,
+              callback: function($$v) {
+                _vm.$set(_vm.login_form.email_field, "value", $$v)
               },
-              [_vm._v("Entrar")]
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+              expression: "login_form.email_field.value"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              label: _vm.login_form.password_field.label,
+              rules: _vm.login_form.password_field.rules,
+              "prepend-inner-icon": "lock",
+              "append-icon": _vm.showPassword ? "visibility" : "visibility_off",
+              type: _vm.showPassword ? "text" : "password",
+              "single-line": "",
+              filled: "",
+              dense: ""
+            },
+            on: {
+              "click:append": function($event) {
+                _vm.showPassword = !_vm.showPassword
+              }
+            },
+            model: {
+              value: _vm.login_form.password_field.value,
+              callback: function($$v) {
+                _vm.$set(_vm.login_form.password_field, "value", $$v)
+              },
+              expression: "login_form.password_field.value"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "text-capitalize w-50 ma-auto",
+              attrs: { color: "white", elevation: "0", small: "" }
+            },
+            [_vm._v("Olvido su contraseña?")]
+          ),
+          _vm._v(" "),
+          _c("v-checkbox", {
+            staticClass: "mt-2 ma-auto mb-0",
+            attrs: { label: "Recuerdame" },
+            model: {
+              value: _vm.login_form.remember_check.value,
+              callback: function($$v) {
+                _vm.$set(_vm.login_form.remember_check, "value", $$v)
+              },
+              expression: "login_form.remember_check.value"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            { staticClass: "mt-6" },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "text-capitalize px-12 py-4 ma-auto",
+                  attrs: {
+                    color: "primary",
+                    type: "submit",
+                    disabled: _vm.sending,
+                    loading: _vm.sending,
+                    large: "",
+                    rounded: ""
+                  }
+                },
+                [_vm._v("Entrar")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -727,226 +700,165 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-100" }, [
-    _c("h2", { staticClass: "primary--text text-center font-weight-bold" }, [
-      _vm._v("Crear Cuenta")
-    ]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass:
-          "mt-8 px-2 px-md-8 w-100 d-flex flex-column justify-center flex-wrap",
-        attrs: { action: "singup_form", method: "POST" }
-      },
-      [
-        _c("validation-provider", {
-          attrs: { rules: "required|max:64" },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var errors = ref.errors
-                return [
-                  _c("v-text-field", {
-                    staticClass: "ma-auto",
-                    staticStyle: { width: "75%" },
-                    attrs: {
-                      label: "Nombre",
-                      "prepend-inner-icon": "person",
-                      dense: "",
-                      "hide-details": "",
-                      "single-line": "",
-                      filled: ""
-                    },
-                    model: {
-                      value: _vm.singup_form.name_field.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.singup_form.name_field, "value", $$v)
-                      },
-                      expression: "singup_form.name_field.value"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content-error text-center" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "error-details",
-                        staticStyle: { lineHeigth: "1" }
-                      },
-                      [_vm._v(_vm._s(errors[0]))]
-                    )
-                  ])
-                ]
-              }
+  return _c(
+    "div",
+    { staticClass: "w-100" },
+    [
+      _c("h2", { staticClass: "primary--text text-center font-weight-bold" }, [
+        _vm._v("Crear Cuenta")
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          staticClass:
+            "mt-8 px-2 px-md-8 w-100 d-flex flex-column justify-center flex-wrap",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.register($event)
             }
-          ])
-        }),
-        _vm._v(" "),
-        _c("validation-provider", {
-          attrs: { rules: "required|max:64" },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var errors = ref.errors
-                return [
-                  _c("v-text-field", {
-                    staticClass: "ma-auto",
-                    staticStyle: { width: "75%" },
-                    attrs: {
-                      label: "Correo electronico",
-                      "prepend-inner-icon": "email",
-                      dense: "",
-                      "single-line": "",
-                      filled: "",
-                      "hide-details": ""
-                    },
-                    model: {
-                      value: _vm.singup_form.email_field.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.singup_form.email_field, "value", $$v)
-                      },
-                      expression: "singup_form.email_field.value"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content-error text-center" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "error-details",
-                        staticStyle: { lineHeigth: "1" }
-                      },
-                      [_vm._v(_vm._s(errors[0]))]
-                    )
-                  ])
-                ]
-              }
-            }
-          ])
-        }),
-        _vm._v(" "),
-        _c("validation-provider", {
-          attrs: { rules: "required|min:8" },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var errors = ref.errors
-                return [
-                  _c("v-text-field", {
-                    staticClass: "ma-auto",
-                    staticStyle: { width: "75%" },
-                    attrs: {
-                      label: "Contraseña",
-                      "prepend-inner-icon": "lock",
-                      "append-icon": _vm.showPassword
-                        ? "visibility"
-                        : "visibility_off",
-                      type: _vm.showPassword ? "text" : "password",
-                      "single-line": "",
-                      "hide-details": "",
-                      filled: "",
-                      dense: ""
-                    },
-                    on: {
-                      "click:append": function($event) {
-                        _vm.showPassword = !_vm.showPassword
-                      }
-                    },
-                    model: {
-                      value: _vm.singup_form.password_field.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.singup_form.password_field, "value", $$v)
-                      },
-                      expression: "singup_form.password_field.value"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content-error text-center" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "error-details",
-                        staticStyle: { lineHeigth: "1" }
-                      },
-                      [_vm._v(_vm._s(errors[0]))]
-                    )
-                  ])
-                ]
-              }
-            }
-          ])
-        }),
-        _vm._v(" "),
-        _c("v-select", {
-          staticClass: "ma-auto",
-          staticStyle: { width: "75%" },
-          attrs: {
-            filled: "",
-            dense: "",
-            "hide-details": "",
-            "prepend-inner-icon": "person_outline",
-            items: _vm.items,
-            "item-text": "label",
-            "item-value": "value",
-            label: "Tipo de usuario"
-          },
-          model: {
-            value: _vm.singup_form.type.value,
-            callback: function($$v) {
-              _vm.$set(_vm.singup_form.type, "value", $$v)
-            },
-            expression: "singup_form.type.value"
           }
-        }),
-        _vm._v(" "),
-        _c("v-checkbox", {
-          staticClass: "mt-2 ma-auto mb-0",
-          attrs: { "hide-details": "", label: "Recuerdame" },
-          model: {
-            value: _vm.singup_form.remember_check.value,
-            callback: function($$v) {
-              _vm.$set(_vm.singup_form.remember_check, "value", $$v)
+        },
+        [
+          _c("v-text-field", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              label: "Nombre",
+              "prepend-inner-icon": "person",
+              rules: _vm.singup_form.name_field.rules,
+              dense: "",
+              "single-line": "",
+              filled: ""
             },
-            expression: "singup_form.remember_check.value"
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "v-card-actions",
-          { staticClass: "mt-6" },
-          [
-            _c(
-              "v-btn",
-              {
-                staticClass: "text-capitalize px-12 py-4 ma-auto",
-                attrs: { color: "primary", dark: "", large: "", rounded: "" },
-                on: {
-                  click: function($event) {
-                    return _vm.register()
-                  }
-                }
+            model: {
+              value: _vm.singup_form.name_field.value,
+              callback: function($$v) {
+                _vm.$set(_vm.singup_form.name_field, "value", $$v)
               },
-              [
-                _c(
-                  "v-icon",
-                  { staticClass: "material-icons", attrs: { left: "" } },
-                  [_vm._v("check")]
-                ),
-                _vm._v("Registrarse")
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+              expression: "singup_form.name_field.value"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              rules: _vm.singup_form.email_field.rules,
+              label: "Correo electronico",
+              "prepend-inner-icon": "email",
+              dense: "",
+              "single-line": "",
+              filled: ""
+            },
+            model: {
+              value: _vm.singup_form.email_field.value,
+              callback: function($$v) {
+                _vm.$set(_vm.singup_form.email_field, "value", $$v)
+              },
+              expression: "singup_form.email_field.value"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              rules: _vm.singup_form.password_field.rules,
+              label: "Contraseña",
+              "prepend-inner-icon": "lock",
+              "append-icon": _vm.showPassword ? "visibility" : "visibility_off",
+              type: _vm.showPassword ? "text" : "password",
+              "single-line": "",
+              filled: "",
+              dense: ""
+            },
+            on: {
+              "click:append": function($event) {
+                _vm.showPassword = !_vm.showPassword
+              }
+            },
+            model: {
+              value: _vm.singup_form.password_field.value,
+              callback: function($$v) {
+                _vm.$set(_vm.singup_form.password_field, "value", $$v)
+              },
+              expression: "singup_form.password_field.value"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-select", {
+            staticClass: "ma-auto",
+            staticStyle: { width: "75%" },
+            attrs: {
+              filled: "",
+              dense: "",
+              "hide-details": "",
+              "prepend-inner-icon": "person_outline",
+              items: _vm.items,
+              "item-text": "label",
+              "item-value": "value",
+              label: "Tipo de usuario"
+            },
+            model: {
+              value: _vm.singup_form.type.value,
+              callback: function($$v) {
+                _vm.$set(_vm.singup_form.type, "value", $$v)
+              },
+              expression: "singup_form.type.value"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-checkbox", {
+            staticClass: "mt-2 ma-auto mb-0",
+            attrs: { "hide-details": "", label: "Recuerdame" },
+            model: {
+              value: _vm.singup_form.remember_check.value,
+              callback: function($$v) {
+                _vm.$set(_vm.singup_form.remember_check, "value", $$v)
+              },
+              expression: "singup_form.remember_check.value"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            { staticClass: "mt-6" },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "text-capitalize px-12 py-4 ma-auto",
+                  attrs: {
+                    color: "primary",
+                    type: "submit",
+                    disabled: _vm.sending,
+                    loading: _vm.sending,
+                    large: "",
+                    rounded: ""
+                  }
+                },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "material-icons", attrs: { left: "" } },
+                    [_vm._v("check")]
+                  ),
+                  _vm._v("Registrarse")
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -971,196 +883,162 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-app",
+    "v-container",
+    { staticClass: "full-height", attrs: { fluid: "" } },
     [
       _c(
-        "v-main",
-        { staticClass: "mt-12 container-global ma-auto" },
+        "v-row",
+        { attrs: { align: "center", justify: "center" } },
         [
           _c(
-            "v-container",
-            { staticClass: "full-height", attrs: { fluid: "" } },
+            "v-col",
+            { attrs: { cols: "12", md: "9" } },
             [
               _c(
-                "v-row",
-                { attrs: { align: "center", justify: "center" } },
+                "v-card",
+                {
+                  staticClass:
+                    "rounded-xl pa-0 d-flex justify-center flex-nowrap card-login",
+                  staticStyle: { overflow: "hidden" },
+                  attrs: { elevation: "4", "min-height": "550" }
+                },
                 [
                   _c(
-                    "v-col",
-                    { attrs: { cols: "12", md: "9" } },
+                    "div",
+                    {
+                      staticClass:
+                        "icon-login d-none d-md-flex justify-center flex-nowrap align-items-center "
+                    },
                     [
+                      _c("v-img", { attrs: { width: "30", src: "" } }),
+                      _vm._v(" "),
                       _c(
-                        "v-card",
-                        {
-                          staticClass:
-                            "rounded-xl pa-0 d-flex justify-center flex-nowrap card-login",
-                          staticStyle: { overflow: "hidden" },
-                          attrs: { elevation: "4", "min-height": "550" }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "icon-login d-none d-md-flex justify-center flex-nowrap align-items-center "
-                            },
-                            [
-                              _c("v-img", { attrs: { width: "30", src: "" } }),
-                              _vm._v(" "),
-                              _c(
-                                "h3",
-                                {
-                                  staticClass: "text-caption white--text mb-0"
-                                },
-                                [_vm._v("DivinasPrepagos")]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "transition",
-                            { attrs: { name: "slide-text", mode: "out-in" } },
-                            [
-                              _vm.efect == false
-                                ? _c(
-                                    "v-col",
-                                    {
-                                      staticClass:
-                                        "py-0 px-4 d-none d-md-flex flex-column justify-center align-items-center text-center white--text",
-                                      attrs: {
-                                        cols: "5",
-                                        height: "100%",
-                                        width: "100%",
-                                        "max-width": "100%"
-                                      }
-                                    },
-                                    [
-                                      _c("h4", {
-                                        staticClass:
-                                          "w-100 text-h4 font-weight-bold mb-7",
-                                        domProps: {
-                                          textContent: _vm._s(_vm.textTitle)
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", {
-                                        staticClass: "w-100 ma-0 mb-8",
-                                        domProps: {
-                                          textContent: _vm._s(_vm.textParr)
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-btn", {
-                                        staticClass:
-                                          "text-capitalize px-10 py-4",
-                                        attrs: {
-                                          color: "white",
-                                          outlined: "",
-                                          dark: "",
-                                          large: "",
-                                          rounded: ""
-                                        },
-                                        domProps: {
-                                          textContent: _vm._s(_vm.textBtn)
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.changeForm()
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
+                        "h3",
+                        { staticClass: "text-caption white--text mb-0" },
+                        [_vm._v("DivinasPrepagos")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "transition",
+                    { attrs: { name: "slide-text", mode: "out-in" } },
+                    [
+                      _vm.efect == false
+                        ? _c(
                             "v-col",
                             {
                               staticClass:
-                                "rounded-0 px-0 py-6 px-md-8 py-md-8 white d-flex flex-column justify-center flex-wrap align-items-center",
+                                "py-0 px-4 d-none d-md-flex flex-column justify-center align-items-center text-center white--text",
                               attrs: {
-                                cols: "12",
-                                md: "7",
+                                cols: "5",
+                                height: "100%",
+                                width: "100%",
                                 "max-width": "100%"
                               }
                             },
                             [
-                              _c(
-                                "transition",
-                                {
-                                  attrs: { name: "slide-login", mode: "out-in" }
-                                },
-                                [
-                                  _vm.formLogin
-                                    ? _c("login-component", {
-                                        on: { login: _vm.login }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
+                              _c("h4", {
+                                staticClass:
+                                  "w-100 text-h4 font-weight-bold mb-7",
+                                domProps: { textContent: _vm._s(_vm.textTitle) }
+                              }),
                               _vm._v(" "),
-                              _c(
-                                "transition",
-                                {
-                                  attrs: {
-                                    name: "slide-signup",
-                                    mode: "out-in"
+                              _c("p", {
+                                staticClass: "w-100 ma-0 mb-8",
+                                domProps: { textContent: _vm._s(_vm.textParr) }
+                              }),
+                              _vm._v(" "),
+                              _c("v-btn", {
+                                staticClass: "text-capitalize px-10 py-4",
+                                attrs: {
+                                  color: "white",
+                                  outlined: "",
+                                  dark: "",
+                                  large: "",
+                                  rounded: ""
+                                },
+                                domProps: { textContent: _vm._s(_vm.textBtn) },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changeForm()
                                   }
-                                },
-                                [
-                                  _vm.formSignup
-                                    ? _c("signup-component", {
-                                        on: { register: _vm.register }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              staticClass:
-                                "text-capitalize w-auto black--text d-block d-md-none font-weight-bold mr-8",
-                              attrs: {
-                                elevation: "0",
-                                color: "white",
-                                absolute: "",
-                                light: "",
-                                small: "",
-                                bottom: "",
-                                right: ""
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.changeForm()
                                 }
-                              }
-                            },
-                            [
-                              _vm._v(_vm._s(_vm.textBtn)),
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "material-icons",
-                                  attrs: { right: "" }
-                                },
-                                [_vm._v("arrow_forward")]
-                              )
+                              })
                             ],
                             1
                           )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    {
+                      staticClass:
+                        "rounded-0 px-0 py-6 px-md-8 py-md-8 white d-flex flex-column justify-center flex-wrap align-items-center",
+                      attrs: { cols: "12", md: "7", "max-width": "100%" }
+                    },
+                    [
+                      _c(
+                        "transition",
+                        { attrs: { name: "slide-login", mode: "out-in" } },
+                        [
+                          _vm.formLogin
+                            ? _c("login-component", {
+                                attrs: { sending: _vm.busy },
+                                on: { login: _vm.login }
+                              })
+                            : _vm._e()
                         ],
                         1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "transition",
+                        { attrs: { name: "slide-signup", mode: "out-in" } },
+                        [
+                          _vm.formSignup
+                            ? _c("signup-component", {
+                                attrs: { sending: _vm.busy },
+                                on: { register: _vm.register }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass:
+                        "text-capitalize w-auto black--text d-block d-md-none font-weight-bold mr-8",
+                      attrs: {
+                        elevation: "0",
+                        color: "white",
+                        absolute: "",
+                        light: "",
+                        small: "",
+                        bottom: "",
+                        right: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.changeForm()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(_vm._s(_vm.textBtn)),
+                      _c(
+                        "v-icon",
+                        { staticClass: "material-icons", attrs: { right: "" } },
+                        [_vm._v("arrow_forward")]
                       )
                     ],
                     1
@@ -1188,7 +1066,7 @@ var render = function() {
           }
         },
         [
-          _vm._v("\n    " + _vm._s(_vm.errorServer) + "\n    "),
+          _vm._v("\n        " + _vm._s(_vm.errorServer) + "\n        "),
           [
             _c(
               "v-btn",

@@ -131,6 +131,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -586,12 +588,14 @@ var render = function() {
                                 [
                                   _vm.data.publication.imgages_path
                                     ? _c("v-img", {
+                                        staticClass: "grey lighten-2",
                                         attrs: {
                                           src:
                                             "/uploads/images/" +
                                             JSON.parse(
                                               _vm.data.publication.imgages_path
-                                            )[0]
+                                            )[0],
+                                          "aspect-ratio": "1"
                                         }
                                       })
                                     : _vm._e()

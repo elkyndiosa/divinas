@@ -257,11 +257,10 @@ var render = function() {
                 { staticClass: "align-self-center", attrs: { color: "white" } },
                 [
                   _c("v-img", {
+                    staticClass: "grey lighten-2",
                     attrs: {
                       src: "/uploads/images/" + _vm.user.image_profile,
-                      width: "100%",
-                      height: "100%",
-                      contain: ""
+                      "aspect-ratio": "1"
                     }
                   })
                 ],

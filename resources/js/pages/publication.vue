@@ -23,6 +23,8 @@
                                 <v-img
                                     v-if="data.publication.imgages_path"
                                     :src="'/uploads/images/'+JSON.parse(data.publication.imgages_path)[0]"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
                                 ></v-img>
                             </v-list-item-avatar>
                             <v-list-item-content>

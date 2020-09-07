@@ -54,6 +54,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
@@ -79,8 +96,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
   data: function data() {
     return {};
   },
-  mounted: function mounted() {
-    console.log(this.value);
+  mounted: function mounted() {//console.log(this.value)
   },
   computed: {
     isFavorite: function isFavorite() {
@@ -495,127 +511,194 @@ var render = function() {
     "v-col",
     { attrs: { cols: "6", md: "4", lg: "3" } },
     [
-      _vm.value != ""
-        ? _c(
-            "base-card",
-            { attrs: { height: 450, outlined: "" } },
-            [
-              _c("v-img", {
-                attrs: {
-                  src:
-                    "/uploads/images/" + JSON.parse(_vm.value.imgages_path)[0],
-                  height: "60%",
-                  width: "100%"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                {
-                  staticClass: "m-0 py-1 px-3",
-                  staticStyle: { cursor: "pointer" },
-                  on: {
-                    click: function($event) {
-                      return _vm.showPublication(_vm.value.uuid)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "v-toolbar",
-                    {
-                      staticClass: "px-0",
-                      attrs: { flat: "", dense: "", color: "white" }
-                    },
-                    [
-                      _vm.value.status == 1
-                        ? _c(
-                            "v-icon",
-                            {
-                              staticClass: "material-icons",
-                              attrs: { color: "yellow" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                  verified_user\n              "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c("v-toolbar-title", [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.value.name) +
-                            "\n              "
-                        )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    { staticClass: "text-end", staticStyle: { width: "100%" } },
-                    [
-                      _c("strong", [_vm._v("Publicado:")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(
-                            _vm
-                              .moment(_vm.value.created_at)
-                              .startOf("hour")
-                              .format("DD-MMMM-YYYY")
-                          )
-                        )
-                      ])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                { staticClass: "m-0 py-0" },
-                [
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        fab: "",
-                        text: "",
-                        color: _vm.isFavorite ? "primary" : "grey lighten-1"
-                      },
-                      on: {
-                        click: function($event) {
-                          !_vm.isFavorite
-                            ? _vm.addFavorities(_vm.value)
-                            : _vm.removeFavorities(_vm.value)
+      _c("v-hover", {
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(ref) {
+              var hover = ref.hover
+              return [
+                _vm.value != ""
+                  ? _c(
+                      "base-card",
+                      {
+                        attrs: {
+                          height: 450,
+                          elevation: hover ? 20 : 2,
+                          rounded: ""
                         }
-                      }
-                    },
-                    [
-                      _c("v-icon", { staticClass: "material-icons" }, [
-                        _vm._v("favorite")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        : _vm._e()
+                      },
+                      [
+                        _c("v-img", {
+                          staticClass: "grey lighten-2",
+                          staticStyle: { cursor: "pointer" },
+                          attrs: {
+                            src:
+                              "/uploads/images/" +
+                              JSON.parse(_vm.value.imgages_path)[0],
+                            height: "60%",
+                            width: "100%",
+                            "aspect-ratio": "1"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.showPublication(_vm.value.uuid)
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "placeholder",
+                                fn: function() {
+                                  return [
+                                    _c(
+                                      "v-row",
+                                      {
+                                        staticClass: "fill-height ma-0",
+                                        attrs: {
+                                          align: "center",
+                                          justify: "center"
+                                        }
+                                      },
+                                      [
+                                        _c("v-progress-circular", {
+                                          attrs: {
+                                            indeterminate: "",
+                                            color: "grey lighten-5"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-text",
+                          {
+                            staticClass: "m-0 py-1 px-3",
+                            staticStyle: { cursor: "pointer" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showPublication(_vm.value.uuid)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "v-toolbar",
+                              {
+                                staticClass: "px-0",
+                                attrs: { flat: "", dense: "", color: "white" }
+                              },
+                              [
+                                _vm.value.status == 1
+                                  ? _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "material-icons",
+                                        attrs: { color: "yellow" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                      verified_user\n                  "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c("v-toolbar-title", [
+                                  _vm._v(
+                                    "\n                      " +
+                                      _vm._s(_vm.value.name) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticClass: "text-end",
+                                staticStyle: { width: "100%" }
+                              },
+                              [
+                                _c("strong", [_vm._v("Publicado:")]),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm
+                                        .moment(_vm.value.created_at)
+                                        .startOf("hour")
+                                        .format("DD-MMMM-YYYY")
+                                    )
+                                  )
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-actions",
+                          { staticClass: "m-0 py-0" },
+                          [
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  fab: "",
+                                  text: "",
+                                  color: _vm.isFavorite
+                                    ? "primary"
+                                    : "grey lighten-1"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    !_vm.isFavorite
+                                      ? _vm.addFavorities(_vm.value)
+                                      : _vm.removeFavorities(_vm.value)
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-icon",
+                                  { staticClass: "material-icons" },
+                                  [_vm._v("favorite")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ]
+            }
+          }
+        ])
+      })
     ],
     1
   )

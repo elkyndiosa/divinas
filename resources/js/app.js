@@ -16,8 +16,5 @@ const app = new Vue({
     vuetify,
     el: "#app",
     template: `<Application/>`,
-    created() {
-        console.log('Created vue instance');
-    },
 });
 export { app };

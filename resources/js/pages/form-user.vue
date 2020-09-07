@@ -1,6 +1,4 @@
 <template>
-  <v-app>
-    <v-main class="mt-12 container-global ma-auto">
       <v-container class="full-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" md="9">
@@ -47,10 +45,10 @@
                 max-width="100%"
               >
                 <transition name="slide-login" mode="out-in">
-                  <login-component v-if="formLogin" @login="login"></login-component>
+                  <login-component :sending="busy" v-if="formLogin" @login="login"></login-component>
                 </transition>
                 <transition name="slide-signup" mode="out-in">
-                  <signup-component v-if="formSignup" @register="register"></signup-component>
+                  <signup-component :sending="busy" v-if="formSignup" @register="register"></signup-component>
                 </transition>
               </v-col>
               <v-btn
@@ -67,15 +65,13 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-container>
-    </v-main>
-    <v-snackbar v-model="snackbar" :timeout="6000">
-      {{ errorServer }}
-      <template>
-        <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
-      </template>
-    </v-snackbar>
-  </v-app>
+        <v-snackbar v-model="snackbar" :timeout="6000">
+            {{ errorServer }}
+            <template>
+                <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
+            </template>
+        </v-snackbar>
+    </v-container>
 </template>
 
 <script>
@@ -90,6 +86,7 @@ export default {
   props: ["type"],
   name: "login-form",
   data: () => ({
+    busy: false,
     errorServer: "",
     snackbar: false,
     formLogin: true,
@@ -132,40 +129,40 @@ export default {
         }, 500);
       }
     },
-    login(loginData) {
-      let url = "/login";
-      let formData = new FormData();
-      formData.append("email", loginData.email_field.value);
-      formData.append("password", loginData.password_field.value);
-      formData.append("remember", loginData.remember_check);
-      axios
-        .post(url, formData)
-        .then((response) => {
-          location.href = "/dashboard";
-        })
-        .catch((error) => {
+    async login(loginData) {
+        this.busy = true
+        let url = "/login";
+        let formData = new FormData();
+        formData.append("email", loginData.email_field.value);
+        formData.append("password", loginData.password_field.value);
+        formData.append("remember", loginData.remember_check);
+        try {
+            let response = await axios.post(url, formData)
+            location.href = "/dashboard";
+        } catch(error){
           this.errorServer = "Incorrect data, please check!";
           this.snackbar = true;
           console.log(error.response.data);
-        });
+          this.busy = false
+        };
     },
-    register(signupData) {
-      const url = "/register";
-      let formData = new FormData();
-      formData.append("name", signupData.name_field.value);
-      formData.append("email", signupData.email_field.value);
-      formData.append("password", signupData.password_field.value);
-      formData.append("type", signupData.type.value);
-      axios
-        .post(url, formData)
-        .then((response) => {
-          location.href = "/dashboard";
-        })
-        .catch((error) => {
+    async register(signupData) {
+        this.busy = true
+        let url = "/register";
+        let formData = new FormData();
+        formData.append("name", signupData.name_field.value);
+        formData.append("email", signupData.email_field.value);
+        formData.append("password", signupData.password_field.value);
+        formData.append("type", signupData.type.value);
+        try {
+            let response = await axios.post(url, formData)
+            location.href = "/dashboard";
+        } catch(error) {
           this.errorServer = "Incorrect data, please check!";
           this.snackbar = true;
           console.log(error.response);
-        });
+          this.busy = false
+        };
     },
   },
 };
