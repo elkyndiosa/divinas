@@ -28,7 +28,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'delivery' => false,
         'have_site' => false,
-        'image_profile' => null,
+        'image_profile' => 'image-'.rand(1, 5).'.jpg',
         'house_id' =>  rand(1, 6),
         'time_id' => rand(1, 6),
         'city_id' => 1,
