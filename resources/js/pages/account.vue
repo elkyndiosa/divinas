@@ -1,53 +1,52 @@
 <template >
-  <div class="mt-16 pt-6 d-flex justify-center flex-wrap">
-    
-    <v-col cols="12" md="4" order="1" order-md="2">
-      <v-card
-        class="mt-8 elevation-10 pt-16 pb-6 d-flex justify-center ma-auto"
-        style="height: auto; max-height: 600px; max-width: 400px;"
-      >
-        <v-avatar
-          size="170"
-          color="red"
-          style="position: absolute;top: -50px; border-radius: 50%;"
-          class="elevation-10"
+  <v-container fluid>
+    <v-row justify="center">
+        <v-col cols="12" md="4" order="1" order-md="2">
+        <v-card
+            class="mt-8 elevation-10 pt-16 pb-6 d-flex justify-center ma-auto"
         >
-          <img
-            style="backg"
-            v-if="user.image_profile != null"
-            :src="'/uploads/images/'+user.image_profile"
-            alt="alt"
-          />
-          <span v-else class="white--text text-h1 text-uppercase">{{user.name[0]}}</span>
-        </v-avatar>
-        <v-btn
-          style="position: absolute; top: 80px; right: 40px;"
-          small
-          fab
-          color="primary"
-          @click="dialogSelectImageProfile= true"
-        >
-          <v-icon color="white" class="material-icons">camera_enhance</v-icon>
-        </v-btn>
-        <v-card-text class="text-center mt-16">
-          <h4 class="text-h3 font-weight-light mb-3 black--text">{{dataUser.name}}</h4>
-          <h6
-            class="text-subtitle-1 mb-1 grey--text"
-          >{{dataUser.nick == null ? 'No has ingresado tu Alias' : dataUser.nick }} (Alias)</h6>
-          <p
-            class="font-weight-light grey--text"
-          >{{dataUser.description == null ? 'No has ingresado tu descripcion personal. Completa tu perfil' : dataUser.description }}</p>
-          <router-link :to="{name: 'publications'}" exact>
-            <v-btn color="primary" rounded class="mr-0">Publicar Anuncio</v-btn>
-          </router-link>
-        </v-card-text>
-      </v-card>
-      <v-dialog v-model="dialogSelectImageProfile" max-width="800">
-        <image-select type="profile" @updateImageProfile="updateImageProfile">></image-select>
-      </v-dialog>
-    </v-col>
-
-  </div>
+            <v-avatar
+            size="170"
+            color="red"
+            style="position: absolute;top: -50px; border-radius: 50%;"
+            class="elevation-10"
+            >
+            <img
+                style="backg"
+                v-if="user.image_profile != null"
+                :src="'/uploads/images/'+user.image_profile"
+                alt="alt"
+            />
+            <span v-else class="white--text text-h1 text-uppercase">{{user.name[0]}}</span>
+            </v-avatar>
+            <v-btn
+            style="position: absolute; top: 80px; right: 40px;"
+            small
+            fab
+            color="primary"
+            @click="dialogSelectImageProfile= true"
+            >
+            <v-icon color="white" class="material-icons">camera_enhance</v-icon>
+            </v-btn>
+            <v-card-text class="text-center mt-16">
+            <h4 class="text-h3 font-weight-light mb-3 black--text">{{dataUser.name}}</h4>
+            <h6
+                class="text-subtitle-1 mb-1 grey--text"
+            >{{dataUser.nick == null ? 'No has ingresado tu Alias' : dataUser.nick }} (Alias)</h6>
+            <p
+                class="font-weight-light grey--text"
+            >{{dataUser.description == null ? 'No has ingresado tu descripcion personal. Completa tu perfil' : dataUser.description }}</p>
+            <router-link :to="{name: 'publications'}" exact>
+                <v-btn color="primary" rounded class="mr-0">Publicar Anuncio</v-btn>
+            </router-link>
+            </v-card-text>
+        </v-card>
+        <v-dialog v-model="dialogSelectImageProfile" max-width="800">
+            <image-select type="profile" @updateImageProfile="updateImageProfile">></image-select>
+        </v-dialog>
+        </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 export default {

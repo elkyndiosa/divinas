@@ -61,7 +61,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ImageSelect: function ImageSelect() {
@@ -267,155 +266,164 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "mt-16 pt-6 d-flex justify-center flex-wrap" },
+    "v-container",
+    { attrs: { fluid: "" } },
     [
       _c(
-        "v-col",
-        { attrs: { cols: "12", md: "4", order: "1", "order-md": "2" } },
+        "v-row",
+        { attrs: { justify: "center" } },
         [
           _c(
-            "v-card",
-            {
-              staticClass:
-                "mt-8 elevation-10 pt-16 pb-6 d-flex justify-center ma-auto",
-              staticStyle: {
-                height: "auto",
-                "max-height": "600px",
-                "max-width": "400px"
-              }
-            },
+            "v-col",
+            { attrs: { cols: "12", md: "4", order: "1", "order-md": "2" } },
             [
               _c(
-                "v-avatar",
+                "v-card",
                 {
-                  staticClass: "elevation-10",
-                  staticStyle: {
-                    position: "absolute",
-                    top: "-50px",
-                    "border-radius": "50%"
-                  },
-                  attrs: { size: "170", color: "red" }
-                },
-                [
-                  _vm.user.image_profile != null
-                    ? _c("img", {
-                        staticStyle: {},
-                        attrs: {
-                          src: "/uploads/images/" + _vm.user.image_profile,
-                          alt: "alt"
-                        }
-                      })
-                    : _c(
-                        "span",
-                        { staticClass: "white--text text-h1 text-uppercase" },
-                        [_vm._v(_vm._s(_vm.user.name[0]))]
-                      )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  staticStyle: {
-                    position: "absolute",
-                    top: "80px",
-                    right: "40px"
-                  },
-                  attrs: { small: "", fab: "", color: "primary" },
-                  on: {
-                    click: function($event) {
-                      _vm.dialogSelectImageProfile = true
-                    }
-                  }
+                  staticClass:
+                    "mt-8 elevation-10 pt-16 pb-6 d-flex justify-center ma-auto"
                 },
                 [
                   _c(
-                    "v-icon",
+                    "v-avatar",
                     {
-                      staticClass: "material-icons",
-                      attrs: { color: "white" }
+                      staticClass: "elevation-10",
+                      staticStyle: {
+                        position: "absolute",
+                        top: "-50px",
+                        "border-radius": "50%"
+                      },
+                      attrs: { size: "170", color: "red" }
                     },
-                    [_vm._v("camera_enhance")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                { staticClass: "text-center mt-16" },
-                [
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "text-h3 font-weight-light mb-3 black--text"
-                    },
-                    [_vm._v(_vm._s(_vm.dataUser.name))]
+                    [
+                      _vm.user.image_profile != null
+                        ? _c("img", {
+                            staticStyle: {},
+                            attrs: {
+                              src: "/uploads/images/" + _vm.user.image_profile,
+                              alt: "alt"
+                            }
+                          })
+                        : _c(
+                            "span",
+                            {
+                              staticClass: "white--text text-h1 text-uppercase"
+                            },
+                            [_vm._v(_vm._s(_vm.user.name[0]))]
+                          )
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("h6", { staticClass: "text-subtitle-1 mb-1 grey--text" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm.dataUser.nick == null
-                          ? "No has ingresado tu Alias"
-                          : _vm.dataUser.nick
-                      ) + " (Alias)"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "font-weight-light grey--text" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm.dataUser.description == null
-                          ? "No has ingresado tu descripcion personal. Completa tu perfil"
-                          : _vm.dataUser.description
-                      )
-                    )
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "router-link",
-                    { attrs: { to: { name: "publications" }, exact: "" } },
+                    "v-btn",
+                    {
+                      staticStyle: {
+                        position: "absolute",
+                        top: "80px",
+                        right: "40px"
+                      },
+                      attrs: { small: "", fab: "", color: "primary" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogSelectImageProfile = true
+                        }
+                      }
+                    },
                     [
                       _c(
-                        "v-btn",
+                        "v-icon",
                         {
-                          staticClass: "mr-0",
-                          attrs: { color: "primary", rounded: "" }
+                          staticClass: "material-icons",
+                          attrs: { color: "white" }
                         },
-                        [_vm._v("Publicar Anuncio")]
+                        [_vm._v("camera_enhance")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    { staticClass: "text-center mt-16" },
+                    [
+                      _c(
+                        "h4",
+                        {
+                          staticClass:
+                            "text-h3 font-weight-light mb-3 black--text"
+                        },
+                        [_vm._v(_vm._s(_vm.dataUser.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        { staticClass: "text-subtitle-1 mb-1 grey--text" },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.dataUser.nick == null
+                                ? "No has ingresado tu Alias"
+                                : _vm.dataUser.nick
+                            ) + " (Alias)"
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "font-weight-light grey--text" }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.dataUser.description == null
+                              ? "No has ingresado tu descripcion personal. Completa tu perfil"
+                              : _vm.dataUser.description
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        { attrs: { to: { name: "publications" }, exact: "" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mr-0",
+                              attrs: { color: "primary", rounded: "" }
+                            },
+                            [_vm._v("Publicar Anuncio")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
                   )
                 ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "800" },
-              model: {
-                value: _vm.dialogSelectImageProfile,
-                callback: function($$v) {
-                  _vm.dialogSelectImageProfile = $$v
-                },
-                expression: "dialogSelectImageProfile"
-              }
-            },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "image-select",
+                "v-dialog",
                 {
-                  attrs: { type: "profile" },
-                  on: { updateImageProfile: _vm.updateImageProfile }
+                  attrs: { "max-width": "800" },
+                  model: {
+                    value: _vm.dialogSelectImageProfile,
+                    callback: function($$v) {
+                      _vm.dialogSelectImageProfile = $$v
+                    },
+                    expression: "dialogSelectImageProfile"
+                  }
                 },
-                [_vm._v(">")]
+                [
+                  _c(
+                    "image-select",
+                    {
+                      attrs: { type: "profile" },
+                      on: { updateImageProfile: _vm.updateImageProfile }
+                    },
+                    [_vm._v(">")]
+                  )
+                ],
+                1
               )
             ],
             1
