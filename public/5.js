@@ -207,7 +207,7 @@ var render = function() {
         id: "core-navigation-drawer",
         dark:
           _vm.barColor !== "rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)",
-        src: _vm.barImage,
+        src: "/images/background-drawer.jpeg",
         app: "",
         permanent: "",
         clipped: "",
