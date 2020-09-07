@@ -76,7 +76,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
   props: ["uuid"],
   components: {
     Gallery: function Gallery() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
     },
     TableData: function TableData() {
       return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));

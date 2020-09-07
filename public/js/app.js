@@ -2256,7 +2256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css?bdb9":
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vuetify/dist/vuetify.min.css ***!
   \***********************************************************************************************************************************/
@@ -79779,7 +79779,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vuetify.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vuetify.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vuetify/dist/vuetify.min.css?bdb9");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -81972,7 +81972,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
@@ -81994,7 +81994,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e(0), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {

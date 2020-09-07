@@ -168,6 +168,7 @@ return [
 
         //Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
         'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

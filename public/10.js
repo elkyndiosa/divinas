@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HomeAbout',
   components: {
     Feed: function Feed() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Feed */ "./resources/js/components/Feed.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Feed */ "./resources/js/components/Feed.vue"));
     }
   },
   methods: {
