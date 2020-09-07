@@ -165,7 +165,6 @@ export default {
         try {
             let response = await axios.get(url)
             this.data= response.data;
-            console.log(resposne.data)
         } catch(error) {
             console.log(error)
         }

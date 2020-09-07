@@ -199,24 +199,23 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
               case 5:
                 response = _context.sent;
                 _this.data = response.data;
-                console.log(resposne.data);
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 13:
+              case 12:
                 _this.busy = false;
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 10]]);
+        }, _callee, null, [[2, 9]]);
       }))();
     }
   }
