@@ -1,14 +1,13 @@
 <template>
   <v-col cols="6" md="4" lg="3">
-    <base-card :height="350" outlined v-if="value != ''">
+    <base-card :height="450" outlined v-if="value != ''">
         <v-img
             :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
-            height="40%"
+            height="60%"
             width="100%"
-            contain
         />
-        <v-card-text @click="showPublication(value.uuid)" style="cursor: pointer">
-            <v-toolbar flat dense color="white">
+        <v-card-text class="m-0 py-1 px-3" @click="showPublication(value.uuid)" style="cursor: pointer">
+            <v-toolbar class="px-0" flat dense color="white">
                 <v-icon
                     class="material-icons"
                     color="yellow"
@@ -27,7 +26,7 @@
                 <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
             </p>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="m-0 py-0">
             <v-spacer></v-spacer>
             <v-btn
                 fab

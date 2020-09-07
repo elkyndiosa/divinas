@@ -54,7 +54,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
@@ -499,21 +498,21 @@ var render = function() {
       _vm.value != ""
         ? _c(
             "base-card",
-            { attrs: { height: 350, outlined: "" } },
+            { attrs: { height: 450, outlined: "" } },
             [
               _c("v-img", {
                 attrs: {
                   src:
                     "/uploads/images/" + JSON.parse(_vm.value.imgages_path)[0],
-                  height: "40%",
-                  width: "100%",
-                  contain: ""
+                  height: "60%",
+                  width: "100%"
                 }
               }),
               _vm._v(" "),
               _c(
                 "v-card-text",
                 {
+                  staticClass: "m-0 py-1 px-3",
                   staticStyle: { cursor: "pointer" },
                   on: {
                     click: function($event) {
@@ -524,7 +523,10 @@ var render = function() {
                 [
                   _c(
                     "v-toolbar",
-                    { attrs: { flat: "", dense: "", color: "white" } },
+                    {
+                      staticClass: "px-0",
+                      attrs: { flat: "", dense: "", color: "white" }
+                    },
                     [
                       _vm.value.status == 1
                         ? _c(
@@ -580,6 +582,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-card-actions",
+                { staticClass: "m-0 py-0" },
                 [
                   _c("v-spacer"),
                   _vm._v(" "),
