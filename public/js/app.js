@@ -20677,7 +20677,7 @@ var render = function() {
             [
               _c("router-link", { attrs: { to: { name: "home" } } }, [
                 _c("img", {
-                  attrs: { height: "60", width: "200", src: "images/logo.jpg" }
+                  attrs: { height: "60", width: "200", src: "/images/logo.jpg" }
                 })
               ]),
               _vm._v(" "),

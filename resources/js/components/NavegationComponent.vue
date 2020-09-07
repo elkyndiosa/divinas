@@ -16,7 +16,7 @@
             <img
               height="60"
               width="200"
-              src="images/logo.jpg"
+              src="/images/logo.jpg"
             />
           </router-link>
           <v-spacer></v-spacer>
