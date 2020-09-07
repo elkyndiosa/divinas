@@ -1,36 +1,33 @@
 <template>
   <v-col cols="6" md="4" lg="3">
-    <base-card :height="480" outlined v-if="value != ''">
+    <base-card :height="350" outlined v-if="value != ''">
         <v-img
             :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
             height="40%"
             width="100%"
             contain
         />
-        <v-card-title @click="showPublication(value.uuid)" style="cursor: pointer">
-            <v-row class="fill-height text-right ma-0">
-            <v-col cols="12">
-                <v-col cols="12" class="d-flex justify-space-between pa-0">
+        <v-card-text @click="showPublication(value.uuid)" style="cursor: pointer">
+            <v-toolbar flat dense color="white">
                 <v-icon
                     class="material-icons"
                     color="yellow"
                     v-if="value.status == 1"
-                >verified_user</v-icon>
-                <div v-else class="my-3"></div>
-                </v-col>
-
-                <p class="text-h6">{{value.name}}</p>
-                <h3 class="title font-weight-bold mb-2">{{ value.title }}</h3>
-
-                <div class="caption">
-                <p>Publicado:</p>
+                >
+                    verified_user
+                </v-icon>
+                <v-spacer></v-spacer>
+                <v-toolbar-title>
+                    {{value.name}}
+                </v-toolbar-title>
+            </v-toolbar>
+            <p class="text-end" style="width: 100%;">
+                <strong>Publicado:</strong>
+                <br/>
                 <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
-                </div>
-            </v-col>
-            </v-row>
-        </v-card-title>
-        <v-card-actions class="pa-0" style="position:absolute;bottom:0px;width:100%;">
-            <v-col cols="12" class="pa-0 d-flex justify-content-end">
+            </p>
+        </v-card-text>
+        <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
                 fab
@@ -40,7 +37,6 @@
             >
                 <v-icon class="material-icons">favorite</v-icon>
             </v-btn>
-            </v-col>
         </v-card-actions>
     </base-card>
   </v-col>
