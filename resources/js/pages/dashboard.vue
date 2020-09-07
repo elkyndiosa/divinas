@@ -1,13 +1,36 @@
 <template >
-  <div class="mt-16 d-flex justify-center flex-wrap">
-    <v-col cols="12" md="6" lg="4" v-for="(item, index) in data" :key="index">
-      <v-card :color="item.color" dark elevation="8" min-height="300">
-        <v-card-title class="headline d-flex justify-end">{{item.title}}</v-card-title>
-        <v-card-title class="text-h1 font-weight-bold d-flex justify-end">{{item.subtitle}}</v-card-title>
-        <div class="icon-card"><v-icon class="material-icons" :color="item.iconColor">{{item.icon}}</v-icon></div>
-      </v-card>
-    </v-col>
-  </div>
+    <v-container>
+        <v-row justify="center">
+            <v-col cols="12" md="6" lg="4" v-for="(item, index) in data" :key="index">
+                <v-card :color="item.color" dark>
+                    <v-card-title>
+                        <v-spacer></v-spacer>
+                        {{item.title}}
+                    </v-card-title>
+                    <v-card-title>
+                        <v-spacer></v-spacer>
+                        <v-progress-circular
+                            v-if="busy"
+                            color="white"
+                            indeterminate
+                        ></v-progress-circular>
+                        <h1 class="font-weight" v-else>
+                            {{item.subtitle}}
+                        </h1>
+                    </v-card-title>
+                    <v-card-actions>
+                        <v-icon
+                            class="material-icons"
+                            :color="item.iconColor"
+                            x-large
+                        >
+                            {{item.icon}}
+                        </v-icon>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
 
@@ -16,28 +39,26 @@ export default {
   },
    data() {
     return {
-      views: '',
-      clicks: '',
-      favorites: '',
+      busy: false,
       data:[
       {
         color: '#00cae3 ',
         title: 'Vistas de perfil',
-        subtitle: "",
+        subtitle: 0,
         icon:'timeline',
         iconColor: '#f2f2f2'
       },
       {
         color: '#4caf50',
         title: 'Clics en Whatsapp',
-        subtitle: "",
+        subtitle: 0,
         icon:'touch_app',
         iconColor: '#f2f2f2'
       },
       {
         color: '#e91e63',
         title: 'Favorita',
-        subtitle: "",
+        subtitle: 0,
         icon:'favorite',
         iconColor: '#f2f2f2'
       }
@@ -50,15 +71,18 @@ export default {
   destroyed() {},
   computed: {},
   methods: {
-    getData(){
+    async getData(){
+      this.busy = true
       let url = '/api/data';
-      axios.get(url).then(response =>{
-        this.data[0].subtitle = response.data.views;
-        this.data[1].subtitle = response.data.click_whatsapp;
-        this.data[2].subtitle = response.data.favorites;
-      }).catch(rerro => {
+      try {
+          let response = await axios.get(url)
+          this.data[0].subtitle = response.data.views;
+          this.data[1].subtitle = response.data.click_whatsapp;
+          this.data[2].subtitle = response.data.favorites;
+      } catch(error) {
         console.log(error)
-      })
+      }
+      this.busy = false
     }
   },
 };

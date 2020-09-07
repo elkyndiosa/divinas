@@ -9,6 +9,37 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -24,25 +55,23 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      views: '',
-      clicks: '',
-      favorites: '',
+      busy: false,
       data: [{
         color: '#00cae3 ',
         title: 'Vistas de perfil',
-        subtitle: "",
+        subtitle: 0,
         icon: 'timeline',
         iconColor: '#f2f2f2'
       }, {
         color: '#4caf50',
         title: 'Clics en Whatsapp',
-        subtitle: "",
+        subtitle: 0,
         icon: 'touch_app',
         iconColor: '#f2f2f2'
       }, {
         color: '#e91e63',
         title: 'Favorita',
-        subtitle: "",
+        subtitle: 0,
         icon: 'favorite',
         iconColor: '#f2f2f2'
       }]
@@ -57,14 +86,41 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      var url = '/api/data';
-      axios.get(url).then(function (response) {
-        _this.data[0].subtitle = response.data.views;
-        _this.data[1].subtitle = response.data.click_whatsapp;
-        _this.data[2].subtitle = response.data.favorites;
-      })["catch"](function (rerro) {
-        console.log(error);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.busy = true;
+                url = '/api/data';
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.get(url);
+
+              case 5:
+                response = _context.sent;
+                _this.data[0].subtitle = response.data.views;
+                _this.data[1].subtitle = response.data.click_whatsapp;
+                _this.data[2].subtitle = response.data.favorites;
+                _context.next = 14;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0);
+
+              case 14:
+                _this.busy = false;
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 11]]);
+      }))();
     }
   }
 });
@@ -136,47 +192,72 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "mt-16 d-flex justify-center flex-wrap" },
-    _vm._l(_vm.data, function(item, index) {
-      return _c(
-        "v-col",
-        { key: index, attrs: { cols: "12", md: "6", lg: "4" } },
-        [
-          _c(
-            "v-card",
-            {
-              attrs: {
-                color: item.color,
-                dark: "",
-                elevation: "8",
-                "min-height": "300"
-              }
-            },
+    "v-container",
+    [
+      _c(
+        "v-row",
+        { attrs: { justify: "center" } },
+        _vm._l(_vm.data, function(item, index) {
+          return _c(
+            "v-col",
+            { key: index, attrs: { cols: "12", md: "6", lg: "4" } },
             [
               _c(
-                "v-card-title",
-                { staticClass: "headline d-flex justify-end" },
-                [_vm._v(_vm._s(item.title))]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-title",
-                { staticClass: "text-h1 font-weight-bold d-flex justify-end" },
-                [_vm._v(_vm._s(item.subtitle))]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "icon-card" },
+                "v-card",
+                { attrs: { color: item.color, dark: "" } },
                 [
                   _c(
-                    "v-icon",
-                    {
-                      staticClass: "material-icons",
-                      attrs: { color: item.iconColor }
-                    },
-                    [_vm._v(_vm._s(item.icon))]
+                    "v-card-title",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.title) +
+                          "\n                "
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-title",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _vm.busy
+                        ? _c("v-progress-circular", {
+                            attrs: { color: "white", indeterminate: "" }
+                          })
+                        : _c("h1", { staticClass: "font-weight" }, [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(item.subtitle) +
+                                "\n                    "
+                            )
+                          ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c(
+                        "v-icon",
+                        {
+                          staticClass: "material-icons",
+                          attrs: { color: item.iconColor, "x-large": "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(item.icon) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -184,10 +265,10 @@ var render = function() {
             ],
             1
           )
-        ],
+        }),
         1
       )
-    }),
+    ],
     1
   )
 }
