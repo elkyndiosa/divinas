@@ -83,6 +83,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ["search", "uuid", "userData", "dash"],
@@ -374,7 +378,7 @@ var render = function() {
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "700px" },
+              attrs: { width: "700" },
               model: {
                 value: _vm.dialog,
                 callback: function($$v) {
@@ -386,15 +390,14 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { attrs: { elevation: "0", width: "100%" } },
+                { attrs: { elevation: "0", height: "600" } },
                 [
                   _c(
                     "v-carousel",
                     {
                       attrs: {
                         "hide-delimiter-background": "",
-                        "delimiter-icon": "minus",
-                        height: "400"
+                        "delimiter-icon": "minus"
                       },
                       model: {
                         value: _vm.indexImage,
@@ -407,7 +410,7 @@ var render = function() {
                     _vm._l(_vm.imagesArray, function(slide, i) {
                       return _c("v-carousel-item", {
                         key: i,
-                        attrs: { src: "/uploads/images/" + slide, contain: "" }
+                        attrs: { src: "/uploads/images/" + slide }
                       })
                     }),
                     1

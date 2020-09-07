@@ -34,15 +34,19 @@
                 </v-row>
             </v-col>
 
-            <v-dialog v-model="dialog" max-width="700px">
-                <v-card elevation="0" width="100%">
+            <v-dialog v-model="dialog" width="700">
+                <v-card elevation="0" height="600">
                     <v-carousel
-                    hide-delimiter-background
-                    delimiter-icon="minus"
-                    height="400"
-                    v-model="indexImage"
-                >
-                    <v-carousel-item v-for="(slide, i) in imagesArray" :key="i" :src="'/uploads/images/'+slide" contain></v-carousel-item>
+                        hide-delimiter-background
+                        delimiter-icon="minus"
+                        v-model="indexImage"
+                    >
+                        <v-carousel-item 
+                            v-for="(slide, i) in imagesArray" 
+                            :key="i" 
+                            :src="'/uploads/images/'+slide"
+                        >
+                        </v-carousel-item>
                     </v-carousel>
                     <v-list two-line>
                         <v-list-item v-if="userData">
