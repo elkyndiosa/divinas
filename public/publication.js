@@ -133,14 +133,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["uuid"],
   components: {
-    Gallery: function Gallery() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/publication/ImageComponent.vue */ "./resources/js/components/publication/ImageComponent.vue"));
-    },
     TableData: function TableData() {
       return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
     }
@@ -148,6 +225,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
   data: function data() {
     return {
       media: 'fotos',
+      dialog: false,
+      indexImage: 0,
       busy: false,
       data: {
         publication: {
@@ -169,11 +248,26 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
       return;
     },
     image: function image() {
-      return this.data.user.image_profile;
+      if (!this.data.publication.imgages_path) return null;
+      return JSON.parse(this.data.publication.imgages_path)[0];
+    },
+    images: function images() {
+      if (!this.data.publication.imgages_path) return [];
+      var images = JSON.parse(this.data.publication.imgages_path);
+      images.splice(0, 1);
+      return images;
     }
   },
-  watch: {},
+  watch: {
+    images: function images(val) {
+      console.log(val);
+    }
+  },
   methods: {
+    openImage: function openImage(index) {
+      this.indexImage = index;
+      this.dialog = true;
+    },
     redirectWhatsapp: function redirectWhatsapp(whatsapp) {
       window.open("https://api.whatsapp.com/send?phone=" + whatsapp + "&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
       var url = '/api/increment/clickwatsapp/' + this.publication.user.uuid;
@@ -187,7 +281,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var url, response;
+        var url, response, name;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -201,23 +295,29 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
               case 5:
                 response = _context.sent;
                 _this.data = response.data;
-                _context.next = 12;
+                name = response.data.publication.name;
+
+                _this.$nextTick(function () {
+                  document.title = 'Divinas Prepagos | ' + name;
+                });
+
+                _context.next = 14;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 12:
+              case 14:
                 _this.busy = false;
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9]]);
+        }, _callee, null, [[2, 11]]);
       }))();
     }
   }
@@ -544,11 +644,68 @@ var render = function() {
     [
       _c(
         "v-row",
-        { attrs: { "justify-sm": "center", "justify-md": "end" } },
+        { attrs: { "justify-sm": "center" } },
         [
           _c(
             "v-col",
-            { attrs: { cols: "12", sm: "8", md: "6" } },
+            { attrs: { cols: "12", sm: "8", md: "6", lg: "4" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _vm.busy
+                    ? _c("v-skeleton-loader", {
+                        staticClass: "mx-auto",
+                        attrs: { type: "image", width: "100%", height: "100%" }
+                      })
+                    : _c("v-img", {
+                        staticClass: "grey lighten-2",
+                        attrs: {
+                          src: "/uploads/images/" + _vm.image,
+                          "aspect-ratio": "1",
+                          width: "100%",
+                          height: "400"
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "placeholder",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-row",
+                                  {
+                                    staticClass: "fill-height ma-0",
+                                    attrs: {
+                                      align: "center",
+                                      justify: "center"
+                                    }
+                                  },
+                                  [
+                                    _c("v-progress-circular", {
+                                      attrs: {
+                                        indeterminate: "",
+                                        color: "grey lighten-5"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ])
+                      })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12", sm: "8", md: "6", lg: "5" } },
             [
               _c(
                 "v-card",
@@ -559,18 +716,8 @@ var render = function() {
                         "v-card-text",
                         [
                           _c("v-skeleton-loader", {
-                            ref: "skeleton",
                             staticClass: "mx-auto",
-                            attrs: {
-                              type: "list-item-avatar-two-line",
-                              height: "100"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-skeleton-loader", {
-                            ref: "skeleton",
-                            staticClass: "mx-auto",
-                            attrs: { type: "paragraph", height: "100" }
+                            attrs: { type: "article", height: "100" }
                           })
                         ],
                         1
@@ -579,74 +726,38 @@ var render = function() {
                         "v-card-text",
                         [
                           _c(
-                            "v-list-item",
-                            { attrs: { "two-line": "" } },
+                            "v-card-title",
+                            {
+                              staticClass:
+                                "black--text text-capitalize text-h4 font-weight-bold"
+                            },
                             [
-                              _c(
-                                "v-list-item-avatar",
-                                { attrs: { height: "100", width: "100" } },
-                                [
-                                  _vm.data.publication.imgages_path
-                                    ? _c("v-img", {
-                                        staticClass: "grey lighten-2",
-                                        attrs: {
-                                          src:
-                                            "/uploads/images/" +
-                                            JSON.parse(
-                                              _vm.data.publication.imgages_path
-                                            )[0],
-                                          "aspect-ratio": "1"
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item-content",
-                                [
-                                  _c(
-                                    "v-list-item-title",
-                                    {
-                                      staticClass:
-                                        "black--text text-capitalize text-h4 font-weight-bold"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                              " +
-                                          _vm._s(_vm.data.publication.name) +
-                                          "\n                          "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-item-subtitle",
-                                    {
-                                      staticClass:
-                                        "grey--text text-capitalize text-h6 font-weight-bold"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                              Publicacion " +
-                                          _vm._s(
-                                            _vm
-                                              .moment(
-                                                _vm.data.publication.created_at
-                                              )
-                                              .startOf("hour")
-                                              .format("DD-MMMM-YYYY")
-                                          ) +
-                                          "\n                          "
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(_vm.data.publication.name) +
+                                  "\n                  "
                               )
-                            ],
-                            1
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-subtitle",
+                            {
+                              staticClass:
+                                "grey--text text-capitalize text-h6 font-weight-bold"
+                            },
+                            [
+                              _vm._v(
+                                "\n                      Publicacion " +
+                                  _vm._s(
+                                    _vm
+                                      .moment(_vm.data.publication.created_at)
+                                      .startOf("hour")
+                                      .format("DD-MMMM-YYYY")
+                                  ) +
+                                  "\n                  "
+                              )
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
@@ -715,95 +826,114 @@ var render = function() {
                   )
                 ],
                 1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { justify: "center" } },
-        [
-          _vm.busy
-            ? _c(
-                "v-col",
-                { attrs: { cols: "12 ", md: "10" } },
-                _vm._l(6, function(n) {
-                  return _c("v-skeleton-loader", {
-                    key: n,
-                    ref: "skeleton",
-                    refInFor: true,
-                    staticClass: "mx-auto",
-                    attrs: { type: "text", height: "50" }
-                  })
-                }),
-                1
-              )
-            : _c(
-                "v-col",
-                { attrs: { cols: "12" } },
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                { attrs: { flat: "" } },
                 [
-                  _c("table-data", {
-                    attrs: {
-                      userDataTable: _vm.data.publication,
-                      times: _vm.data.times
-                    }
-                  })
+                  _c("v-card-title", { staticClass: "text-center text-bold" }, [
+                    _vm._v("\n                  Servicios\n              ")
+                  ]),
+                  _vm._v(" "),
+                  _vm.busy
+                    ? _c(
+                        "v-card-text",
+                        [
+                          _c("v-skeleton-loader", {
+                            ref: "skeleton",
+                            staticClass: "mx-auto",
+                            attrs: { type: "table-thead" }
+                          })
+                        ],
+                        1
+                      )
+                    : _c(
+                        "v-card-text",
+                        [
+                          _vm.data.services.length > 0
+                            ? _c(
+                                "v-chip-group",
+                                {
+                                  attrs: {
+                                    column: "",
+                                    "active-class": "primary--text"
+                                  }
+                                },
+                                _vm._l(_vm.data.services, function(
+                                  item,
+                                  index
+                                ) {
+                                  return _c(
+                                    "v-chip",
+                                    { key: index, attrs: { disabled: "" } },
+                                    [
+                                      _vm._v(
+                                        "\n                      " +
+                                          _vm._s(item.name) +
+                                          "\n                  "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                1
+                              )
+                            : _c("v-subheader", [
+                                _vm._v(
+                                  "\n                      Sin servicios.\n                  "
+                                )
+                              ])
+                        ],
+                        1
+                      )
                 ],
                 1
               )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      !_vm.busy
-        ? _c(
-            "v-row",
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "10", lg: "9" } },
             [
-              _c("v-col", { attrs: { cols: "12" } }, [
-                _c("h4", { staticClass: "text-center" }, [
-                  _vm._v("Mis servicios")
-                ])
-              ]),
-              _vm._v(" "),
               _c(
-                "v-col",
-                { attrs: { cols: "12" } },
+                "v-card",
+                { attrs: { flat: "" } },
                 [
-                  _vm.data.services.length > 0
+                  _vm.busy
                     ? _c(
-                        "v-chip-group",
-                        {
-                          attrs: { column: "", "active-class": "primary--text" }
-                        },
-                        _vm._l(_vm.data.services, function(item, index) {
-                          return _c(
-                            "v-chip",
-                            { key: index, attrs: { disabled: "" } },
-                            [
-                              _vm._v(
-                                "\n           " +
-                                  _vm._s(item.name) +
-                                  "\n        "
-                              )
-                            ]
-                          )
+                        "v-card-text",
+                        _vm._l(6, function(n) {
+                          return _c("v-skeleton-loader", {
+                            key: n,
+                            staticClass: "mx-auto",
+                            attrs: { type: "text", height: "50" }
+                          })
                         }),
                         1
                       )
-                    : _c("v-subheader", [
-                        _vm._v("\n          Sin servicios.\n      ")
-                      ])
+                    : _c(
+                        "v-card-text",
+                        [
+                          _c("table-data", {
+                            attrs: {
+                              userDataTable: _vm.data.publication,
+                              times: _vm.data.times
+                            }
+                          })
+                        ],
+                        1
+                      )
                 ],
                 1
               )
             ],
             1
           )
-        : _vm._e(),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-row",
@@ -818,57 +948,186 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  class: _vm.media == "fotos" ? "red white--text" : "",
-                  attrs: { elevation: "0", color: "transparent" },
+                  staticClass: "mx-2",
+                  attrs: {
+                    dark: !_vm.busy,
+                    color: "red",
+                    disabled: _vm.busy,
+                    text: _vm.media != "fotos",
+                    depressed: ""
+                  },
                   on: {
                     click: function($event) {
                       _vm.media = "fotos"
                     }
                   }
                 },
-                [_vm._v("Fotos")]
+                [_vm._v("\n          Fotos\n      ")]
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-                  class: _vm.media == "videos" ? "red white--text" : "",
-                  attrs: { elevation: "0", color: "transparent" },
+                  staticClass: "mx-2",
+                  attrs: {
+                    dark: !_vm.busy,
+                    color: "red",
+                    disabled: _vm.busy,
+                    text: _vm.media != "videos",
+                    depressed: ""
+                  },
                   on: {
                     click: function($event) {
                       _vm.media = "videos"
                     }
                   }
                 },
-                [_vm._v("Videos")]
+                [_vm._v("\n          Videos\n      ")]
               )
             ],
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-col",
-            { attrs: { cols: "12" } },
-            [
-              _c(
-                "transition",
-                { attrs: { name: "slide-image", mode: "out-in" } },
+          _vm.busy
+            ? _c(
+                "v-col",
+                { attrs: { cols: "12" } },
                 [
-                  _vm.media == "fotos"
-                    ? _c("gallery", {
-                        attrs: {
-                          userData: _vm.data.user,
-                          uuid: _vm.data.user.uuid,
-                          search: "publication"
-                        }
-                      })
-                    : _vm._e()
+                  _c(
+                    "v-row",
+                    { attrs: { justify: "center" } },
+                    _vm._l(3, function(n) {
+                      return _c(
+                        "v-col",
+                        {
+                          key: n,
+                          attrs: { cols: "6", sm: "4", md: "3", lg: "2" }
+                        },
+                        [
+                          _c("v-skeleton-loader", {
+                            staticClass: "mx-auto",
+                            attrs: { type: "image", height: "50" }
+                          })
+                        ],
+                        1
+                      )
+                    }),
+                    1
+                  )
                 ],
                 1
               )
-            ],
-            1
-          )
+            : _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c(
+                    "transition",
+                    { attrs: { name: "slide-image" } },
+                    [
+                      _vm.media == "fotos"
+                        ? _c(
+                            "v-sheet",
+                            { attrs: { "min-height": "200" } },
+                            [
+                              _c(
+                                "v-row",
+                                { attrs: { justify: "center" } },
+                                _vm._l(_vm.images, function(item, index) {
+                                  return _c(
+                                    "v-col",
+                                    {
+                                      key: index,
+                                      attrs: {
+                                        cols: "6",
+                                        sm: "4",
+                                        md: "3",
+                                        lg: "2"
+                                      }
+                                    },
+                                    [
+                                      _c("v-card", {
+                                        staticClass: "portrait",
+                                        attrs: {
+                                          img: "/uploads/images/" + item,
+                                          height: "150"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openImage(index)
+                                          }
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-dialog",
+                                {
+                                  attrs: { width: "700" },
+                                  model: {
+                                    value: _vm.dialog,
+                                    callback: function($$v) {
+                                      _vm.dialog = $$v
+                                    },
+                                    expression: "dialog"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-card",
+                                    { attrs: { flat: "" } },
+                                    [
+                                      _c(
+                                        "v-carousel",
+                                        {
+                                          attrs: {
+                                            "hide-delimiter-background": ""
+                                          },
+                                          model: {
+                                            value: _vm.indexImage,
+                                            callback: function($$v) {
+                                              _vm.indexImage = $$v
+                                            },
+                                            expression: "indexImage"
+                                          }
+                                        },
+                                        _vm._l(_vm.images, function(slide, i) {
+                                          return _c("v-carousel-item", {
+                                            key: i,
+                                            staticClass: "grey lighten-2",
+                                            attrs: {
+                                              src: "/uploads/images/" + slide,
+                                              "aspect-ratio": "1"
+                                            }
+                                          })
+                                        }),
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.media == "videos"
+                        ? _c("v-sheet", { attrs: { "min-height": "200" } })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
         ],
         1
       )

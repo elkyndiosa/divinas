@@ -1,7 +1,7 @@
 <template>
   <v-col cols="6" md="4" lg="3">
     <v-hover v-slot:default="{ hover }">
-        <base-card :height="450" :elevation="hover ? 20 : 2" rounded v-if="value != ''">
+        <base-card :height="450" class="base-card" :elevation="hover ? 20 : 2" v-if="value != ''">
             <v-img
                 :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
                 height="60%"
@@ -141,3 +141,4 @@ export default {
   transition: 0.3s linear;
 }
 </style>
+

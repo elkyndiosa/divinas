@@ -1,59 +1,70 @@
 <template >
       <v-container fluid>
-        <v-row justify-sm="center" justify-md="end">
-            <v-col cols="12" sm="8" md="6">
+        <v-row justify-sm="center">
+            <v-col cols="12" sm="8" md="6" lg="4">
+                <v-card>
+                    <v-skeleton-loader
+                        type="image"
+                        class="mx-auto"
+                        width="100%"
+                        height="100%"
+                        v-if="busy"
+                    ></v-skeleton-loader>
+                    <v-img
+                        v-else
+                        :src="'/uploads/images/'+image"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                        width="100%"
+                        height="400"
+                    >
+                        <template v-slot:placeholder>
+                            <v-row
+                                class="fill-height ma-0"
+                                align="center"
+                                justify="center"
+                            >
+                                <v-progress-circular indeterminate color="grey lighten-5">
+                                </v-progress-circular>
+                            </v-row>
+                        </template>
+                    </v-img>
+                </v-card>
+            </v-col>
+            <v-col cols="12" sm="8" md="6" lg="5">
                 <v-card flat>
                     <v-card-text v-if="busy">
                         <v-skeleton-loader
-                            ref="skeleton"
-                            type="list-item-avatar-two-line"
-                            class="mx-auto"
-                            height="100"
-                        ></v-skeleton-loader>
-                        <v-skeleton-loader
-                            ref="skeleton"
-                            type="paragraph"
+                            type="article"
                             class="mx-auto"
                             height="100"
                         ></v-skeleton-loader>
                     </v-card-text>
                     <v-card-text v-else>
-                        <v-list-item two-line>
-                            <v-list-item-avatar height="100" width="100">
-                                <v-img
-                                    v-if="data.publication.imgages_path"
-                                    :src="'/uploads/images/'+JSON.parse(data.publication.imgages_path)[0]"
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
-                                ></v-img>
-                            </v-list-item-avatar>
-                            <v-list-item-content>
-                                <v-list-item-title class="black--text text-capitalize text-h4 font-weight-bold">
-                                    {{ data.publication.name }}
-                                </v-list-item-title>
-                                <v-list-item-subtitle class="grey--text text-capitalize text-h6 font-weight-bold">
-                                    Publicacion {{ moment(data.publication.created_at).startOf('hour').format('DD-MMMM-YYYY') }}
-                                </v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
+                        <v-card-title class="black--text text-capitalize text-h4 font-weight-bold">
+                            {{ data.publication.name }}
+                        </v-card-title>
+                        <v-card-subtitle class="grey--text text-capitalize text-h6 font-weight-bold">
+                            Publicacion {{ moment(data.publication.created_at).startOf('hour').format('DD-MMMM-YYYY') }}
+                        </v-card-subtitle>
                         <p class="black--text text-none text-justify text-body-1" style="line-height: 25px;">
                             {{ data.publication.description }}
                         </p>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn 
+                        <v-btn
                             class="mx-2"
-                            :disabled="busy" 
-                            color="red" 
-                            :href="'tel:3145780315'"  
+                            :disabled="busy"
+                            color="red"
+                            :href="'tel:3145780315'"
                             :dark="!busy"
                         >
                             Llamar
                         </v-btn>
-                        <v-btn 
-                            @click="redirectWhatsapp(data.publication.whatsapp)" 
-                            class="mx-2" 
+                        <v-btn
+                            @click="redirectWhatsapp(data.publication.whatsapp)"
+                            class="mx-2"
                             :disabled="busy"
                             color="success"
                         >
@@ -61,53 +72,122 @@
                         </v-btn>
                     </v-card-actions>
                 </v-card>
+                <v-card flat>
+                    <v-card-title class="text-center text-bold">
+                        Servicios
+                    </v-card-title>
+                    <v-card-text v-if="busy">
+                        <v-skeleton-loader
+                            ref="skeleton"
+                            type="table-thead"
+                            class="mx-auto"
+                        ></v-skeleton-loader>
+                    </v-card-text>
+                    <v-card-text v-else>
+                        <v-chip-group
+                            column
+                            active-class="primary--text"
+                            v-if="data.services.length > 0"
+                        >
+                        <v-chip v-for="(item, index) in data.services" :key="index" disabled>
+                            {{item.name}}
+                        </v-chip>
+                        </v-chip-group>
+                        <v-subheader v-else>
+                            Sin servicios.
+                        </v-subheader>
+                    </v-card-text>
+                </v-card>
             </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols="12 " md="10" v-if="busy">
-                <v-skeleton-loader
-
-                    ref="skeleton"
-                    type="text"
-                    class="mx-auto"
-                    height="50"
-                    v-for="n in 6"
-                    :key="n"
-                ></v-skeleton-loader>
+            <v-col cols="12" md="10" lg="9">
+                <v-card flat>
+                    <v-card-text v-if="busy">
+                        <v-skeleton-loader
+                            type="text"
+                            class="mx-auto"
+                            height="50"
+                            v-for="n in 6"
+                            :key="n"
+                        ></v-skeleton-loader>
+                    </v-card-text>
+                    <v-card-text v-else>
+                        <table-data :userDataTable="data.publication" :times="data.times"></table-data>
+                    </v-card-text>
+                </v-card>
             </v-col>
-            <v-col cols="12" v-else>
-                <table-data :userDataTable="data.publication" :times="data.times"></table-data>
-            </v-col>
-        </v-row>
-        <v-row v-if="!busy">
-          <v-col cols="12">
-            <h4 class="text-center">Mis servicios</h4>
-          </v-col>
-          <v-col cols="12">
-            <v-chip-group
-              column
-              active-class="primary--text"
-              v-if="data.services.length > 0"
-            >
-              <v-chip v-for="(item, index) in data.services" :key="index" disabled>
-                 {{item.name}}
-              </v-chip>
-            </v-chip-group>
-            <v-subheader v-else>
-                Sin servicios.
-            </v-subheader>
-          </v-col>
         </v-row>
         <v-row>
           <v-col cols="12" class="d-flex justify-center pb-0">
-            <v-btn @click="media = 'fotos'" elevation="0" :class="media == 'fotos' ? 'red white--text' : '' " color="transparent">Fotos</v-btn>
-            <v-btn @click="media = 'videos'" elevation="0" :class="media == 'videos' ? 'red white--text' : '' " color="transparent">Videos</v-btn>
+            <v-btn
+                @click="media = 'fotos'"
+                class="mx-2"
+                :dark="!busy"
+                color="red"
+                :disabled="busy"
+                :text="media != 'fotos'"
+                depressed
+            >
+                Fotos
+            </v-btn>
+            <v-btn
+                @click="media = 'videos'"
+                class="mx-2"
+                :dark="!busy"
+                color="red"
+                :disabled="busy"
+                :text="media != 'videos'"
+                depressed
+            >
+                Videos
+            </v-btn>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" v-if="busy">
+                <v-row justify="center">
+                    <v-col cols="6" sm="4" md="3" lg="2" v-for="n in 3" :key="n">
+                        <v-skeleton-loader
+                            type="image"
+                            class="mx-auto"
+                            height="50"
+                        ></v-skeleton-loader>
+                    </v-col>
+                </v-row>
+          </v-col>
+          <v-col cols="12" v-else>
+            <transition name="slide-image">
+                <v-sheet v-if="media == 'fotos'" min-height="200">
+                    <v-row justify="center">
+                        <v-col cols="6" sm="4" md="3" lg="2" v-for="(item, index) in images" :key="index">
+                            <v-card
+                                class="portrait"
+                                :img="'/uploads/images/'+item"
+                                height="150"
+                                @click="openImage(index)"
+                            >
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    <v-dialog v-model="dialog" width="700">
+                        <v-card flat>
+                            <v-carousel
+                                hide-delimiter-background
+                                v-model="indexImage"
+                            >
+                                <v-carousel-item
+                                    v-for="(slide, i) in images"
+                                    :key="i"
+                                    :src="'/uploads/images/'+slide"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                >
+                                </v-carousel-item>
+                            </v-carousel>
+                        </v-card>
+                    </v-dialog>
+                </v-sheet>
+                <v-sheet v-if="media == 'videos'" min-height="200">
 
-          <transition name="slide-image" mode="out-in">
-            <gallery v-if="media == 'fotos'" :userData="data.user" :uuid="data.user.uuid"  search="publication"></gallery>
-          </transition>
+                </v-sheet>
+            </transition>
           </v-col>
         </v-row>
       </v-container>
@@ -118,12 +198,13 @@ Vue.prototype.moment = moment
 export default {
   props: ["uuid"],
   components:{
-    Gallery: () => import('../components/publication/ImageComponent.vue'),
     TableData: () => import('../components/publication/TableInfo.vue'),
   },
   data() {
     return {
       media: 'fotos',
+      dialog: false,
+      indexImage: 0,
       busy: false,
       data: {
             publication: {
@@ -145,13 +226,28 @@ export default {
       return ;
     },
     image() {
-        return this.data.user.image_profile
+        if(!this.data.publication.imgages_path)
+            return null
+        return JSON.parse(this.data.publication.imgages_path)[0]
+    },
+    images() {
+        if(!this.data.publication.imgages_path)
+            return []
+        let images = JSON.parse(this.data.publication.imgages_path)
+        images.splice(0, 1)
+        return images
     }
   },
   watch: {
-      
+      images(val) {
+          console.log(val)
+      }
   },
   methods: {
+    openImage(index) {
+      this.indexImage = index;
+      this.dialog = true;
+    },
     redirectWhatsapp(whatsapp){
       window.open("https://api.whatsapp.com/send?phone="+whatsapp+"&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
       let url = '/api/increment/clickwatsapp/'+this.publication.user.uuid;
@@ -167,6 +263,10 @@ export default {
         try {
             let response = await axios.get(url)
             this.data= response.data;
+            let name = response.data.publication.name
+            this.$nextTick(() => {
+                document.title = 'Divinas Prepagos | '+name
+            })
         } catch(error) {
             console.log(error)
         }

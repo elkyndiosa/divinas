@@ -11,7 +11,7 @@
     {{-- <link rel="icon" type="image/png" href="" /> --}}
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
-    <title>DivinasPrepagos</title>
+    <title>divinasprepagos.com</title>
 
         <!--  Essential META Tags Socials -->
         <meta property="og:title" content="Divinas Prepagos">
@@ -28,7 +28,7 @@
         <meta name="twitter:image:alt" content="DivinasPrepagos">
         <meta name="twitter:site" content="@website-username">
 
-        <link  rel="icon"   href="{{ asset('images/favicon.jpeg') }}" type="image/png" />
+        <link  rel="icon"   href="{{ asset('images/favicon.png') }}" type="image/png" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -38,7 +38,6 @@
 </head>
 <body>
     <div id="app">
-        <Application></Application>
     </div>
 </body>
 </html>

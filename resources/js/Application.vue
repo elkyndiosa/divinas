@@ -12,6 +12,16 @@ import navegation from './components/NavegationComponent.vue'
 export default {
     components:{
       navegation
+    },
+    watch: {
+        '$route'(to, from) {
+            let title = to.meta.title
+            if(title) {
+                document.title = 'Divinas Prepagos | '+title
+            } else {
+                document.title = 'Divinas Prepagos'
+            }
+        }
     }
 };
 </script>

@@ -522,11 +522,8 @@ var render = function() {
                   ? _c(
                       "base-card",
                       {
-                        attrs: {
-                          height: 450,
-                          elevation: hover ? 20 : 2,
-                          rounded: ""
-                        }
+                        staticClass: "base-card",
+                        attrs: { height: 450, elevation: hover ? 20 : 2 }
                       },
                       [
                         _c("v-img", {

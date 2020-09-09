@@ -60,4 +60,22 @@ class Publication extends Model
     {
         return $this->belongsTo(Time::class);
     }
+
+    public function getDeliveryAttribute($val) {
+        if($val)
+            return true;
+        return false;
+    }
+
+    public function getHaveSiteAttribute($val) {
+        if($val)
+            return true;
+        return false;
+    }
+
+    public function getStatusAttribute($val) {
+        if($val)
+            return true;
+        return false;
+    }
 }

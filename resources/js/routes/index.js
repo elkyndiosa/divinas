@@ -45,7 +45,10 @@ export const routes = [
     {
         path: '/form/:type',
         name: 'form-user',
-        meta: { layout: 'default' },
+        meta: {
+            layout: 'default',
+            title: 'Entrar y Registrarse'
+        },
         beforeEnter : guardRouteGuest,
         component: () =>
             import(/* webpackChunkName: "form-user" */ '../pages/form-user.vue'),
@@ -61,7 +64,10 @@ export const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        meta: { layout: 'dash' },
+        meta: {
+            layout: 'dash',
+            title: 'Panel de Control'
+        },
         beforeEnter : guardRoute,
         component: () =>
             import(/* webpackChunkName: "dashboard" */ '../pages/dashboard.vue'),
@@ -69,7 +75,10 @@ export const routes = [
     {
         path: '/favorites',
         name: 'favorites',
-        meta: { layout: 'default' },
+        meta: {
+            layout: 'default',
+            title: 'Favoritas'
+        },
         component: () =>
             import(/* webpackChunkName: "favorites" */ '../pages/favorites.vue'),
     },
@@ -85,7 +94,10 @@ export const routes = [
     {
         path: '/account',
         name: 'account',
-        meta: { layout: 'dash' },
+        meta: {
+            layout: 'dash',
+            tile: 'Cuenta'
+        },
         beforeEnter : guardRoute,
         component: () =>
             import(/* webpackChunkName: "account" */ '../pages/account.vue'),
@@ -95,7 +107,10 @@ export const routes = [
     {
         path: '/publications',
         name: 'publications',
-        meta: { layout: 'dash' },
+        meta: {
+            layout: 'dash',
+            title: 'Publicaciones'
+        },
         beforeEnter : guardRoute,
         component: () =>
             import(/* webpackChunkName: "publications" */ '../pages/publications/publications.vue'),
@@ -105,7 +120,10 @@ export const routes = [
     {
         path: '/images/upload',
         name: 'images',
-        meta: { layout: 'dash' },
+        meta: {
+            layout: 'dash',
+            title: 'Imagenes'
+        },
         beforeEnter : guardRoute,
         component: () =>
             import(/* webpackChunkName: "images" */ '../pages/imagesView.vue'),
@@ -113,7 +131,10 @@ export const routes = [
     {
         path: '/videos',
         name: 'videos',
-        meta: { layout: 'dash' },
+        meta: {
+            layout: 'dash',
+            title: 'Video'
+        },
         beforeEnter : guardRoute,
         component: () =>
             import(/* webpackChunkName: "videos" */ '../pages/videosView.vue'),
@@ -121,7 +142,10 @@ export const routes = [
     {
         path: '*',
         name: '404',
-        meta: { layout: 'default' },
+        meta: {
+            layout: 'default',
+            title: '404 Pagina no existe'
+        },
         component: () =>
             import(/* webpackChunkName: "not-found-page" */ '../pages/404.vue'),
     },

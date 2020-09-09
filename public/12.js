@@ -78,6 +78,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ["userDataTable", "times"],
@@ -125,180 +150,188 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "full-width mt-3 m-auto d-flex justify-center flex-wrap" },
-    [
-      _c(
-        "v-col",
-        {
-          staticClass: "d-flex justify-center flex-wrap",
-          staticStyle: { width: "100%" },
-          attrs: { cols: "12" }
-        },
-        [
-          _c("v-simple-table", {
-            staticStyle: { width: "100%" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function() {
-                  return [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { staticClass: "text-left" }, [
-                          _vm._v("Informacion Detallada")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { staticClass: "text-left" })
-                      ])
+  return _c("v-simple-table", {
+    staticStyle: { width: "100%" },
+    scopedSlots: _vm._u([
+      {
+        key: "default",
+        fn: function() {
+          return [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { staticClass: "text-left" }, [
+                  _vm._v("Informacion Detallada")
+                ]),
+                _vm._v(" "),
+                _c("th")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Domicilio\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.delivery ? "Si" : "No") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Tiene Sitio\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.have_site ? "Si" : "No") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Telefono\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.phone ? "Si" : "No") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Whatsapp\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.whatsapp ? "Si" : "No") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v(
+                    "\n                    Perfil verificado\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.status ? "Si" : "No") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Edad\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.years + " Años") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.times
+                ? _c("tr", [
+                    _c("td", [
+                      _vm._v("\n                    Hotario\n                ")
                     ]),
                     _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Domicilio")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm.userDataTable.delivery == 1 ? "Si" : "No"
-                            )
-                          )
-                        ])
-                      ])
+                    _c("td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.times.every_single_day
+                              ? "Todo el dia"
+                              : _vm.getHour(_vm.times.input) +
+                                  " - " +
+                                  _vm.getHour(_vm.times.output)
+                          ) +
+                          "\n                "
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.times
+                ? _c("tr", [
+                    _c("td", [
+                      _vm._v("\n                    Dias\n                ")
                     ]),
                     _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Tiene Sitio")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm.userDataTable.have_site == 1 ? "Si" : "No"
-                            )
-                          )
-                        ])
-                      ])
-                    ]),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Telefono")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(_vm.userDataTable.phone == 1 ? "Si" : "No")
-                          )
-                        ])
-                      ])
-                    ]),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Whatsapp")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm.userDataTable.whatsapp == 1 ? "Si" : "No"
-                            )
-                          )
-                        ])
-                      ])
-                    ]),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Perfil verificado")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(_vm.userDataTable.status == 1 ? "Si" : "No")
-                          )
-                        ])
-                      ])
-                    ]),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Edad")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(_vm.userDataTable.years + " Años") + " "
-                          )
-                        ])
-                      ])
-                    ]),
-                    _vm.times
-                      ? _c("tbody", [
-                          _c("tr", [
-                            _c("td", [_vm._v("Hotario")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.times.every_single_day == 1
-                                    ? "Todo el dia"
-                                    : _vm.getHour(_vm.times.input) +
-                                        " - " +
-                                        _vm.getHour(_vm.times.output)
-                                )
-                              )
-                            ])
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm.times
-                      ? _c("tbody", [
-                          _c("tr", [
-                            _c("td", [_vm._v("Dias")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.times.every_day == 1
-                                    ? "Todos los dia"
-                                    : _vm.times.input_day +
-                                        " - " +
-                                        _vm.times.output_day
-                                )
-                              )
-                            ])
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm.times
-                      ? _c("tbody", [
-                          _c("tr", [
-                            _c("td", [_vm._v("Mide")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.userDataTable.height + " Cm"))
-                            ])
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm.times
-                      ? _c("tbody", [
-                          _c("tr", [
-                            _c("td", [_vm._v("Pesa")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.userDataTable.weight + " Kg"))
-                            ])
-                          ])
-                        ])
-                      : _vm._e()
-                  ]
-                },
-                proxy: true
-              }
+                    _c("td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.times.every_day
+                              ? "Todos los dia"
+                              : _vm.times.input_day +
+                                  " - " +
+                                  _vm.times.output_day
+                          ) +
+                          "\n                "
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Mide\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.height + " Cm") +
+                      "\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("\n                    Pesa\n                ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userDataTable.weight + " Kg") +
+                      "\n                "
+                  )
+                ])
+              ])
             ])
-          })
-        ],
-        1
-      )
-    ],
-    1
-  )
+          ]
+        },
+        proxy: true
+      }
+    ])
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

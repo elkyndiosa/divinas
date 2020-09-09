@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~images~publications~videos","15":"form-user","images":"images","videos":"videos","publication":"publication","publications":"publications","dashboard":"dashboard","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","dashboard":"dashboard","form-user":"form-user","vendors~images~publications~videos":"vendors~images~publications~videos","publications":"publications","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact","images":"images","videos":"videos"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2037,6 +2037,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     navegation: _components_NavegationComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  watch: {
+    '$route': function $route(to, from) {
+      var title = to.meta.title;
+
+      if (title) {
+        document.title = 'Divinas Prepagos | ' + title;
+      } else {
+        document.title = 'Divinas Prepagos';
+      }
+    }
   }
 });
 
@@ -2051,6 +2062,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2286,7 +2298,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -20675,7 +20687,9 @@ var render = function() {
             },
             [
               _c("router-link", { attrs: { to: { name: "home" } } }, [
-                _c("img", { attrs: { width: "200", src: "/images/logo.png" } })
+                _c("img", {
+                  attrs: { width: "120", src: "/images/logo.png", contain: "" }
+                })
               ]),
               _vm._v(" "),
               _c("v-spacer"),
@@ -81923,11 +81937,12 @@ var routes = [{
   path: '/form/:type',
   name: 'form-user',
   meta: {
-    layout: 'default'
+    layout: 'default',
+    title: 'Entrar y Registrarse'
   },
   beforeEnter: guardRouteGuest,
   component: function component() {
-    return Promise.all(/*! import() | form-user */[__webpack_require__.e(16), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
+    return Promise.all(/*! import() | form-user */[__webpack_require__.e(0), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
   },
   props: true
 }, {
@@ -81943,17 +81958,19 @@ var routes = [{
   path: '/dashboard',
   name: 'dashboard',
   meta: {
-    layout: 'dash'
+    layout: 'dash',
+    title: 'Panel de Control'
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(16), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
+    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(0), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
   }
 }, {
   path: '/favorites',
   name: 'favorites',
   meta: {
-    layout: 'default'
+    layout: 'default',
+    title: 'Favoritas'
   },
   component: function component() {
     return __webpack_require__.e(/*! import() | favorites */ "favorites").then(__webpack_require__.bind(null, /*! ../pages/favorites.vue */ "./resources/js/pages/favorites.vue"));
@@ -81965,14 +81982,15 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(16), __webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
   path: '/account',
   name: 'account',
   meta: {
-    layout: 'dash'
+    layout: 'dash',
+    tile: 'Cuenta'
   },
   beforeEnter: guardRoute,
   component: function component() {
@@ -81983,38 +82001,42 @@ var routes = [{
   path: '/publications',
   name: 'publications',
   meta: {
-    layout: 'dash'
+    layout: 'dash',
+    title: 'Publicaciones'
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e(16), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e(0), __webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {
   path: '/images/upload',
   name: 'images',
   meta: {
-    layout: 'dash'
+    layout: 'dash',
+    title: 'Imagenes'
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | images */[__webpack_require__.e(1), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
+    return Promise.all(/*! import() | images */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
   }
 }, {
   path: '/videos',
   name: 'videos',
   meta: {
-    layout: 'dash'
+    layout: 'dash',
+    title: 'Video'
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | videos */[__webpack_require__.e(1), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
+    return Promise.all(/*! import() | videos */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
   }
 }, {
   path: '*',
   name: '404',
   meta: {
-    layout: 'default'
+    layout: 'default',
+    title: '404 Pagina no existe'
   },
   component: function component() {
     return __webpack_require__.e(/*! import() | not-found-page */ "not-found-page").then(__webpack_require__.bind(null, /*! ../pages/404.vue */ "./resources/js/pages/404.vue"));

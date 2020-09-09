@@ -1,7 +1,6 @@
 <template>
   <v-card
     flat
-    tile
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -14,3 +13,9 @@
     name: 'BaseCard',
   }
 </script>
+
+<style>
+    .base-card {
+        transition: all 0.3s;
+    }
+</style>

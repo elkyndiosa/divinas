@@ -12,6 +12,18 @@ class Time extends Model
      * @var array
      */
     protected $fillable = [
-        'input','output','every_single_day','input_day','output_day','every_day' 
+        'input','output','every_single_day','input_day','output_day','every_day'
     ];
+
+    public function getEverySingleDayAttribute($val) {
+        if($val)
+            return true;
+        return false;
+    }
+
+    public function getEveryDayAttribute($val) {
+        if($val)
+            return true;
+        return false;
+    }
 }
