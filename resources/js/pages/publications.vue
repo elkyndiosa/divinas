@@ -320,7 +320,7 @@
       </v-form>
     </v-col>
     <v-col cols="12" class="d-flex flex-wrap">
-      <feed-card v-for="(item, index) in publications" :key="index" :size="3" :value="item" />
+      <feed-card @reload="getPublication" v-for="(item, index) in publications" :key="index" :size="3" :value="item" />
     </v-col>
         <v-snackbar
       v-model="messaje"

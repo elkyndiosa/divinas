@@ -238,11 +238,6 @@ export default {
         return images
     }
   },
-  watch: {
-      images(val) {
-          console.log(val)
-      }
-  },
   methods: {
     openImage(index) {
       this.indexImage = index;

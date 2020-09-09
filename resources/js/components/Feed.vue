@@ -38,13 +38,17 @@
         color="primary"
         v-if="busy"
       ></v-progress-linear>
-      <feed-card
-      v-for="(item, index) in publications" :key="index"
-        :size="3"
-        :value="item"
-        @addFavorities="addFavorities"
-        v-else
-      />
+      <v-col cols="12" v-else>
+        <v-row>
+            <feed-card
+                v-for="(item, index) in publications" :key="index"
+                :size="3"
+                :value="item"
+                @addFavorities="addFavorities"
+                @reload="getPublications"
+            />
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>

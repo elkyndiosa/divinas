@@ -44,7 +44,7 @@ class Publication extends Model
      * @var array
      */
     protected $hidden = [
-        'id', 'user_id'
+        'id'
     ];
     public function user()
     {

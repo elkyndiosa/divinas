@@ -68,6 +68,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Feed",
   components: {
@@ -303,15 +307,29 @@ var render = function() {
             ? _c("v-progress-linear", {
                 attrs: { indeterminate: "", color: "primary" }
               })
-            : _vm._l(_vm.publications, function(item, index) {
-                return _c("feed-card", {
-                  key: index,
-                  attrs: { size: 3, value: item },
-                  on: { addFavorities: _vm.addFavorities }
-                })
-              })
+            : _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c(
+                    "v-row",
+                    _vm._l(_vm.publications, function(item, index) {
+                      return _c("feed-card", {
+                        key: index,
+                        attrs: { size: 3, value: item },
+                        on: {
+                          addFavorities: _vm.addFavorities,
+                          reload: _vm.getPublications
+                        }
+                      })
+                    }),
+                    1
+                  )
+                ],
+                1
+              )
         ],
-        2
+        1
       )
     ],
     1

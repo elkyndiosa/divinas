@@ -258,11 +258,6 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
       return images;
     }
   },
-  watch: {
-    images: function images(val) {
-      console.log(val);
-    }
-  },
   methods: {
     openImage: function openImage(index) {
       this.indexImage = index;

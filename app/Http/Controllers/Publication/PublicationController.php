@@ -24,6 +24,7 @@ class PublicationController extends Controller
     public function __construct(PublicationRepository $publicationRepo)
     {
         $this->publicationRepo = $publicationRepo;
+        $this->middleware('auth')->only('destroy');
     }
     public function index(){
         return $this->publicationRepo->index();
@@ -43,9 +44,12 @@ class PublicationController extends Controller
         //     'user_id' =>Auth::user()->id,
         // ]);
     }
-    public function destroy(){
+    public function destroy(Publication $publication){
         // $this->authorize('userIsOwner', $uuid);
         // return $this->imageRepo->destroy($uuid);
+        $publication->delete();
+        $message = 'La publicacion ha sido eliminada.';
+        return response()->json(compact('message', 201));
     }
     public function show($uuid/*Publication $publication*/){
         //return $uuid;

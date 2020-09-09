@@ -454,6 +454,7 @@
                     <v-row>
                         <feed-card
                             v-for="(item, index) in publications.list"
+                            @reload="getPublications"
                             :key="index" :size="3"
                             :value="item"
                         />

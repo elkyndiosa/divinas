@@ -2045,7 +2045,8 @@ var render = function() {
                     _vm._l(_vm.publications.list, function(item, index) {
                       return _c("feed-card", {
                         key: index,
-                        attrs: { size: 3, value: item }
+                        attrs: { size: 3, value: item },
+                        on: { reload: _vm.getPublications }
                       })
                     }),
                     1

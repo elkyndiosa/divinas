@@ -43,10 +43,20 @@
                 </p>
             </v-card-text>
             <v-card-actions class="m-0 py-0">
+                <v-btn
+                    v-if="canDelete"
+                    :disabled="busy"
+                    @click="destroy(value.uuid)"
+                    small
+                    class="my-4"
+                    color="error"
+                    icon
+                >
+                    <v-icon small class="material-icons">delete</v-icon>
+                </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                    fab
-                    text
+                    icon
                     @click="!isFavorite ? addFavorities(value) : removeFavorities(value)"
                     :color="isFavorite ? 'primary' : 'grey lighten-1'"
                 >
@@ -80,10 +90,12 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+        busy: false
+    };
   },
   mounted(){
-    //console.log(this.value)
+    //console.log(this.value.user)
   },
   computed: {
     isFavorite() {
@@ -96,7 +108,16 @@ export default {
       return false;
     },
 
+    canDelete() {
+        if(!this.user)
+            return false
+        if(this.value.user_id != this.user.id)
+            return false
+        return true
+    }
+
   },
+
   methods: {
     showPublication(uuid) {
       this.$router.push("/publication/" + uuid);
@@ -132,6 +153,17 @@ export default {
           console.log(error);
         });
     },
+    async destroy(uuid) {
+        this.busy = true
+        let url = '/api/publication/'+uuid
+        try {
+            let response = await axios.delete(url)
+            this.$emit('reload', true)
+        } catch( error) {
+            console.log(error)
+            this.busy = false
+        }
+    }
   },
 };
 </script>
