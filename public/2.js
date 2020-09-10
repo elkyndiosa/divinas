@@ -219,7 +219,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-image__image {\n  transition: 0.3s linear;\n}\n", ""]);
+exports.push([module.i, "\n.v-image__image {\r\n  transition: 0.3s linear;\n}\r\n", ""]);
 
 // exports
 

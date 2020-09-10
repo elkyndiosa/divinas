@@ -64,7 +64,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ImageSelect: function ImageSelect() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
     }
   },
   data: function data() {
@@ -213,7 +213,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.icon-card {\n  position: absolute;\n  left: 20px;\n  bottom: 20px;\n}\n.icon-card i {\n  font-size: 100px !important;\n}\n.card-elevation {\n  position: relative;\n  top: -70px;\n}\n", ""]);
+exports.push([module.i, "\n.icon-card {\r\n  position: absolute;\r\n  left: 20px;\r\n  bottom: 20px;\n}\n.icon-card i {\r\n  font-size: 100px !important;\n}\n.card-elevation {\r\n  position: relative;\r\n  top: -70px;\n}\r\n", ""]);
 
 // exports
 

@@ -180,7 +180,7 @@ export default {
 }
 @media only screen and (min-width: 1450px) {
   .card-login {
-    margin-top: 30% !important;
+    margin-top: 10% !important;
   }
 
 }

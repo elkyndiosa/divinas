@@ -218,7 +218,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.inputNumber input[type='number'] {\n    -moz-appearance:textfield;\n}\n.inputNumber input::-webkit-outer-spin-button,\n.inputNumber input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n}\n\n", ""]);
+exports.push([module.i, "\n.inputNumber input[type='number'] {\r\n    -moz-appearance:textfield;\n}\n.inputNumber input::-webkit-outer-spin-button,\r\n.inputNumber input::-webkit-inner-spin-button {\r\n    -webkit-appearance: none;\n}\r\n\r\n", ""]);
 
 // exports
 
