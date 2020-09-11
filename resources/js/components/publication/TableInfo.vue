@@ -58,7 +58,7 @@
                 </tr>
                 <tr v-if="times">
                     <td>
-                        Hotario
+                        Horario
                     </td>
                     <td>
                         {{ times.every_single_day ? 'Todo el dia' : getHour(times.input) +" - "+ getHour(times.output) }}
@@ -106,7 +106,6 @@ export default {
   },
   methods: {
      getHour(hour){
-       //console.log(hour)
        var lateNight = ''
        var hourOnly = parseInt(hour.substring(0, 3))
        if(hourOnly > 12){
@@ -125,7 +124,10 @@ export default {
     }
   },
   mounted() {
-
+      setTimeout(() => {
+          console.log(this.userDataTable)
+          
+      }, 2000);
   },
 
 };

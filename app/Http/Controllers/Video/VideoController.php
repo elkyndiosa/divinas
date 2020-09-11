@@ -43,7 +43,6 @@ class VideoController extends Controller
             $name = time().str_replace($replace, "", $original_name);
             $image_name = str_replace(".".$extension, "", $name);
             $file->storeAs('videos/', $name, 'uploads');
-
             FFMpeg::fromDisk('videos')
                 ->open($name)
                 ->getFrameFromSeconds(2)
@@ -53,7 +52,6 @@ class VideoController extends Controller
             $message = 'El video ha sido guardado.';
             return response()->json(compact('message'), 201);
         }
-
     }
 
     protected function createthumnail($video_name, $image_name)

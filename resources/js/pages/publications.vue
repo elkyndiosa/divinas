@@ -528,6 +528,7 @@ export default {
         .then((response) => {
           this.texteMessaje = "Actualizacion exitosa";
           this.messaje = true;
+          this.dataUser = {};
           console.log(response);
         })
         .catch((error) => {

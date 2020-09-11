@@ -1,14 +1,14 @@
 <template>
   <v-col cols="6" md="4" lg="3">
     <v-hover v-slot:default="{ hover }">
-        <base-card :height="450" class="base-card" :elevation="hover ? 20 : 2" v-if="value != ''">
+        <base-card :height="250" class="base-card" :elevation="hover ? 20 : 2" v-if="value != ''">
             <v-img
                 :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
                 height="60%"
                 width="100%"
-                aspect-ratio="1"
-                class="grey lighten-2"
-                style="cursor: pointer"
+                
+                class="white"
+                style="cursor: pointer; "
                 @click="showPublication(value.uuid)"
             >
                 <template v-slot:placeholder>
@@ -23,7 +23,7 @@
                 </template>
             </v-img>
             <v-card-text class="m-0 py-1 px-3" @click="showPublication(value.uuid)" style="cursor: pointer">
-                <v-toolbar class="px-0" flat dense color="white">
+                <v-toolbar class="px-0" flat dense color="white" style="height: min-content !important;">
                     <v-icon
                         class="material-icons"
                         color="yellow"
@@ -36,23 +36,19 @@
                         {{value.name}}
                     </v-toolbar-title>
                 </v-toolbar>
-                <p class="text-end" style="width: 100%;">
-                    <strong>Publicado:</strong>
-                    <br/>
-                    <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
-                </p>
+
             </v-card-text>
-            <v-card-actions class="m-0 py-0">
+            <v-card-actions class="m-0 py-0" style="height: 16px !important;">
                 <v-btn
                     v-if="canDelete"
                     :disabled="busy"
                     @click="destroy(value.uuid)"
                     small
                     class="my-4"
-                    color="error"
+                    color="red"
                     icon
                 >
-                    <v-icon small class="material-icons">delete</v-icon>
+                    <v-icon class="material-icons">delete</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -170,7 +166,12 @@ export default {
 
 <style>
 .v-image__image {
+  background-size: auto 100% !important;
   transition: 0.3s linear;
 }
+.v-toolbar, .v-toolbar__content{
+  height: min-content;
+}
+
 </style>
 

@@ -13,8 +13,8 @@
                     <v-img
                         v-else
                         :src="'/uploads/images/'+image"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
+                        contain
+                        class="white"
                         width="100%"
                         height="400"
                     >
@@ -41,10 +41,10 @@
                         ></v-skeleton-loader>
                     </v-card-text>
                     <v-card-text v-else>
-                        <v-card-title class="black--text text-capitalize text-h4 font-weight-bold">
+                        <v-card-title class="black--text text-capitalize text-h4 font-weight-bold px-0">
                             {{ data.publication.name }}
                         </v-card-title>
-                        <v-card-subtitle class="grey--text text-capitalize text-h6 font-weight-bold">
+                        <v-card-subtitle class="grey--text text-capitalize text-h6 font-weight-bold px-0">
                             Publicacion {{ moment(data.publication.created_at).startOf('hour').format('DD-MMMM-YYYY') }}
                         </v-card-subtitle>
                         <p class="black--text text-none text-justify text-body-1" style="line-height: 25px;">
@@ -54,20 +54,22 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn
-                            class="mx-2"
+                            class="mx-2 text-capitalize"
                             :disabled="busy"
-                            color="red"
-                            :href="'tel:3145780315'"
+                            color="blue"
+                            :href="'tel:'+data.publication.phone"
                             :dark="!busy"
                         >
+                        <v-icon class="material-icons mr-2">phone</v-icon>
                             Llamar
                         </v-btn>
                         <v-btn
                             @click="redirectWhatsapp(data.publication.whatsapp)"
-                            class="mx-2"
+                            class="mx-2 text-capitalize"
                             :disabled="busy"
                             color="success"
                         >
+                        <i class="fab fa-whatsapp mr-2 fa-lg"></i>
                             Whatsapp
                         </v-btn>
                     </v-card-actions>
@@ -245,7 +247,7 @@ export default {
     },
     redirectWhatsapp(whatsapp){
       window.open("https://api.whatsapp.com/send?phone="+whatsapp+"&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
-      let url = '/api/increment/clickwatsapp/'+this.publication.user.uuid;
+      let url = '/api/increment/clickwatsapp/'+this.data.user.uuid;
       axios.get(url).then(response =>{
         console.log(response)
       }).catch(rerro => {

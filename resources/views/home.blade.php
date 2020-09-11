@@ -34,6 +34,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <script src="https://kit.fontawesome.com/e75ef2cea1.js" crossorigin="anonymous"></script>
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>

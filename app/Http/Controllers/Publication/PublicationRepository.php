@@ -7,6 +7,7 @@ use App\Publication;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Service;
 
 class PublicationRepository
 {
@@ -32,22 +33,24 @@ class PublicationRepository
             'videos_path' => '[]',
             'user_id'=> Auth::user()->id,
             'email' => $data->email,
-            'phone' => $data->phone,
+            'phone' => $this->cleanNumber($data->phone),
             'nikc' => $data->nikc,
-            'whatsapp' => $data->whatsapp,
+            'whatsapp' => $this->cleanNumber($data->whatsapp),
             'height' => $data->height,
             'weight' => $data->weight,
             'delivery' => $data->delivery,
-            'fave_site' => $data->have_site,
+            'have_site' => $data->have_site,
             'barrio_id' => $data->barrio_id,
             'city_id' => $data->city_id,
             'time_id' => $time_id,
             'years' => $data->years
         ]);
-
         $this->saveServices($publication, $data);
     }
-
+    public function cleanNumber($number){
+        $data = str_replace("+", "", $number);
+        return preg_replace('/[^0-9]/', '', $data);
+    }
     public function saveTime($data){
             $dataToCreate =[
                 'every_day' => $data->dataAdd['every_day'],
@@ -61,11 +64,12 @@ class PublicationRepository
             return $flight->id;
     }
 
-    public function saveServices($publication, $data){
+     public function saveServices($publication, $data){
         foreach ($data->services as $services) {
+            $id_serv = Service::where('name', '=', $services)->first();
              $dataToCreate =[
                  'publication_id' => $publication->id,
-                 'service_id' => $services['id'],
+                 'service_id' => $id_serv->id,
              ];
              DB::table('publications_services')->insert($dataToCreate);
         }

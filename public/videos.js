@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
       dropzoneOptions: {
         url: '/api/upload/video',
         thumbnailHeight: 150,
-        maxFilesize: 5,
+        maxFilesize: 10000,
         headers: {
           "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
         },

@@ -213,6 +213,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -265,7 +267,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
     },
     redirectWhatsapp: function redirectWhatsapp(whatsapp) {
       window.open("https://api.whatsapp.com/send?phone=" + whatsapp + "&text=Hola,%20vi%20tu%20anuncio%20en%20www.divinasprepagos.com,%20quisiera%20conocerte!", '_blank');
-      var url = '/api/increment/clickwatsapp/' + this.publication.user.uuid;
+      var url = '/api/increment/clickwatsapp/' + this.data.user.uuid;
       axios.get(url).then(function (response) {
         console.log(response);
       })["catch"](function (rerro) {
@@ -654,10 +656,10 @@ var render = function() {
                         attrs: { type: "image", width: "100%", height: "100%" }
                       })
                     : _c("v-img", {
-                        staticClass: "grey lighten-2",
+                        staticClass: "white",
                         attrs: {
                           src: "/uploads/images/" + _vm.image,
-                          "aspect-ratio": "1",
+                          contain: "",
                           width: "100%",
                           height: "400"
                         },
@@ -724,7 +726,7 @@ var render = function() {
                             "v-card-title",
                             {
                               staticClass:
-                                "black--text text-capitalize text-h4 font-weight-bold"
+                                "black--text text-capitalize text-h4 font-weight-bold px-0"
                             },
                             [
                               _vm._v(
@@ -739,7 +741,7 @@ var render = function() {
                             "v-card-subtitle",
                             {
                               staticClass:
-                                "grey--text text-capitalize text-h6 font-weight-bold"
+                                "grey--text text-capitalize text-h6 font-weight-bold px-0"
                             },
                             [
                               _vm._v(
@@ -782,25 +784,29 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mx-2",
+                          staticClass: "mx-2 text-capitalize",
                           attrs: {
                             disabled: _vm.busy,
-                            color: "red",
-                            href: "tel:3145780315",
+                            color: "blue",
+                            href: "tel:" + _vm.data.publication.phone,
                             dark: !_vm.busy
                           }
                         },
                         [
+                          _c("v-icon", { staticClass: "material-icons mr-2" }, [
+                            _vm._v("phone")
+                          ]),
                           _vm._v(
                             "\n                      Llamar\n                  "
                           )
-                        ]
+                        ],
+                        1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mx-2",
+                          staticClass: "mx-2 text-capitalize",
                           attrs: { disabled: _vm.busy, color: "success" },
                           on: {
                             click: function($event) {
@@ -811,6 +817,9 @@ var render = function() {
                           }
                         },
                         [
+                          _c("i", {
+                            staticClass: "fab fa-whatsapp mr-2 fa-lg"
+                          }),
                           _vm._v(
                             "\n                      Whatsapp\n                  "
                           )

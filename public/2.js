@@ -85,10 +85,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
@@ -219,7 +215,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-image__image {\r\n  transition: 0.3s linear;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-image__image {\r\n  background-size: auto 100% !important;\r\n  transition: 0.3s linear;\n}\n.v-toolbar, .v-toolbar__content{\r\n  height: -webkit-min-content;\r\n  height: -moz-min-content;\r\n  height: min-content;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -585,19 +581,18 @@ var render = function() {
                       "base-card",
                       {
                         staticClass: "base-card",
-                        attrs: { height: 450, elevation: hover ? 20 : 2 }
+                        attrs: { height: 250, elevation: hover ? 20 : 2 }
                       },
                       [
                         _c("v-img", {
-                          staticClass: "grey lighten-2",
+                          staticClass: "white",
                           staticStyle: { cursor: "pointer" },
                           attrs: {
                             src:
                               "/uploads/images/" +
                               JSON.parse(_vm.value.imgages_path)[0],
                             height: "60%",
-                            width: "100%",
-                            "aspect-ratio": "1"
+                            width: "100%"
                           },
                           on: {
                             click: function($event) {
@@ -655,6 +650,9 @@ var render = function() {
                               "v-toolbar",
                               {
                                 staticClass: "px-0",
+                                staticStyle: {
+                                  height: "min-content !important"
+                                },
                                 attrs: { flat: "", dense: "", color: "white" }
                               },
                               [
@@ -684,30 +682,6 @@ var render = function() {
                                 ])
                               ],
                               1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "text-end",
-                                staticStyle: { width: "100%" }
-                              },
-                              [
-                                _c("strong", [_vm._v("Publicado:")]),
-                                _vm._v(" "),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm
-                                        .moment(_vm.value.created_at)
-                                        .startOf("hour")
-                                        .format("DD-MMMM-YYYY")
-                                    )
-                                  )
-                                ])
-                              ]
                             )
                           ],
                           1
@@ -715,7 +689,10 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "v-card-actions",
-                          { staticClass: "m-0 py-0" },
+                          {
+                            staticClass: "m-0 py-0",
+                            staticStyle: { height: "16px !important" }
+                          },
                           [
                             _vm.canDelete
                               ? _c(
@@ -725,7 +702,7 @@ var render = function() {
                                     attrs: {
                                       disabled: _vm.busy,
                                       small: "",
-                                      color: "error",
+                                      color: "red",
                                       icon: ""
                                     },
                                     on: {
@@ -737,10 +714,7 @@ var render = function() {
                                   [
                                     _c(
                                       "v-icon",
-                                      {
-                                        staticClass: "material-icons",
-                                        attrs: { small: "" }
-                                      },
+                                      { staticClass: "material-icons" },
                                       [_vm._v("delete")]
                                     )
                                   ],

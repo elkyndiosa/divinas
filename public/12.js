@@ -112,7 +112,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     getHour: function getHour(hour) {
-      //console.log(hour)
       var lateNight = '';
       var hourOnly = parseInt(hour.substring(0, 3));
 
@@ -130,7 +129,13 @@ __webpack_require__.r(__webpack_exports__);
       return hourOnly + hour.substring(2, 5) + ' ' + lateNight; // retorna 'ma'
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+
+    setTimeout(function () {
+      console.log(_this.userDataTable);
+    }, 2000);
+  }
 });
 
 /***/ }),
@@ -257,7 +262,7 @@ var render = function() {
               _vm.times
                 ? _c("tr", [
                     _c("td", [
-                      _vm._v("\n                    Hotario\n                ")
+                      _vm._v("\n                    Horario\n                ")
                     ]),
                     _vm._v(" "),
                     _c("td", [
