@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","dashboard":"dashboard","form-user":"form-user","vendors~images~publications~videos":"vendors~images~publications~videos","publications":"publications","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact","images":"images","videos":"videos"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~PublicationEditPage~images~publications~videos","15":"publication","PublicationEditPage":"PublicationEditPage","publications":"publications","dashboard":"dashboard","form-user":"form-user","images":"images","videos":"videos","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -81982,7 +81982,18 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+  },
+  props: true
+}, {
+  path: '/publications/edit/:uuid',
+  name: 'publication-edit',
+  meta: {
+    layout: 'dash'
+  },
+  beforeEnter: guardRoute,
+  component: function component() {
+    return Promise.all(/*! import() | PublicationEditPage */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("PublicationEditPage")]).then(__webpack_require__.bind(null, /*! ../pages/publications-edit/publications-edit.vue */ "./resources/js/pages/publications-edit/publications-edit.vue"));
   },
   props: true
 }, {
@@ -82006,7 +82017,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e(0), __webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {
@@ -82018,7 +82029,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | images */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
+    return Promise.all(/*! import() | images */[__webpack_require__.e(1), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
   }
 }, {
   path: '/videos',
@@ -82029,7 +82040,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | videos */[__webpack_require__.e("vendors~images~publications~videos"), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
+    return Promise.all(/*! import() | videos */[__webpack_require__.e(1), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
   }
 }, {
   path: '*',

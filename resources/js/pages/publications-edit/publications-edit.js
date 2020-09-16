@@ -6,6 +6,14 @@ export default {
         FeedCard: () => import("../../components/FeedCard.vue"),
         vueDropzone: vue2Dropzone,
     },
+    beforeRouteEnter (to, from, next) {
+        let uuid = to.params.uuid
+        if(uuid) {
+            next(vm => vm.getPublication(uuid))
+        } else {
+            next({name: 'home'})
+        }
+    },
     data() {
         return {
             dropzoneOptions: {
@@ -27,18 +35,10 @@ export default {
             step: 1,
             valid_step_1: false,
             valid_step_2: false,
-            dataUser: {},
-            price: 0,
+            publication: {},
             from_menu: false,
             to_menu: false,
-            dataAdd: {
-                input: null,
-                output: null,
-                every_single_day: false,
-                input_day: "Lunes",
-                output_day: "Lunes",
-                every_day: false,
-            },
+            dataAdd: {},
             servicesSelect: [],
             services: {
                 busy: false,
@@ -69,8 +69,6 @@ export default {
     },
 
     created() {
-        this.getPublications()
-        this.dataUser = this.user
         this.getCitiesList()
         this.getServices()
         this.getImages()
@@ -78,7 +76,7 @@ export default {
 
     computed: {
         barrios() {
-            let index = _.findIndex(this.cities.list, {'id': this.dataUser.city_id})
+            let index = _.findIndex(this.cities.list, {'id': this.publication.city_id})
             let city = this.cities.list[index]
             if(city)
                 return city.barrios
@@ -94,16 +92,23 @@ export default {
     },
 
     methods: {
-        async getPublications() {
-            this.publications.busy = true
-            let url = "/api/publications/" + this.user.uuid;
+        async getPublication(uuid){
+            this.busy = true
+            let url = "/api/publication/"+uuid;
             try {
                 let response = await axios.get(url)
-                this.publications.list = response.data;
-            } catch (error) {
-                console.log(error);
+                this.publication= response.data.publication;
+                this.servicesSelect = response.data.services
+                this.dataAdd = response.data.times
+                this.imagesSelect = JSON.parse(response.data.publication.imgages_path)
+                let name = response.data.publication.name
+                this.$nextTick(() => {
+                    document.title = 'Divinas Prepagos | Editar '+name
+                })
+            } catch(error) {
+                console.log(error)
             }
-            this.publications.busy = false
+            this.busy = false
         },
         async getImages() {
             this.images.busy = true
@@ -141,16 +146,15 @@ export default {
             this.services.busy = false
         },
 
-        async store() {
+        async update() {
             this.busy = true
-            let data = this.dataUser
+            let data = this.publication
             data.dataAdd = this.dataAdd;
             data.services = this.servicesSelect;
-            data.price = this.price
             data.images = this.imagesSelect
-            let url = '/api/publication'
+            let url = '/api/publication/'+this.publication.uuid
             try {
-                let response = await axios.post(url, data)
+                let response = await axios.put(url, data)
                 this.message = response.data.message
                 this.success = true
                 this.$nextTick(() => {

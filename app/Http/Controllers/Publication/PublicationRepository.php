@@ -38,7 +38,7 @@ class PublicationRepository
             'height' => $data->height,
             'weight' => $data->weight,
             'delivery' => $data->delivery,
-            'fave_site' => $data->have_site,
+            'have_site' => $data->have_site,
             'barrio_id' => $data->barrio_id,
             'city_id' => $data->city_id,
             'time_id' => $time_id,
@@ -69,6 +69,46 @@ class PublicationRepository
              ];
              DB::table('publications_services')->insert($dataToCreate);
         }
+     }
+
+     public function update($uuid, $data)
+     {
+
+        $timeId = $data->time_id;
+        $this->updateTime($timeId, $data->dataAdd);
+
+        Publication::where('uuid', $uuid)->update([
+            'description' => $data->description,
+            'name' => $data->name,
+            'price' => $data->price,
+            'imgages_path' => json_encode($data->images),
+            //'videos_path' => '[]',
+            'user_id'=> Auth::user()->id,
+            'email' => $data->email,
+            'phone' => $data->phone,
+            'nikc' => $data->nikc,
+            'whatsapp' => $data->whatsapp,
+            'height' => $data->height,
+            'weight' => $data->weight,
+            'delivery' => $data->delivery,
+            'have_site' => $data->have_site,
+            'barrio_id' => $data->barrio_id,
+            'city_id' => $data->city_id,
+            'years' => $data->years
+        ]);
+     }
+
+     public function updateTime($id, $data)
+     {
+        $dataToUpdate =[
+            'every_day' => $data['every_day'],
+            'every_single_day' => $data['every_single_day'],
+            'input' => $data['input'],
+            'input_day' => $data['input_day'],
+            'output' => $data['output'],
+            'output_day' => $data['output_day'],
+        ];
+        Time::where('id', $id)->update($dataToUpdate);
      }
 
     public function getByUser($user){

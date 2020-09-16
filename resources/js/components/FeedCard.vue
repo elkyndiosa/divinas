@@ -44,15 +44,25 @@
             </v-card-text>
             <v-card-actions class="m-0 py-0">
                 <v-btn
-                    v-if="canDelete"
+                    v-if="canEdit"
                     :disabled="busy"
                     @click="destroy(value.uuid)"
                     small
-                    class="my-4"
+                    class="my-4 mx-1"
                     color="error"
                     icon
                 >
                     <v-icon small class="material-icons">delete</v-icon>
+                </v-btn>
+                <v-btn
+                    v-if="canEdit"
+                    @click="show(value.uuid)"
+                    small
+                    class="my-4 mx-1"
+                    color="success"
+                    icon
+                >
+                    <v-icon small class="material-icons">edit</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -108,7 +118,7 @@ export default {
       return false;
     },
 
-    canDelete() {
+    canEdit() {
         if(!this.user)
             return false
         if(this.value.user_id != this.user.id)
@@ -163,6 +173,14 @@ export default {
             console.log(error)
             this.busy = false
         }
+    },
+    show(uuid) {
+        this.$router.push({
+            name: 'publication-edit',
+            params: {
+                uuid: uuid,
+            }
+        })
     }
   },
 };

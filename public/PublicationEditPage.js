@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["publications"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["PublicationEditPage"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/pages/publications/publications.js?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/pages/publications/publications.js?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,6 +30,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default.a
   },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    var uuid = to.params.uuid;
+
+    if (uuid) {
+      next(function (vm) {
+        return vm.getPublication(uuid);
+      });
+    } else {
+      next({
+        name: 'home'
+      });
+    }
+  },
   data: function data() {
     return {
       dropzoneOptions: {
@@ -51,18 +64,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       step: 1,
       valid_step_1: false,
       valid_step_2: false,
-      dataUser: {},
-      price: 0,
+      publication: {},
       from_menu: false,
       to_menu: false,
-      dataAdd: {
-        input: null,
-        output: null,
-        every_single_day: false,
-        input_day: "Lunes",
-        output_day: "Lunes",
-        every_day: false
-      },
+      dataAdd: {},
       servicesSelect: [],
       services: {
         busy: false,
@@ -84,8 +89,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
-    this.getPublications();
-    this.dataUser = this.user;
     this.getCitiesList();
     this.getServices();
     this.getImages();
@@ -93,7 +96,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     barrios: function barrios() {
       var index = _.findIndex(this.cities.list, {
-        'id': this.dataUser.city_id
+        'id': this.publication.city_id
       });
 
       var city = this.cities.list[index];
@@ -107,41 +110,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    getPublications: function getPublications() {
+    getPublication: function getPublication(uuid) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var url, response;
+        var url, response, name;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.publications.busy = true;
-                url = "/api/publications/" + _this.user.uuid;
+                _this.busy = true;
+                url = "/api/publication/" + uuid;
                 _context.prev = 2;
                 _context.next = 5;
                 return axios.get(url);
 
               case 5:
                 response = _context.sent;
-                _this.publications.list = response.data;
-                _context.next = 12;
+                _this.publication = response.data.publication;
+                _this.servicesSelect = response.data.services;
+                _this.dataAdd = response.data.times;
+                _this.imagesSelect = JSON.parse(response.data.publication.imgages_path);
+                name = response.data.publication.name;
+
+                _this.$nextTick(function () {
+                  document.title = 'Divinas Prepagos | Editar ' + name;
+                });
+
+                _context.next = 17;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 12:
-                _this.publications.busy = false;
+              case 17:
+                _this.busy = false;
 
-              case 13:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9]]);
+        }, _callee, null, [[2, 14]]);
       }))();
     },
     getImages: function getImages() {
@@ -256,7 +268,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4, null, [[2, 10]]);
       }))();
     },
-    store: function store() {
+    update: function update() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
@@ -266,17 +278,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context5.prev = _context5.next) {
               case 0:
                 _this5.busy = true;
-                data = _this5.dataUser;
+                data = _this5.publication;
                 data.dataAdd = _this5.dataAdd;
                 data.services = _this5.servicesSelect;
-                data.price = _this5.price;
                 data.images = _this5.imagesSelect;
-                url = '/api/publication';
-                _context5.prev = 7;
-                _context5.next = 10;
-                return axios.post(url, data);
+                url = '/api/publication/' + _this5.publication.uuid;
+                _context5.prev = 6;
+                _context5.next = 9;
+                return axios.put(url, data);
 
-              case 10:
+              case 9:
                 response = _context5.sent;
                 _this5.message = response.data.message;
                 _this5.success = true;
@@ -285,23 +296,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this5.getPublications();
                 });
 
-                _context5.next = 19;
+                _context5.next = 18;
                 break;
 
-              case 16:
-                _context5.prev = 16;
-                _context5.t0 = _context5["catch"](7);
+              case 15:
+                _context5.prev = 15;
+                _context5.t0 = _context5["catch"](6);
                 console.log(_context5.t0);
 
-              case 19:
+              case 18:
                 _this5.busy = false;
 
-              case 20:
+              case 19:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[7, 16]]);
+        }, _callee5, null, [[6, 15]]);
       }))();
     },
     removeService: function removeService(id) {
@@ -318,16 +329,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-exports.i(__webpack_require__(/*! -!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./publications.scss */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications/publications.scss"), "");
+exports.i(__webpack_require__(/*! -!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./publications-edit.scss */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications-edit/publications-edit.scss"), "");
 
 // module
 exports.push([module.i, "\n", ""]);
@@ -337,10 +348,10 @@ exports.push([module.i, "\n", ""]);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications/publications.scss":
-/*!********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications/publications.scss ***!
-  \********************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications-edit/publications-edit.scss":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/js/pages/publications-edit/publications-edit.scss ***!
+  \******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -356,15 +367,15 @@ exports.push([module.i, "", ""]);
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications-edit.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -386,10 +397,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -405,6 +416,12 @@ var render = function() {
     "v-row",
     { attrs: { justify: "center" } },
     [
+      _c("v-col", { attrs: { cols: "12" } }, [
+        _c("h1", { staticClass: "h1" }, [
+          _vm._v("\n            Editar Publicacion\n        ")
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "v-col",
         { attrs: { cols: "12" } },
@@ -518,15 +535,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.name,
+                                              value: _vm.publication.name,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "name",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.name"
+                                              expression: "publication.name"
                                             }
                                           })
                                         ],
@@ -551,15 +568,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.nikc,
+                                              value: _vm.publication.nikc,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "nikc",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.nikc"
+                                              expression: "publication.nikc"
                                             }
                                           })
                                         ],
@@ -596,16 +613,17 @@ var render = function() {
                                                       dense: ""
                                                     },
                                                     model: {
-                                                      value: _vm.dataUser.years,
+                                                      value:
+                                                        _vm.publication.years,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "years",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.years"
+                                                        "publication.years"
                                                     }
                                                   })
                                                 ],
@@ -629,16 +647,16 @@ var render = function() {
                                                     },
                                                     model: {
                                                       value:
-                                                        _vm.dataUser.weight,
+                                                        _vm.publication.weight,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "weight",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.weight"
+                                                        "publication.weight"
                                                     }
                                                   })
                                                 ],
@@ -662,16 +680,16 @@ var render = function() {
                                                     },
                                                     model: {
                                                       value:
-                                                        _vm.dataUser.height,
+                                                        _vm.publication.height,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "height",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.height"
+                                                        "publication.height"
                                                     }
                                                   })
                                                 ],
@@ -701,15 +719,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.email,
+                                              value: _vm.publication.email,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "email",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.email"
+                                              expression: "publication.email"
                                             }
                                           })
                                         ],
@@ -734,15 +752,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.phone,
+                                              value: _vm.publication.phone,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "phone",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.phone"
+                                              expression: "publication.phone"
                                             }
                                           })
                                         ],
@@ -767,15 +785,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.whatsapp,
+                                              value: _vm.publication.whatsapp,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "whatsapp",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.whatsapp"
+                                              expression: "publication.whatsapp"
                                             }
                                           })
                                         ],
@@ -801,15 +819,15 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.city_id,
+                                              value: _vm.publication.city_id,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "city_id",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.city_id"
+                                              expression: "publication.city_id"
                                             }
                                           })
                                         ],
@@ -835,15 +853,16 @@ var render = function() {
                                               dense: ""
                                             },
                                             model: {
-                                              value: _vm.dataUser.barrio_id,
+                                              value: _vm.publication.barrio_id,
                                               callback: function($$v) {
                                                 _vm.$set(
-                                                  _vm.dataUser,
+                                                  _vm.publication,
                                                   "barrio_id",
                                                   $$v
                                                 )
                                               },
-                                              expression: "dataUser.barrio_id"
+                                              expression:
+                                                "publication.barrio_id"
                                             }
                                           })
                                         ],
@@ -880,16 +899,17 @@ var render = function() {
                                                     },
                                                     model: {
                                                       value:
-                                                        _vm.dataUser.delivery,
+                                                        _vm.publication
+                                                          .delivery,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "delivery",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.delivery"
+                                                        "publication.delivery"
                                                     }
                                                   })
                                                 ],
@@ -913,16 +933,17 @@ var render = function() {
                                                     },
                                                     model: {
                                                       value:
-                                                        _vm.dataUser.have_site,
+                                                        _vm.publication
+                                                          .have_site,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "have_site",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.have_site"
+                                                        "publication.have_site"
                                                     }
                                                   })
                                                 ],
@@ -1027,11 +1048,17 @@ var render = function() {
                                                       dense: ""
                                                     },
                                                     model: {
-                                                      value: _vm.price,
+                                                      value:
+                                                        _vm.publication.price,
                                                       callback: function($$v) {
-                                                        _vm.price = $$v
+                                                        _vm.$set(
+                                                          _vm.publication,
+                                                          "price",
+                                                          $$v
+                                                        )
                                                       },
-                                                      expression: "price"
+                                                      expression:
+                                                        "publication.price"
                                                     }
                                                   }),
                                                   _vm._v(" "),
@@ -1138,17 +1165,17 @@ var render = function() {
                                                     },
                                                     model: {
                                                       value:
-                                                        _vm.dataUser
+                                                        _vm.publication
                                                           .description,
                                                       callback: function($$v) {
                                                         _vm.$set(
-                                                          _vm.dataUser,
+                                                          _vm.publication,
                                                           "description",
                                                           $$v
                                                         )
                                                       },
                                                       expression:
-                                                        "dataUser.description"
+                                                        "publication.description"
                                                     }
                                                   })
                                                 ],
@@ -1899,11 +1926,10 @@ var render = function() {
                                                   _c("v-img", {
                                                     attrs: {
                                                       src:
-                                                        "uploads/images/" +
+                                                        "/uploads/images/" +
                                                         img.path,
                                                       width: "100%",
-                                                      height: "100%",
-                                                      contain: ""
+                                                      height: "100%"
                                                     }
                                                   }),
                                                   _vm._v(" "),
@@ -1970,11 +1996,11 @@ var render = function() {
                                     loading: _vm.busy,
                                     depressed: ""
                                   },
-                                  on: { click: _vm.store }
+                                  on: { click: _vm.update }
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Crear Publicacion\n                            "
+                                    "\n                                Actualizar Publicacion\n                            "
                                   )
                                 ]
                               )
@@ -1985,70 +2011,6 @@ var render = function() {
                         1
                       )
                     ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-col",
-        { attrs: { cols: "12" } },
-        [
-          _c(
-            "v-card",
-            { attrs: { flat: "" } },
-            [
-              _c("v-card-title", [
-                _vm._v("\n                Mis Publicaciones\n            ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                [
-                  !_vm.publications.busy && _vm.publications.list.length == 0
-                    ? _c(
-                        "v-row",
-                        [
-                          _c(
-                            "v-col",
-                            {
-                              staticClass:
-                                "text-center text-h6 font-weight-bold",
-                              attrs: { cols: "12" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        No hay publicaciones creadas.\n                    "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.publications.busy
-                    ? _c("v-progress-linear", {
-                        attrs: { indeterminate: "", color: "primary" }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "v-row",
-                    _vm._l(_vm.publications.list, function(item, index) {
-                      return _c("feed-card", {
-                        key: index,
-                        attrs: { size: 3, value: item },
-                        on: { reload: _vm.getPublications }
-                      })
-                    }),
                     1
                   )
                 ],
@@ -2113,32 +2075,32 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/pages/publications/publications.js?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/pages/publications/publications.js?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_publications_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!./publications.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/pages/publications/publications.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_publications_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_publications_edit_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!./publications-edit.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_publications_edit_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/publications/publications.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/pages/publications/publications.vue ***!
-  \**********************************************************/
+/***/ "./resources/js/pages/publications-edit/publications-edit.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/pages/publications-edit/publications-edit.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./publications.vue?vue&type=template&id=a78f4f14& */ "./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14&");
-/* harmony import */ var _publications_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./publications.js?vue&type=script&lang=js& */ "./resources/js/pages/publications/publications.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./publications.vue?vue&type=style&index=0&lang=css& */ "./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./publications-edit.vue?vue&type=template&id=000e9810& */ "./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810&");
+/* harmony import */ var _publications_edit_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./publications-edit.js?vue&type=script&lang=js& */ "./resources/js/pages/publications-edit/publications-edit.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./publications-edit.vue?vue&type=style&index=0&lang=css& */ "./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2149,9 +2111,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _publications_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _publications_edit_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -2161,40 +2123,40 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/publications/publications.vue"
+component.options.__file = "resources/js/pages/publications-edit/publications-edit.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications-edit.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications.vue?vue&type=template&id=a78f4f14& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications/publications.vue?vue&type=template&id=a78f4f14&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./publications-edit.vue?vue&type=template&id=000e9810& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publications-edit/publications-edit.vue?vue&type=template&id=000e9810&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_vue_vue_type_template_id_a78f4f14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_publications_edit_vue_vue_type_template_id_000e9810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

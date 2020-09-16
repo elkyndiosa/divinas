@@ -22,6 +22,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/destroy/images/{uuid}', 'Image\ImageController@destroy');
     Route::get('/profile/image/{name}', 'User\UserController@saveImageProfile');
     Route::get('/publications/{uuid}', 'Publication\PublicationController@indexByUser');
-
 });
 
