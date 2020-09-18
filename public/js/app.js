@@ -82191,7 +82191,7 @@ var routes = [{
   },
   beforeEnter: guardRouteGuest,
   component: function component() {
-    return Promise.all(/*! import() | form-user */[__webpack_require__.e(15), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
+    return Promise.all(/*! import() | form-user */[__webpack_require__.e(0), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
   },
   props: true
 }, {
@@ -82212,7 +82212,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(15), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
+    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(0), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
   }
 }, {
   path: '/favorites',
@@ -82231,7 +82231,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(15), __webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
@@ -82242,7 +82242,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | PublicationEditPage */[__webpack_require__.e(15), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("PublicationEditPage")]).then(__webpack_require__.bind(null, /*! ../pages/publications-edit/publications-edit.vue */ "./resources/js/pages/publications-edit/publications-edit.vue"));
+    return Promise.all(/*! import() | PublicationEditPage */[__webpack_require__.e(0), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("PublicationEditPage")]).then(__webpack_require__.bind(null, /*! ../pages/publications-edit/publications-edit.vue */ "./resources/js/pages/publications-edit/publications-edit.vue"));
   },
   props: true
 }, {
@@ -82266,7 +82266,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e(15), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e(0), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {

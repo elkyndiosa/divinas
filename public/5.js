@@ -335,6 +335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
+    this.getPublications();
     this.getWeek();
     this.getCitiesList();
     this.getServices();

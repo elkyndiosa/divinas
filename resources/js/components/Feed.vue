@@ -310,6 +310,7 @@ export default {
     }
   },
   created() {
+    this.getPublications()
     this.getWeek()
     this.getCitiesList()
     this.getServices()
