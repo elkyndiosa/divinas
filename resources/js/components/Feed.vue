@@ -186,7 +186,7 @@
                     @reload="getPublications"
                 />
             </v-row>
-            <v-row justify="center" v-if="!scroller.getting && publications.length == 0">
+            <v-row justify="center" v-if="!scroller.getting && searched && publications.length == 0">
                 <h4 class="text-h4">
                     No hay resultados
                 </h4>
@@ -195,8 +195,7 @@
                 <v-col cols="8" sm="6" md="4">
                     <v-progress-linear
                         color="primary"
-                        buffer-value="0"
-                        stream
+                        indeterminate
                     ></v-progress-linear>
                 </v-col>
             </v-row>
@@ -217,6 +216,7 @@ export default {
     layout: [1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
     publications: [],
     status: false,
+    searched: false,
     scroller: {
         page: 1,
         last_page: 0,
@@ -335,9 +335,11 @@ export default {
             console.log(error);
         }
         this.scroller.getting = false
+        this.searched = true
     },
 
     async search() {
+        this.searched = false
         this.scroller.ready = true
         this.publications = []
         this.scroller.page = 1

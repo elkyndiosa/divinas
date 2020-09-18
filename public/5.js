@@ -236,7 +236,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Feed",
   components: {
@@ -249,6 +248,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       layout: [1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
       publications: [],
       status: false,
+      searched: false,
       scroller: {
         page: 1,
         last_page: 0,
@@ -386,8 +386,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 19:
                 _this.scroller.getting = false;
+                _this.searched = true;
 
-              case 20:
+              case 21:
               case "end":
                 return _context.stop();
             }
@@ -403,6 +404,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                _this2.searched = false;
                 _this2.scroller.ready = true;
                 _this2.publications = [];
                 _this2.scroller.page = 1;
@@ -413,7 +415,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.scroller.ready = false;
                 });
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -1053,7 +1055,9 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                !_vm.scroller.getting && _vm.publications.length == 0
+                !_vm.scroller.getting &&
+                _vm.searched &&
+                _vm.publications.length == 0
                   ? _c("v-row", { attrs: { justify: "center" } }, [
                       _c("h4", { staticClass: "text-h4" }, [
                         _vm._v(
@@ -1073,11 +1077,7 @@ var render = function() {
                           { attrs: { cols: "8", sm: "6", md: "4" } },
                           [
                             _c("v-progress-linear", {
-                              attrs: {
-                                color: "primary",
-                                "buffer-value": "0",
-                                stream: ""
-                              }
+                              attrs: { color: "primary", indeterminate: "" }
                             })
                           ],
                           1
