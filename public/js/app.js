@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"1":"vendors~PublicationEditPage~images~publications~videos","15":"publication","PublicationEditPage":"PublicationEditPage","publications":"publications","dashboard":"dashboard","form-user":"form-user","images":"images","videos":"videos","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","dashboard":"dashboard","form-user":"form-user","vendors~PublicationEditPage~images~publications~videos":"vendors~PublicationEditPage~images~publications~videos","PublicationEditPage":"PublicationEditPage","publications":"publications","account":"account","favorites":"favorites","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","images":"images","videos":"videos","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2040,6 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     '$route': function $route(to, from) {
+      this.$vuetify.goTo(0, 0);
       var title = to.meta.title;
 
       if (title) {
@@ -2298,7 +2299,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* STYLES FOR EFECTS */\n.slide-page-enter-active, .slide-page-leave-active{\n  transition: all .5s;\n}\n.slide-page-leave-to{\n  transform: translateX(-50px);\n  opacity: 0;\n}\n.slide-page-enter{\n  transform: translateX(50px);\n  opacity: 0;\n}\n.slide-page-enter-to, .slide-page-leave{\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -20610,6 +20611,250 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (this && this.clearImmediate);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/vue-infinite-scroll/vue-infinite-scroll.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/vue-infinite-scroll/vue-infinite-scroll.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function (global, factory) {
+   true ? module.exports = factory() :
+  undefined;
+}(this, function () { 'use strict';
+
+  var ctx = '@@InfiniteScroll';
+
+  var throttle = function throttle(fn, delay) {
+    var now, lastExec, timer, context, args; //eslint-disable-line
+
+    var execute = function execute() {
+      fn.apply(context, args);
+      lastExec = now;
+    };
+
+    return function () {
+      context = this;
+      args = arguments;
+
+      now = Date.now();
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      if (lastExec) {
+        var diff = delay - (now - lastExec);
+        if (diff < 0) {
+          execute();
+        } else {
+          timer = setTimeout(function () {
+            execute();
+          }, diff);
+        }
+      } else {
+        execute();
+      }
+    };
+  };
+
+  var getScrollTop = function getScrollTop(element) {
+    if (element === window) {
+      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
+    }
+
+    return element.scrollTop;
+  };
+
+  var getComputedStyle = document.defaultView.getComputedStyle;
+
+  var getScrollEventTarget = function getScrollEventTarget(element) {
+    var currentNode = element;
+    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
+    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
+      var overflowY = getComputedStyle(currentNode).overflowY;
+      if (overflowY === 'scroll' || overflowY === 'auto') {
+        return currentNode;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return window;
+  };
+
+  var getVisibleHeight = function getVisibleHeight(element) {
+    if (element === window) {
+      return document.documentElement.clientHeight;
+    }
+
+    return element.clientHeight;
+  };
+
+  var getElementTop = function getElementTop(element) {
+    if (element === window) {
+      return getScrollTop(window);
+    }
+    return element.getBoundingClientRect().top + getScrollTop(window);
+  };
+
+  var isAttached = function isAttached(element) {
+    var currentNode = element.parentNode;
+    while (currentNode) {
+      if (currentNode.tagName === 'HTML') {
+        return true;
+      }
+      if (currentNode.nodeType === 11) {
+        return false;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return false;
+  };
+
+  var doBind = function doBind() {
+    if (this.binded) return; // eslint-disable-line
+    this.binded = true;
+
+    var directive = this;
+    var element = directive.el;
+
+    var throttleDelayExpr = element.getAttribute('infinite-scroll-throttle-delay');
+    var throttleDelay = 200;
+    if (throttleDelayExpr) {
+      throttleDelay = Number(directive.vm[throttleDelayExpr] || throttleDelayExpr);
+      if (isNaN(throttleDelay) || throttleDelay < 0) {
+        throttleDelay = 200;
+      }
+    }
+    directive.throttleDelay = throttleDelay;
+
+    directive.scrollEventTarget = getScrollEventTarget(element);
+    directive.scrollListener = throttle(doCheck.bind(directive), directive.throttleDelay);
+    directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
+
+    this.vm.$on('hook:beforeDestroy', function () {
+      directive.scrollEventTarget.removeEventListener('scroll', directive.scrollListener);
+    });
+
+    var disabledExpr = element.getAttribute('infinite-scroll-disabled');
+    var disabled = false;
+
+    if (disabledExpr) {
+      this.vm.$watch(disabledExpr, function (value) {
+        directive.disabled = value;
+        if (!value && directive.immediateCheck) {
+          doCheck.call(directive);
+        }
+      });
+      disabled = Boolean(directive.vm[disabledExpr]);
+    }
+    directive.disabled = disabled;
+
+    var distanceExpr = element.getAttribute('infinite-scroll-distance');
+    var distance = 0;
+    if (distanceExpr) {
+      distance = Number(directive.vm[distanceExpr] || distanceExpr);
+      if (isNaN(distance)) {
+        distance = 0;
+      }
+    }
+    directive.distance = distance;
+
+    var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
+    var immediateCheck = true;
+    if (immediateCheckExpr) {
+      immediateCheck = Boolean(directive.vm[immediateCheckExpr]);
+    }
+    directive.immediateCheck = immediateCheck;
+
+    if (immediateCheck) {
+      doCheck.call(directive);
+    }
+
+    var eventName = element.getAttribute('infinite-scroll-listen-for-event');
+    if (eventName) {
+      directive.vm.$on(eventName, function () {
+        doCheck.call(directive);
+      });
+    }
+  };
+
+  var doCheck = function doCheck(force) {
+    var scrollEventTarget = this.scrollEventTarget;
+    var element = this.el;
+    var distance = this.distance;
+
+    if (force !== true && this.disabled) return; //eslint-disable-line
+    var viewportScrollTop = getScrollTop(scrollEventTarget);
+    var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
+
+    var shouldTrigger = false;
+
+    if (scrollEventTarget === element) {
+      shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
+    } else {
+      var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
+
+      shouldTrigger = viewportBottom + distance >= elementBottom;
+    }
+
+    if (shouldTrigger && this.expression) {
+      this.expression();
+    }
+  };
+
+  var InfiniteScroll = {
+    bind: function bind(el, binding, vnode) {
+      el[ctx] = {
+        el: el,
+        vm: vnode.context,
+        expression: binding.value
+      };
+      var args = arguments;
+      el[ctx].vm.$on('hook:mounted', function () {
+        el[ctx].vm.$nextTick(function () {
+          if (isAttached(el)) {
+            doBind.call(el[ctx], args);
+          }
+
+          el[ctx].bindTryCount = 0;
+
+          var tryBind = function tryBind() {
+            if (el[ctx].bindTryCount > 10) return; //eslint-disable-line
+            el[ctx].bindTryCount++;
+            if (isAttached(el)) {
+              doBind.call(el[ctx], args);
+            } else {
+              setTimeout(tryBind, 50);
+            }
+          };
+
+          tryBind();
+        });
+      });
+    },
+    unbind: function unbind(el) {
+      if (el && el[ctx] && el[ctx].scrollEventTarget) el[ctx].scrollEventTarget.removeEventListener('scroll', el[ctx].scrollListener);
+    }
+  };
+
+  var install = function install(Vue) {
+    Vue.directive('InfiniteScroll', InfiniteScroll);
+  };
+
+  if (window.Vue) {
+    window.infiniteScroll = InfiniteScroll;
+    Vue.use(install); // eslint-disable-line
+  }
+
+  InfiniteScroll.install = install;
+
+  return InfiniteScroll;
+
+}));
 
 /***/ }),
 
@@ -81566,25 +81811,29 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "app", function() { return app; });
-/* harmony import */ var _plugins_router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/router.js */ "./resources/js/plugins/router.js");
-/* harmony import */ var _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/vuetify.js */ "./resources/js/plugins/vuetify.js");
-/* harmony import */ var _plugins_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/store.js */ "./resources/js/plugins/store.js");
-/* harmony import */ var _mixins_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mixins/auth */ "./resources/js/mixins/auth.js");
-/* harmony import */ var _mixins_auth__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mixins_auth__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_infinite_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-infinite-scroll */ "./node_modules/vue-infinite-scroll/vue-infinite-scroll.js");
+/* harmony import */ var vue_infinite_scroll__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_scroll__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _plugins_router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/router.js */ "./resources/js/plugins/router.js");
+/* harmony import */ var _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/vuetify.js */ "./resources/js/plugins/vuetify.js");
+/* harmony import */ var _plugins_store_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/store.js */ "./resources/js/plugins/store.js");
+/* harmony import */ var _mixins_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mixins/auth */ "./resources/js/mixins/auth.js");
+/* harmony import */ var _mixins_auth__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_mixins_auth__WEBPACK_IMPORTED_MODULE_4__);
 __webpack_require__(/*! ./configAxios */ "./resources/js/configAxios.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.component('Application', __webpack_require__(/*! ./Application.vue */ "./resources/js/Application.vue")["default"]); // plugins
+Vue.component('Application', __webpack_require__(/*! ./Application.vue */ "./resources/js/Application.vue")["default"]);
+
+Vue.use(vue_infinite_scroll__WEBPACK_IMPORTED_MODULE_0___default.a); // plugins
 
 
 
 
 
-Vue.mixin(_mixins_auth__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.mixin(_mixins_auth__WEBPACK_IMPORTED_MODULE_4___default.a);
 var app = new Vue({
-  router: _plugins_router_js__WEBPACK_IMPORTED_MODULE_0__["default"],
-  store: _plugins_store_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-  vuetify: _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  router: _plugins_router_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  store: _plugins_store_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  vuetify: _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: "#app",
   template: "<Application/>"
 });
@@ -81942,7 +82191,7 @@ var routes = [{
   },
   beforeEnter: guardRouteGuest,
   component: function component() {
-    return Promise.all(/*! import() | form-user */[__webpack_require__.e(0), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
+    return Promise.all(/*! import() | form-user */[__webpack_require__.e(15), __webpack_require__.e("form-user")]).then(__webpack_require__.bind(null, /*! ../pages/form-user.vue */ "./resources/js/pages/form-user.vue"));
   },
   props: true
 }, {
@@ -81963,7 +82212,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(0), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
+    return Promise.all(/*! import() | dashboard */[__webpack_require__.e(15), __webpack_require__.e("dashboard")]).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
   }
 }, {
   path: '/favorites',
@@ -81982,7 +82231,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(15), __webpack_require__.e(1), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {
@@ -81993,7 +82242,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | PublicationEditPage */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("PublicationEditPage")]).then(__webpack_require__.bind(null, /*! ../pages/publications-edit/publications-edit.vue */ "./resources/js/pages/publications-edit/publications-edit.vue"));
+    return Promise.all(/*! import() | PublicationEditPage */[__webpack_require__.e(15), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("PublicationEditPage")]).then(__webpack_require__.bind(null, /*! ../pages/publications-edit/publications-edit.vue */ "./resources/js/pages/publications-edit/publications-edit.vue"));
   },
   props: true
 }, {
@@ -82017,7 +82266,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | publications */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
+    return Promise.all(/*! import() | publications */[__webpack_require__.e(15), __webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("publications")]).then(__webpack_require__.bind(null, /*! ../pages/publications/publications.vue */ "./resources/js/pages/publications/publications.vue"));
   },
   props: true
 }, {
@@ -82029,7 +82278,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | images */[__webpack_require__.e(1), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
+    return Promise.all(/*! import() | images */[__webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("images")]).then(__webpack_require__.bind(null, /*! ../pages/imagesView.vue */ "./resources/js/pages/imagesView.vue"));
   }
 }, {
   path: '/videos',
@@ -82040,7 +82289,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return Promise.all(/*! import() | videos */[__webpack_require__.e(1), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
+    return Promise.all(/*! import() | videos */[__webpack_require__.e("vendors~PublicationEditPage~images~publications~videos"), __webpack_require__.e("videos")]).then(__webpack_require__.bind(null, /*! ../pages/videosView.vue */ "./resources/js/pages/videosView.vue"));
   }
 }, {
   path: '*',

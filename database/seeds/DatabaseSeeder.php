@@ -38,5 +38,9 @@ class DatabaseSeeder extends Seeder
         factory(App\Message::class, 40)->create();
         factory(App\Validation::class, 15)->create();
         factory(App\Payment::class, 60)->create();
+
+        $publication = App\Publication::inRandomOrder()->first();
+        $publication->week = true;
+        $publication->save();
     }
 }

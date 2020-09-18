@@ -7,6 +7,7 @@ use App\Publication;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class PublicationRepository
 {
@@ -83,7 +84,6 @@ class PublicationRepository
             'price' => $data->price,
             'imgages_path' => json_encode($data->images),
             //'videos_path' => '[]',
-            'user_id'=> Auth::user()->id,
             'email' => $data->email,
             'phone' => $data->phone,
             'nikc' => $data->nikc,
@@ -114,10 +114,53 @@ class PublicationRepository
     public function getByUser($user){
         return $user->publications;
     }
-    public function index(){
-        $publications = Publication::with('user')->orderBy('id','desc')->get();
+
+    public function index($request){
+        $consult = Publication::where('week', false);
+
+        $status = $request->get('status');
+        if($status)
+            $consult->where('status', (Boolean)$status);
+
+        $age = $request->get('age');
+        if($age) {
+            $ages = explode('-', $age);
+            $consult->whereBetween('years', $ages);
+        }
+        $city = $request->get('city');
+        if($city)
+            $consult->where('city_id', $city);
+
+        $barrio = $request->get('barrio');
+        if($barrio)
+            $consult->where('barrio_id', $barrio);
+
+        $price = $request->get('price');
+        if($price) {
+            $prices = explode('-', $price);
+            $consult->whereBetween('price', $prices);
+        }
+
+        $services = $request->get('services');
+        if($services) {
+            $servicesList = explode('-', $services);
+            $consult->join('publications_services', 'publications.id', '=', 'publications_services.publication_id')
+                    ->select('publications.*')
+                    ->whereIn('publications_services.service_id', $servicesList);
+        }
+
+
+        $publications = $consult->orderBy('id', 'desc')
+            ->paginate(16);
         return $publications;
     }
+
+    public function week()
+    {
+        $week = Publication::where('week', true)->first();
+        return $week;
+    }
+
      public function show($uuid){
         $publication = Publication::where('uuid', $uuid)->first();
         $user = $publication->user;

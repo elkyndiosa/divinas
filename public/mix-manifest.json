@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/PublicationEditPage.js": "/PublicationEditPage.js",
     "/account.js": "/account.js",
     "/contact.js": "/contact.js",
     "/dashboard.js": "/dashboard.js",
@@ -12,10 +13,7 @@
     "/not-found-page.js": "/not-found-page.js",
     "/ation.js": "/ation.js",
     "/ations.js": "/ations.js",
-    "/vendors~contact.js": "/vendors~contact.js",
-    "/vendors~images~publications~videos.js": "/vendors~images~publications~videos.js",
-    "/videos.js": "/videos.js",
-    "/vendors~images~publication~publications~videos.js": "/vendors~images~publication~publications~videos.js",
     "/vendors~PublicationEditPage~images~publications~videos.js": "/vendors~PublicationEditPage~images~publications~videos.js",
-    "/PublicationEditPage.js": "/PublicationEditPage.js"
+    "/vendors~contact.js": "/vendors~contact.js",
+    "/videos.js": "/videos.js"
 }

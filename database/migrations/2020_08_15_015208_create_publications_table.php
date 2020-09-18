@@ -33,6 +33,7 @@ class CreatePublicationsTable extends Migration
             $table->longText('description');
             $table->string('email');
             $table->string('price');
+            $table->boolean('week')->default(false);
             $table->uuid('uuid');
             $table->json('imgages_path')->nullable();
             $table->json('videos_path')->nullable();

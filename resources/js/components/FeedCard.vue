@@ -1,10 +1,10 @@
 <template>
   <v-col cols="6" md="4" lg="3">
     <v-hover v-slot:default="{ hover }">
-        <base-card :height="450" class="base-card" :elevation="hover ? 20 : 2" v-if="value != ''">
+        <base-card :height="300" class="base-card" :elevation="hover ? 10 : 2" v-if="value != ''">
             <v-img
                 :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
-                height="60%"
+                height="65%"
                 width="100%"
                 aspect-ratio="1"
                 class="grey lighten-2"
@@ -36,11 +36,6 @@
                         {{value.name}}
                     </v-toolbar-title>
                 </v-toolbar>
-                <p class="text-end" style="width: 100%;">
-                    <strong>Publicado:</strong>
-                    <br/>
-                    <span>{{moment(value.created_at).startOf('hour').format('DD-MMMM-YYYY')}}</span>
-                </p>
             </v-card-text>
             <v-card-actions class="m-0 py-0">
                 <v-btn

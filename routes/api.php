@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::apiResource('/publication', 'Publication\PublicationController');
+Route::get('/get-week', 'Publication\PublicationController@getWeek');
 Route::get('/cities', 'City\CityController@index');
 Route::get('/services', 'Service\ServiceController@index');
 Route::get('/time/{id}', 'Time\TimeController@show');

@@ -603,7 +603,7 @@ var render = function() {
                       "base-card",
                       {
                         staticClass: "base-card",
-                        attrs: { height: 450, elevation: hover ? 20 : 2 }
+                        attrs: { height: 450, elevation: hover ? 10 : 2 }
                       },
                       [
                         _c("v-img", {

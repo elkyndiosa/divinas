@@ -26,10 +26,19 @@ class PublicationController extends Controller
         $this->publicationRepo = $publicationRepo;
         $this->middleware('auth')->only('destroy', 'update');
     }
-    public function index(){
-        return $this->publicationRepo->index();
+    public function index(Request $request)
+    {
+        $list = $this->publicationRepo->index($request);
+        return response()->json(compact('list'), 200);
 
     }
+
+    public function getWeek()
+    {
+        $week = $this->publicationRepo->week();
+        return response()->json(compact('week'), 200);
+    }
+
     public function indexByUser(User $uuid){
         return $this->publicationRepo->getByUser($uuid);
     }
