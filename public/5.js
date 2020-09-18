@@ -236,6 +236,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Feed",
   components: {
@@ -573,10 +574,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
+    { attrs: { id: "scroll-target" } },
     [
       _c(
         "v-row",
-        { attrs: { justify: "center" } },
+        { staticClass: "fill-height", attrs: { justify: "center" } },
         [
           _c("v-col", { attrs: { cols: "12" } }, [_vm._t("default")], 2),
           _vm._v(" "),
@@ -1066,14 +1068,20 @@ var render = function() {
                       "v-row",
                       { staticClass: "mt-4", attrs: { justify: "center" } },
                       [
-                        _c("v-progress-circular", {
-                          attrs: {
-                            size: "70",
-                            width: "7",
-                            color: "secondary",
-                            indeterminate: ""
-                          }
-                        })
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "8", sm: "6", md: "4" } },
+                          [
+                            _c("v-progress-linear", {
+                              attrs: {
+                                color: "primary",
+                                "buffer-value": "0",
+                                stream: ""
+                              }
+                            })
+                          ],
+                          1
+                        )
                       ],
                       1
                     )

@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row justify="center">
+  <v-container id="scroll-target">
+    <v-row justify="center" class="fill-height">
         <v-col cols="12">
             <slot />
         </v-col>
@@ -192,12 +192,13 @@
                 </h4>
             </v-row>
             <v-row justify="center" class="mt-4" v-if="scroller.getting">
-                <v-progress-circular
-                    size="70"
-                    width="7"
-                    color="secondary"
-                    indeterminate
-                ></v-progress-circular>
+                <v-col cols="8" sm="6" md="4">
+                    <v-progress-linear
+                        color="primary"
+                        buffer-value="0"
+                        stream
+                    ></v-progress-linear>
+                </v-col>
             </v-row>
         </div>
       </v-col>
@@ -410,7 +411,8 @@ export default {
     showWeek() {
         let uuid = this.week.uuid
         this.$router.push("/publication/" + uuid);
-    }
+    },
+
   },
   watch: {
   },
