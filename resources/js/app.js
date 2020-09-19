@@ -1,8 +1,11 @@
 require('./configAxios');
 window.Vue = require('vue');
 Vue.component('Application', require('./Application.vue').default);
-// plugins
 
+import InfiniteScroll from 'vue-infinite-scroll';
+Vue.use(InfiniteScroll);
+
+// plugins
 import router from './plugins/router.js'
 import vuetify from './plugins/vuetify.js'
 import store from './plugins/store.js'

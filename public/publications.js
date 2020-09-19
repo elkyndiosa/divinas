@@ -271,7 +271,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data.services = _this5.servicesSelect;
                 data.price = _this5.price;
                 data.images = _this5.imagesSelect;
-                url = 'api/publication';
+                url = '/api/publication';
                 _context5.prev = 7;
                 _context5.next = 10;
                 return axios.post(url, data);

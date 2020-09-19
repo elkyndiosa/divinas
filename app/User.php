@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Time::class);
     }
-    public function Services()
+    public function services()
     {
         return $this->belongsToMany(Service::class, 'service_users');
     }

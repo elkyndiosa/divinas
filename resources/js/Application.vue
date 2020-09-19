@@ -15,6 +15,7 @@ export default {
     },
     watch: {
         '$route'(to, from) {
+            this.$vuetify.goTo(0, 0)
             let title = to.meta.title
             if(title) {
                 document.title = 'Divinas Prepagos | '+title

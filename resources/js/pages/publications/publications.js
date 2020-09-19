@@ -148,7 +148,7 @@ export default {
             data.services = this.servicesSelect;
             data.price = this.price
             data.images = this.imagesSelect
-            let url = 'api/publication'
+            let url = '/api/publication'
             try {
                 let response = await axios.post(url, data)
                 this.message = response.data.message

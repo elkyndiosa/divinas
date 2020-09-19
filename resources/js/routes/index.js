@@ -92,6 +92,18 @@ export const routes = [
 
     },
     {
+        path: '/publications/edit/:uuid',
+        name: 'publication-edit',
+        meta: {
+            layout: 'dash'
+        },
+        beforeEnter : guardRoute,
+        component: () =>
+            import(/* webpackChunkName: "PublicationEditPage" */ '../pages/publications-edit/publications-edit.vue'),
+        props: true
+
+    },
+    {
         path: '/account',
         name: 'account',
         meta: {

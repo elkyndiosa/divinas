@@ -24,12 +24,21 @@ class PublicationController extends Controller
     public function __construct(PublicationRepository $publicationRepo)
     {
         $this->publicationRepo = $publicationRepo;
-        $this->middleware('auth')->only('destroy');
+        $this->middleware('auth')->only('destroy', 'update');
     }
-    public function index(){
-        return $this->publicationRepo->index();
+    public function index(Request $request)
+    {
+        $list = $this->publicationRepo->index($request);
+        return response()->json(compact('list'), 200);
 
     }
+
+    public function getWeek()
+    {
+        $week = $this->publicationRepo->week();
+        return response()->json(compact('week'), 200);
+    }
+
     public function indexByUser(User $uuid){
         return $this->publicationRepo->getByUser($uuid);
     }
@@ -38,11 +47,10 @@ class PublicationController extends Controller
         $message = 'La publicacion ha sido creada.';
         return response()->json(compact('message'), 201);
     }
-    public function update(){
-        // return Image::create([
-        //     'path' => $name,
-        //     'user_id' =>Auth::user()->id,
-        // ]);
+    public function update($uuid, Request $request){
+        $this->publicationRepo->update($uuid, $request);
+        $message = 'La publicacion ha sido actualizada.';
+        return response()->json(compact('message'), 201);
     }
     public function destroy(Publication $publication){
         // $this->authorize('userIsOwner', $uuid);

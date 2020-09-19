@@ -21,7 +21,11 @@ class ServiceRepository
     }
     public function index(){
         $services = Service::all();
-        $servicesUser = Auth::user()->Services;
+        $servicesUser = [];
+
+        if(Auth::check())
+            $servicesUser = Auth::user()->services;
+
         return response()->json([
             'services' => $services,
             'servicesUser' => $servicesUser

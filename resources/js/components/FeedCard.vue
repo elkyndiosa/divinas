@@ -1,10 +1,14 @@
 <template>
   <v-col cols="6" md="4" lg="3">
     <v-hover v-slot:default="{ hover }">
+<<<<<<< HEAD
         <base-card :height="250" class="base-card" :elevation="hover ? 20 : 2" v-if="value != ''">
+=======
+        <base-card :height="300" class="base-card" :elevation="hover ? 10 : 2" v-if="value != ''">
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
             <v-img
                 :src="'/uploads/images/'+JSON.parse(value.imgages_path)[0]"
-                height="60%"
+                height="65%"
                 width="100%"
                 
                 class="white"
@@ -36,19 +40,37 @@
                         {{value.name}}
                     </v-toolbar-title>
                 </v-toolbar>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
             </v-card-text>
             <v-card-actions class="m-0 py-0" style="height: 16px !important;">
                 <v-btn
-                    v-if="canDelete"
+                    v-if="canEdit"
                     :disabled="busy"
                     @click="destroy(value.uuid)"
                     small
+<<<<<<< HEAD
                     class="my-4"
                     color="red"
+=======
+                    class="my-4 mx-1"
+                    color="error"
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
                     icon
                 >
                     <v-icon class="material-icons">delete</v-icon>
+                </v-btn>
+                <v-btn
+                    v-if="canEdit"
+                    @click="show(value.uuid)"
+                    small
+                    class="my-4 mx-1"
+                    color="success"
+                    icon
+                >
+                    <v-icon small class="material-icons">edit</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -104,7 +126,7 @@ export default {
       return false;
     },
 
-    canDelete() {
+    canEdit() {
         if(!this.user)
             return false
         if(this.value.user_id != this.user.id)
@@ -159,6 +181,14 @@ export default {
             console.log(error)
             this.busy = false
         }
+    },
+    show(uuid) {
+        this.$router.push({
+            name: 'publication-edit',
+            params: {
+                uuid: uuid,
+            }
+        })
     }
   },
 };

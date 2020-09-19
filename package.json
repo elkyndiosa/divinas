@@ -27,6 +27,8 @@
         "ffmpeg": "0.0.4",
         "moment": "^2.27.0",
         "vee-validate": "^3.3.9",
+        "vue-infinite-loading": "^2.4.5",
+        "vue-infinite-scroll": "^2.0.2",
         "vue-router": "^3.4.3",
         "vue2-dropzone": "^3.6.0",
         "vuetify": "^2.3.8",

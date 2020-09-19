@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::apiResource('/publication', 'Publication\PublicationController');
+Route::get('/get-week', 'Publication\PublicationController@getWeek');
 Route::get('/cities', 'City\CityController@index');
 Route::get('/services', 'Service\ServiceController@index');
 Route::get('/time/{id}', 'Time\TimeController@show');
@@ -22,6 +23,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/destroy/images/{uuid}', 'Image\ImageController@destroy');
     Route::get('/profile/image/{name}', 'User\UserController@saveImageProfile');
     Route::get('/publications/{uuid}', 'Publication\PublicationController@indexByUser');
-
 });
 

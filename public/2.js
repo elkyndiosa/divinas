@@ -85,6 +85,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
@@ -126,7 +138,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 
       return false;
     },
-    canDelete: function canDelete() {
+    canEdit: function canEdit() {
       if (!this.user) return false;
       if (this.value.user_id != this.user.id) return false;
       return true;
@@ -197,6 +209,14 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
           }
         }, _callee, null, [[2, 9]]);
       }))();
+    },
+    show: function show(uuid) {
+      this.$router.push({
+        name: 'publication-edit',
+        params: {
+          uuid: uuid
+        }
+      });
     }
   }
 });
@@ -581,7 +601,11 @@ var render = function() {
                       "base-card",
                       {
                         staticClass: "base-card",
+<<<<<<< HEAD
                         attrs: { height: 250, elevation: hover ? 20 : 2 }
+=======
+                        attrs: { height: 300, elevation: hover ? 10 : 2 }
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
                       },
                       [
                         _c("v-img", {
@@ -591,8 +615,14 @@ var render = function() {
                             src:
                               "/uploads/images/" +
                               JSON.parse(_vm.value.imgages_path)[0],
+<<<<<<< HEAD
                             height: "60%",
                             width: "100%"
+=======
+                            height: "65%",
+                            width: "100%",
+                            "aspect-ratio": "1"
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
                           },
                           on: {
                             click: function($event) {
@@ -694,11 +724,11 @@ var render = function() {
                             staticStyle: { height: "16px !important" }
                           },
                           [
-                            _vm.canDelete
+                            _vm.canEdit
                               ? _c(
                                   "v-btn",
                                   {
-                                    staticClass: "my-4",
+                                    staticClass: "my-4 mx-1",
                                     attrs: {
                                       disabled: _vm.busy,
                                       small: "",
@@ -716,6 +746,36 @@ var render = function() {
                                       "v-icon",
                                       { staticClass: "material-icons" },
                                       [_vm._v("delete")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.canEdit
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "my-4 mx-1",
+                                    attrs: {
+                                      small: "",
+                                      color: "success",
+                                      icon: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.show(_vm.value.uuid)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "material-icons",
+                                        attrs: { small: "" }
+                                      },
+                                      [_vm._v("edit")]
                                     )
                                   ],
                                   1

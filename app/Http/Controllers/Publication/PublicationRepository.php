@@ -7,7 +7,11 @@ use App\Publication;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+<<<<<<< HEAD
 use App\Service;
+=======
+use phpDocumentor\Reflection\Types\Boolean;
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 
 class PublicationRepository
 {
@@ -75,13 +79,95 @@ class PublicationRepository
         }
      }
 
+     public function update($uuid, $data)
+     {
+
+        $timeId = $data->time_id;
+        $this->updateTime($timeId, $data->dataAdd);
+
+        Publication::where('uuid', $uuid)->update([
+            'description' => $data->description,
+            'name' => $data->name,
+            'price' => $data->price,
+            'imgages_path' => json_encode($data->images),
+            //'videos_path' => '[]',
+            'email' => $data->email,
+            'phone' => $data->phone,
+            'nikc' => $data->nikc,
+            'whatsapp' => $data->whatsapp,
+            'height' => $data->height,
+            'weight' => $data->weight,
+            'delivery' => $data->delivery,
+            'have_site' => $data->have_site,
+            'barrio_id' => $data->barrio_id,
+            'city_id' => $data->city_id,
+            'years' => $data->years
+        ]);
+     }
+
+     public function updateTime($id, $data)
+     {
+        $dataToUpdate =[
+            'every_day' => $data['every_day'],
+            'every_single_day' => $data['every_single_day'],
+            'input' => $data['input'],
+            'input_day' => $data['input_day'],
+            'output' => $data['output'],
+            'output_day' => $data['output_day'],
+        ];
+        Time::where('id', $id)->update($dataToUpdate);
+     }
+
     public function getByUser($user){
         return $user->publications;
     }
-    public function index(){
-        $publications = Publication::with('user')->orderBy('id','desc')->get();
+
+    public function index($request){
+        $consult = Publication::where('week', false);
+
+        $status = $request->get('status');
+        if($status)
+            $consult->where('status', (Boolean)$status);
+
+        $age = $request->get('age');
+        if($age) {
+            $ages = explode('-', $age);
+            $consult->whereBetween('years', $ages);
+        }
+        $city = $request->get('city');
+        if($city)
+            $consult->where('city_id', $city);
+
+        $barrio = $request->get('barrio');
+        if($barrio)
+            $consult->where('barrio_id', $barrio);
+
+        $price = $request->get('price');
+        if($price) {
+            $prices = explode('-', $price);
+            $consult->whereBetween('price', $prices);
+        }
+
+        $services = $request->get('services');
+        if($services) {
+            $servicesList = explode('-', $services);
+            $consult->join('publications_services', 'publications.id', '=', 'publications_services.publication_id')
+                    ->select('publications.*')
+                    ->whereIn('publications_services.service_id', $servicesList);
+        }
+
+
+        $publications = $consult->orderBy('id', 'desc')
+            ->paginate(16);
         return $publications;
     }
+
+    public function week()
+    {
+        $week = Publication::where('week', true)->first();
+        return $week;
+    }
+
      public function show($uuid){
         $publication = Publication::where('uuid', $uuid)->first();
         $user = $publication->user;

@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('path', 100);
-            $table->foreignId('image_id')->constrained();
+            $table->string('image_path', 100);
             $table->timestamps();
         });
     }

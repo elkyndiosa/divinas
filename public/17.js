@@ -1,5 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
+<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FeedCard.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FeedCard.vue?vue&type=script&lang=js& ***!
@@ -226,6 +227,8 @@ exports.push([module.i, "\n.v-image__image {\r\n  transition: 0.3s linear;\n}\r\
 
 /***/ }),
 
+=======
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 /***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
 /*!**************************************************!*\
   !*** ./node_modules/moment/locale sync ^\.\/.*$ ***!
@@ -522,6 +525,7 @@ webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
+<<<<<<< HEAD
 /***/ }),
 
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FeedCard.vue?vue&type=style&index=0&lang=css&":
@@ -884,6 +888,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+=======
+>>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 /***/ })
 
 }]);
