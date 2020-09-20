@@ -71,7 +71,7 @@ export default {
       axios.get(url).then(response =>{
         console.log(response)
       }).catch(rerro => {
-        console.log(error)
+        ErrorHandler.render(error)
       })
     }
 

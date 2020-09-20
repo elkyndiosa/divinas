@@ -423,21 +423,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 response = _context.sent;
                 location.href = "/dashboard";
-                _context.next = 19;
+                _context.next = 17;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](6);
-                _this2.errorServer = "Incorrect data, please check!";
-                _this2.snackbar = true;
-                console.log(_context.t0.response.data);
+                ErrorHandler.render(_context.t0);
                 _this2.busy = false;
 
-              case 19:
+              case 17:
                 ;
 
-              case 20:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -468,21 +466,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 10:
                 response = _context2.sent;
                 location.href = "/dashboard";
-                _context2.next = 20;
+                _context2.next = 18;
                 break;
 
               case 14:
                 _context2.prev = 14;
                 _context2.t0 = _context2["catch"](7);
-                _this3.errorServer = "Incorrect data, please check!";
-                _this3.snackbar = true;
-                console.log(_context2.t0.response);
+                ErrorHandler.render(_context2.t0);
                 _this3.busy = false;
 
-              case 20:
+              case 18:
                 ;
 
-              case 21:
+              case 19:
               case "end":
                 return _context2.stop();
             }

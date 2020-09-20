@@ -70,4 +70,9 @@ class User extends Authenticatable
         return $this->hasOne(DataUser::class);
     }
 
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
 }

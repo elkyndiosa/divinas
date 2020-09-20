@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Publication;
 
 use App\DataUser;
 use App\Publication;
+use App\Video;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,7 @@ class PublicationRepository
             'name' => $data->name,
             'price' => $data->price,
             'imgages_path' => json_encode($data->images),
-            'videos_path' => '[]',
+            'videos_path' => json_encode($data->videos),
             'user_id'=> Auth::user()->id,
             'email' => $data->email,
             'phone' => $data->phone,
@@ -83,7 +84,7 @@ class PublicationRepository
             'name' => $data->name,
             'price' => $data->price,
             'imgages_path' => json_encode($data->images),
-            //'videos_path' => '[]',
+            'videos_path' => json_encode($data->videos),
             'email' => $data->email,
             'phone' => $data->phone,
             'nikc' => $data->nikc,
@@ -96,6 +97,19 @@ class PublicationRepository
             'city_id' => $data->city_id,
             'years' => $data->years
         ]);
+        $publication = Publication::where('uuid', $uuid)->first();
+        $this->updateServices($publication->id, $data->services);
+     }
+
+     public function updateServices($id, $services) {
+        DB::table('publications_services')->where('publication_id', $id)->delete();
+        foreach ($services as $service) {
+            $dataToCreate =[
+                'publication_id' => $id,
+                'service_id' => $service,
+            ];
+            DB::table('publications_services')->insert($dataToCreate);
+       }
      }
 
      public function updateTime($id, $data)
@@ -166,11 +180,14 @@ class PublicationRepository
         $user = $publication->user;
         $time = Time::where('id', '=', $publication->time_id)->first();
         $services = $publication->services;
+        $videos_list = json_decode($publication->videos_path);
+        $videos = Video::whereIn('id', $videos_list)->get();
         $this->incrementViews($user->id);
         return response()->json([
             'user' => $user,
             'publication' => $publication,
             'times' => $time,
+            'videos' => $videos,
             'services' =>  $services
         ]);
     }

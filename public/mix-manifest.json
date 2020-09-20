@@ -15,5 +15,7 @@
     "/ations.js": "/ations.js",
     "/vendors~PublicationEditPage~images~publications~videos.js": "/vendors~PublicationEditPage~images~publications~videos.js",
     "/vendors~contact.js": "/vendors~contact.js",
-    "/videos.js": "/videos.js"
+    "/videos.js": "/videos.js",
+    "/vendors~PublicationEditPage~images~videos.js": "/vendors~PublicationEditPage~images~videos.js",
+    "/vendors~images~publications~videos.js": "/vendors~images~publications~videos.js"
 }

@@ -154,7 +154,7 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          console.log(error);
+          ErrorHandler.render(error)
         });
     },
     getCitiesAndBarrios() {
@@ -165,7 +165,7 @@ export default {
           this.cities = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          ErrorHandler.render(error)
         });
     },
     getTimesUsers() {
@@ -177,7 +177,7 @@ export default {
           this.dataAdd = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          ErrorHandler.render(error)
         });
     },
     getServices() {
@@ -190,7 +190,7 @@ export default {
             this.servicesSelect = response.data.servicesUser;
         })
         .catch((error) => {
-          console.log(error);
+          ErrorHandler.render(error)
         });
     },
     updateImageProfile(nameProfileImage) {

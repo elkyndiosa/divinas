@@ -109,7 +109,7 @@ export default {
       if(this.formLogin){
         this.formLogin = false;
         this.efect = true;
-        
+
         setTimeout(() => {
           this.efect = false;
           this.formSignup = true;
@@ -140,9 +140,7 @@ export default {
             let response = await axios.post(url, formData)
             location.href = "/dashboard";
         } catch(error){
-          this.errorServer = "Incorrect data, please check!";
-          this.snackbar = true;
-          console.log(error.response.data);
+          ErrorHandler.render(error)
           this.busy = false
         };
     },
@@ -158,9 +156,7 @@ export default {
             let response = await axios.post(url, formData)
             location.href = "/dashboard";
         } catch(error) {
-          this.errorServer = "Incorrect data, please check!";
-          this.snackbar = true;
-          console.log(error.response);
+          ErrorHandler.render(error)
           this.busy = false
         };
     },

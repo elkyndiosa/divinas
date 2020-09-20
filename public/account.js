@@ -64,7 +64,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ImageSelect: function ImageSelect() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
     }
   },
   data: function data() {
@@ -157,7 +157,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         _this2.messaje = true;
         console.log(response);
       })["catch"](function (error) {
-        console.log(error);
+        ErrorHandler.render(error);
       });
     },
     getCitiesAndBarrios: function getCitiesAndBarrios() {
@@ -167,7 +167,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       axios.get(url).then(function (response) {
         _this3.cities = response.data;
       })["catch"](function (error) {
-        console.log(error);
+        ErrorHandler.render(error);
       });
     },
     getTimesUsers: function getTimesUsers() {
@@ -177,7 +177,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       axios.get(url).then(function (response) {
         _this4.dataAdd = response.data;
       })["catch"](function (error) {
-        console.log(error);
+        ErrorHandler.render(error);
       });
     },
     getServices: function getServices() {
@@ -189,7 +189,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         _this5.services = response.data.services;
         _this5.servicesSelect = response.data.servicesUser;
       })["catch"](function (error) {
-        console.log(error);
+        ErrorHandler.render(error);
       });
     },
     updateImageProfile: function updateImageProfile(nameProfileImage) {

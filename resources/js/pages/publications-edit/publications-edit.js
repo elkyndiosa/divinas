@@ -5,6 +5,10 @@ export default {
     components: {
         FeedCard: () => import("../../components/FeedCard.vue"),
         vueDropzone: vue2Dropzone,
+        VideoPlayer: () => import(
+            /*webpackChunckName: "VideoPlayerComponent"*/
+            '../../components/VideoPlayer.vue'
+        )
     },
     beforeRouteEnter (to, from, next) {
         let uuid = to.params.uuid
@@ -16,7 +20,7 @@ export default {
     },
     data() {
         return {
-            dropzoneOptions: {
+            imagesOption: {
                 url: "/api/upload/image",
                 thumbnailHeight: 150,
                 maxFilesize: 2,
@@ -25,9 +29,14 @@ export default {
                 },
                 dictDefaultMessage: "Click para buscar una imagen o arrastre aqui",
             },
+            videosOptions: {
+                url: '/api/upload/video',
+                thumbnailHeight: 150,
+                maxFilesize: 5,
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content},
+                dictDefaultMessage: "Click para buscar un video o arrastre aqui"
+            },
             busy: false,
-            success: false,
-            message: null,
             publications: {
                 busy: false,
                 list: []
@@ -48,6 +57,13 @@ export default {
             images: {
                 busy: false,
                 list: []
+            },
+            videosSelect: [],
+            videos: {
+                busy: false,
+                list: [],
+                playing: false,
+                selected: {},
             },
             cities: {
                 busy: false,
@@ -72,6 +88,7 @@ export default {
         this.getCitiesList()
         this.getServices()
         this.getImages()
+        this.getVideos()
     },
 
     computed: {
@@ -81,14 +98,20 @@ export default {
             if(city)
                 return city.barrios
             return []
+        },
+        valid_step_3() {
+            if(this.imagesSelect.length >= 2)
+                return true
+            return false
+        },
+        valid_step_4() {
+            if(this.videosSelect.length >0)
+                return true
+            return false
         }
     },
 
     watch: {
-        success(val) {
-            if(!val)
-                this.message = null
-        }
     },
 
     methods: {
@@ -98,15 +121,16 @@ export default {
             try {
                 let response = await axios.get(url)
                 this.publication= response.data.publication;
-                this.servicesSelect = response.data.services
+                this.servicesSelect = _.map(services, 'id')
                 this.dataAdd = response.data.times
                 this.imagesSelect = JSON.parse(response.data.publication.imgages_path)
+                this.videosSelect = JSON.parse(response.data.publication.videos_path)
                 let name = response.data.publication.name
                 this.$nextTick(() => {
                     document.title = 'Divinas Prepagos | Editar '+name
                 })
             } catch(error) {
-                console.log(error)
+                ErrorHandler.render(error)
             }
             this.busy = false
         },
@@ -117,10 +141,23 @@ export default {
                 let response = await axios.get(url)
                 this.images.list = response.data;
             } catch (error) {
-                console.log(error);
+                ErrorHandler.render(error)
             }
             this.images.busy = false
         },
+
+        async getVideos() {
+            this.videos.busy = true
+            let url = '/api/user-videos'
+            try {
+                let response = await axios.get(url)
+                this.videos.list = response.data.list
+            } catch (error) {
+                ErrorHandler.render(error)
+            }
+            this.videos.busy = false
+        },
+
         async getCitiesList() {
             this.cities.busy = true
             let url = "/api/cities"
@@ -128,7 +165,7 @@ export default {
                 let response = await axios.get(url)
                 this.cities.list = response.data.cities
             } catch (error) {
-                console.log(error)
+                ErrorHandler.render(error)
             }
             this.cities.busy = false
         },
@@ -139,9 +176,8 @@ export default {
             try {
                 let response = await axios.get(url)
                 this.services.list = response.data.services
-                this.servicesSelect = response.data.servicesUser
             } catch (error) {
-                console
+                ErrorHandler.render(error)
             }
             this.services.busy = false
         },
@@ -152,16 +188,15 @@ export default {
             data.dataAdd = this.dataAdd;
             data.services = this.servicesSelect;
             data.images = this.imagesSelect
+            data.videos = this.videosSelect
             let url = '/api/publication/'+this.publication.uuid
             try {
                 let response = await axios.put(url, data)
-                this.message = response.data.message
-                this.success = true
-                this.$nextTick(() => {
-                    this.getPublications()
-                })
+                let msj = response.data.message
+                NotificationHandler.simpleSuccess(msj)
+                this.step = 1
             } catch (error) {
-                console.log(error)
+                ErrorHandler.render(error)
             }
             this.busy = false
         },
@@ -171,10 +206,20 @@ export default {
             this.servicesSelect.splice(index, 1)
         },
 
-        cleanFiles() {
-            this.$refs.myVueDropzone.removeAllFiles();
+        imagesCleanFiles() {
+            this.$refs.imagesDropzone.removeAllFiles();
             this.getImages()
         },
+        videosCleanFiles() {
+            this.$refs.videosDropzone.removeAllFiles();
+            this.getVideos()
+        },
+        selectVideo(v) {
+            this.videos.selected = v
+            this.$nextTick(() => {
+                this.videos.playing = true
+            })
+        }
 
     }
 }

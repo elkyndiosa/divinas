@@ -1,8 +1,11 @@
 require('./configAxios');
-window.Vue = require('vue');
+window.Vue = require('vue')
 Vue.component('Application', require('./Application.vue').default);
 
 import InfiniteScroll from 'vue-infinite-scroll';
+import VueVideoPlayer from 'vue-video-player';
+
+Vue.use(VueVideoPlayer)
 Vue.use(InfiniteScroll);
 
 // plugins

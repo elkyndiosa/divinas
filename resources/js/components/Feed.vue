@@ -8,7 +8,7 @@
             <h4 class="text-center text-h4 full-width" v-text="isHome ? 'Las mejores prepagos de la ciudad' : 'Tus Favoritas' "></h4>
         </v-col>
         <v-col cols="12" sm="10" md="8" v-if="isHome">
-            <v-form @submit.prevent="search">
+            <v-form ref="form_search" @submit.prevent="search">
                 <v-row justify="center">
                     <v-col cols="12" md="6">
                         <v-select
@@ -80,18 +80,33 @@
                         v-model="status"
                         ></v-checkbox>
                     </v-col>
-                    <v-col class="d-flex pa-0 mb-8" cols="12">
-                        <v-btn
-                            color="primary"
-                            large
-                            class="px-16 py-4 ma-auto text-subtitle-2"
-                            rounded
-                            type="submit"
-                            :disabled="scroller.getting"
-                            :loading="scroller.getting"
-                        >
-                            Filtrar
-                        </v-btn>
+                    <v-col class="pa-0 mb-8" cols="12">
+                        <v-toolbar flat color="white">
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="primary"
+                                large
+                                class="px-16 py-4 mx-2 text-subtitle-2"
+                                rounded
+                                type="submit"
+                                :disabled="scroller.getting"
+                                :loading="scroller.getting"
+                            >
+                                Filtrar
+                            </v-btn>
+                            <v-btn
+                                color="primary"
+                                large
+                                class="px-16 py-4 mx-2 text-subtitle-2"
+                                rounded
+                                outlined
+                                @click="$refs.form_search.reset()"
+                                :disabled="scroller.getting"
+                            >
+                                Limpiar
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                        </v-toolbar>
                     </v-col>
                 </v-row>
             </v-form>

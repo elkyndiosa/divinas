@@ -25,7 +25,7 @@ class VideoController extends Controller
      */
     public function __construct(VideoRepository $videoRepo)
     {
-        $this->videoeRepo = $videoRepo;
+        $this->videoRepo = $videoRepo;
     }
     // public function index(){
     //     return $this->videoRepo->getImagesByUser();
@@ -33,42 +33,23 @@ class VideoController extends Controller
     // public function getByPublication(User $uuid){
     //     return $this->videoRepo->getByPublication($uuid);
     // }
+
+    public function indexUser()
+    {
+        $list = $this->videoRepo->indexByUser();
+        return response()->json(compact('list'), 200);
+    }
+
     public function create(VideoSaveRequest $request){
 
         if($request->file('file')) {
-            $file = $request->file;
-            $original_name = $file->getClientOriginalName();
-            $replace = array(" ", "(", ")");
-            $extension = $file->getClientOriginalExtension();
-            $name = time().str_replace($replace, "", $original_name);
-            $image_name = str_replace(".".$extension, "", $name);
-            $file->storeAs('videos/', $name, 'uploads');
-
-            FFMpeg::fromDisk('videos')
-                ->open($name)
-                ->getFrameFromSeconds(2)
-                ->export()
-                ->toDisk('images')
-                ->save($image_name.'.png');
+            $this->videoRepo->create($request);
             $message = 'El video ha sido guardado.';
             return response()->json(compact('message'), 201);
         }
 
+        $message = 'No ha enviado ningun video.';
+        return response()->json(compact('message'), 401);
     }
 
-    protected function createthumnail($video_name, $image_name)
-    {
-
-    }
-    // public function saveName($name){
-    //     return Video::create([
-    //         'path' => $name,
-    //         'image'=>
-    //         'user_id' =>Auth::user()->id,
-    //     ]);
-    // }
-    // public function destroy(Image $uuid){
-    //     $this->authorize('userIsOwner', $uuid);
-    //     return $this->imageRepo->destroy($uuid);
-    // }
 }

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["dashboard"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/dashboard.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
@@ -109,7 +109,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 11:
                 _context.prev = 11;
                 _context.t0 = _context["catch"](2);
-                console.log(_context.t0);
+                ErrorHandler.render(_context.t0);
 
               case 14:
                 _this.busy = false;
