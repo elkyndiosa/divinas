@@ -122,7 +122,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return [];
     },
     valid_step_3: function valid_step_3() {
-      if (this.imagesSelect.length >= 2) return true;
+      if (this.imagesSelect.length > 0) return true;
       return false;
     },
     valid_step_4: function valid_step_4() {

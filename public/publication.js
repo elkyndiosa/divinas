@@ -312,7 +312,6 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
     images: function images() {
       if (!this.data.publication.imgages_path) return [];
       var images = JSON.parse(this.data.publication.imgages_path);
-      images.splice(0, 1);
       return images;
     }
   },

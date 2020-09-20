@@ -293,7 +293,6 @@ export default {
         if(!this.data.publication.imgages_path)
             return []
         let images = JSON.parse(this.data.publication.imgages_path)
-        images.splice(0, 1)
         return images
     }
   },

@@ -100,7 +100,7 @@ export default {
             return []
         },
         valid_step_3() {
-            if(this.imagesSelect.length >= 2)
+            if(this.imagesSelect.length > 0)
                 return true
             return false
         },
