@@ -13,8 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
-<<<<<<< HEAD
-=======
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -27,13 +25,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -186,7 +181,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 //
 //
 //
@@ -252,10 +246,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       layout: [1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
-<<<<<<< HEAD
-      page: 1,
-      publications: [],
-=======
       publications: [],
       status: false,
       searched: false,
@@ -305,27 +295,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Entre 100 y 120',
         value: '100-120'
       }],
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
       busy: false
     };
   },
   computed: {
-<<<<<<< HEAD
-    pages: function pages() {
-      return Math.ceil(this.articles.length / 11);
-    },
-    paginatedArticles: function paginatedArticles() {
-      var start = (this.page - 1) * 11;
-      var stop = this.page * 11;
-      return this.articles.slice(start, stop);
-    },
-    isHome: function isHome() {
-      if (this.$router.history.current.name == "favorites") {
-        return false;
-      } else if (this.$router.history.current.name == "home") {
-        return true;
-      }
-=======
     noGet: function noGet() {
       var scroll = this.scroller;
       if (scroll.getting || scroll.ready) return true;
@@ -359,75 +332,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return data;
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
     }
   },
   created: function created() {
     this.getPublications();
-<<<<<<< HEAD
-=======
     this.getWeek();
     this.getCitiesList();
     this.getServices();
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
   },
   methods: {
     getPublications: function getPublications() {
       var _this = this;
-<<<<<<< HEAD
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var url, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.busy = true;
-                url = '/api/publication/';
-                _context.prev = 2;
-                _context.next = 5;
-                return axios.get(url);
-
-              case 5:
-                response = _context.sent;
-                _this.publications = response.data;
-                _context.next = 12;
-                break;
-
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
-                console.log(_context.t0.response.data);
-
-              case 12:
-                _this.busy = false;
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[2, 9]]);
-      }))();
-    },
-    addFavorities: function addFavorities(uuid) {
-      this.$emit("addFavorities", uuid);
-    }
-  },
-  watch: {
-    page: function page() {
-      window.scrollTo(0, 0);
-    }
-  }
-});
-=======
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var url, params, _this$publications, response, list;
 
-<<<<<<< HEAD
-=======
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -641,7 +560,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Feed.vue?vue&type=template&id=cfa144ee&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Feed.vue?vue&type=template&id=cfa144ee& ***!
@@ -659,127 +577,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
-<<<<<<< HEAD
-    [
-      _c(
-        "v-row",
-        [
-          _c("v-col", { attrs: { cols: "12" } }, [_vm._t("default")], 2),
-          _vm._v(" "),
-          _c("v-col", { staticClass: "d-flex justify-center" }, [
-            _c("h4", {
-              staticClass: "text-center text-h4 full-width",
-              domProps: {
-                textContent: _vm._s(
-                  _vm.isHome
-                    ? "Las mejores prepagos de la ciudad"
-                    : "Tus Favoritas"
-                )
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _vm.isHome
-            ? _c(
-                "v-row",
-                { staticClass: "d-flex justify-center px-4 px-md-14" },
-                [
-                  _c(
-                    "v-col",
-                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          "hide-details": "",
-                          dense: "",
-                          outlined: "",
-                          label: "Barrio"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          "hide-details": "",
-                          dense: "",
-                          outlined: "",
-                          label: "Edad"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          "hide-details": "",
-                          dense: "",
-                          outlined: "",
-                          label: "Servicios"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          "hide-details": "",
-                          dense: "",
-                          outlined: "",
-                          label: "Precio"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    {
-                      staticClass: "d-flex justify-center pa-0",
-                      attrs: { cols: "12" }
-                    },
-                    [
-                      _c("v-checkbox", {
-                        attrs: { label: "Solo prefiles verificados" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { staticClass: "d-flex pa-0 mb-8", attrs: { cols: "12" } },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass:
-                            "text-capitalize px-16 py-4 ma-auto text-subtitle-2",
-                          attrs: {
-                            color: "primary",
-                            dark: "",
-                            large: "",
-                            rounded: ""
-                          }
-                        },
-                        [_vm._v("Filtrar")]
-=======
     { attrs: { id: "scroll-target" } },
     [
       _c(
@@ -1014,7 +811,6 @@ var render = function() {
                           )
                         ],
                         1
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
                       )
                     ],
                     1
@@ -1024,33 +820,6 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-<<<<<<< HEAD
-          _vm.busy
-            ? _c("v-progress-linear", {
-                attrs: { indeterminate: "", color: "primary" }
-              })
-            : _c(
-                "v-col",
-                { attrs: { cols: "12" } },
-                [
-                  _c(
-                    "v-row",
-                    _vm._l(_vm.publications, function(item, index) {
-                      return _c("feed-card", {
-                        key: index,
-                        attrs: { size: 3, value: item },
-                        on: {
-                          addFavorities: _vm.addFavorities,
-                          reload: _vm.getPublications
-                        }
-                      })
-                    }),
-                    1
-                  )
-                ],
-                1
-              )
-=======
           _vm.isHome
             ? _c(
                 "v-col",
@@ -1322,7 +1091,6 @@ var render = function() {
               1
             )
           ])
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
         ],
         1
       )

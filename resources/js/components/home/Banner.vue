@@ -1,9 +1,8 @@
 <template>
   <base-card dark>
     <v-img
-      src="/images/banner.jpg"
+      src="/images/banner2.jpg"
       class="grey lighten-2"
-      height="400"
       width="100%"
     >
       <v-row

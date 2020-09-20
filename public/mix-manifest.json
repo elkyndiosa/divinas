@@ -1,22 +1,6 @@
 {
-    "/vendors~images~publications~videos.175c73bd.js": "/vendors~images~publications~videos.175c73bd.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-<<<<<<< HEAD
-    "/account.d6503acd.js": "/account.d6503acd.js",
-    "/contact.09df7647.js": "/contact.09df7647.js",
-    "/dashboard.a624f279.js": "/dashboard.a624f279.js",
-    "/favorites.3a4773d6.js": "/favorites.3a4773d6.js",
-    "/form-user.aa5793a5.js": "/form-user.aa5793a5.js",
-    "/handler-layout.e9942c98.js": "/handler-layout.e9942c98.js",
-    "/home.6a811291.js": "/home.6a811291.js",
-    "/images.ec2174fa.js": "/images.ec2174fa.js",
-    "/not-found-page.f7659942.js": "/not-found-page.f7659942.js",
-    "/ation.94579005.js": "/ation.94579005.js",
-    "/ations.52e9016d.js": "/ations.52e9016d.js",
-    "/vendors~contact.a26fcded.js": "/vendors~contact.a26fcded.js",
-    "/videos.631d4864.js": "/videos.631d4864.js"
-=======
     "/PublicationEditPage.js": "/PublicationEditPage.js",
     "/account.js": "/account.js",
     "/contact.js": "/contact.js",
@@ -30,7 +14,6 @@
     "/ation.js": "/ation.js",
     "/ations.js": "/ations.js",
     "/vendors~PublicationEditPage~images~publications~videos.js": "/vendors~PublicationEditPage~images~publications~videos.js",
-    "/vendors~contact.js": "/vendors~contact.js",
-    "/videos.js": "/videos.js"
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
+    "/videos.js": "/videos.js",
+    "/vendors~contact.js": "/vendors~contact.js"
 }

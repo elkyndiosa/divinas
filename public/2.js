@@ -85,8 +85,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -96,7 +94,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 // import VueMoment from 'vue-moment';
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
@@ -601,11 +598,7 @@ var render = function() {
                       "base-card",
                       {
                         staticClass: "base-card",
-<<<<<<< HEAD
                         attrs: { height: 250, elevation: hover ? 20 : 2 }
-=======
-                        attrs: { height: 300, elevation: hover ? 10 : 2 }
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
                       },
                       [
                         _c("v-img", {
@@ -615,14 +608,8 @@ var render = function() {
                             src:
                               "/uploads/images/" +
                               JSON.parse(_vm.value.imgages_path)[0],
-<<<<<<< HEAD
-                            height: "60%",
-                            width: "100%"
-=======
                             height: "65%",
-                            width: "100%",
-                            "aspect-ratio": "1"
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
+                            width: "100%"
                           },
                           on: {
                             click: function($event) {
@@ -728,7 +715,7 @@ var render = function() {
                               ? _c(
                                   "v-btn",
                                   {
-                                    staticClass: "my-4 mx-1",
+                                    staticClass: "my-4",
                                     attrs: {
                                       disabled: _vm.busy,
                                       small: "",

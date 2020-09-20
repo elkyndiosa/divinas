@@ -7,11 +7,7 @@ use App\Publication;
 use App\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
 use App\Service;
-=======
-use phpDocumentor\Reflection\Types\Boolean;
->>>>>>> 3e8538ff3cc936ded200387ed2901df94a5781d6
 
 class PublicationRepository
 {

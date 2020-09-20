@@ -37,7 +37,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "required_if", function() { return required_if; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "size", function() { return size; });
 /**
-  * vee-validate v3.3.9
+  * vee-validate v3.3.11
   * (c) 2020 Abdelrahman Awad
   * @license MIT
   */
@@ -473,6 +473,9 @@ var validate$g = function (value, _a) {
     if (isNullOrUndefined(value)) {
         return false;
     }
+    if (typeof value === 'string') {
+        value = toArray(value);
+    }
     if (typeof value === 'number') {
         value = String(value);
     }
@@ -763,7 +766,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /**
-  * vee-validate v3.3.9
+  * vee-validate v3.3.11
   * (c) 2020 Abdelrahman Awad
   * @license MIT
   */
@@ -1278,7 +1281,9 @@ function createLocator(value, castFn) {
 }
 function extractLocators(params) {
     if (Array.isArray(params)) {
-        return params.filter(isLocator);
+        return params.filter(function (param) {
+            return isLocator(param) || (typeof param === 'string' && param[0] === '@');
+        });
     }
     return Object.keys(params)
         .filter(function (key) { return isLocator(params[key]); })
@@ -1568,7 +1573,13 @@ function _normalizeMessage(template, field, values) {
 }
 function fillTargetValues(params, crossTable) {
     if (Array.isArray(params)) {
-        return params;
+        return params.map(function (param) {
+            var targetPart = typeof param === 'string' && param[0] === '@' ? param.slice(1) : param;
+            if (targetPart in crossTable) {
+                return crossTable[targetPart];
+            }
+            return param;
+        });
     }
     var values = {};
     var normalize = function (value) {
@@ -1587,7 +1598,7 @@ var aggressive = function () { return ({
     on: ['input', 'blur']
 }); };
 var lazy = function () { return ({
-    on: ['change']
+    on: ['change', 'blur']
 }); };
 var eager = function (_a) {
     var errors = _a.errors;
@@ -2165,7 +2176,9 @@ var ValidationProvider = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
         fieldDeps: function () {
             var _this = this;
             return Object.keys(this.normalizedRules).reduce(function (acc, rule) {
-                var deps = extractLocators(_this.normalizedRules[rule]).map(function (dep) { return dep.__locatorRef; });
+                var deps = extractLocators(_this.normalizedRules[rule]).map(function (dep) {
+                    return isLocator(dep) ? dep.__locatorRef : dep.slice(1);
+                });
                 acc.push.apply(acc, deps);
                 deps.forEach(function (depName) {
                     watchCrossFieldDep(_this, depName);
@@ -2712,7 +2725,7 @@ function withValidation(component, mapProps) {
     return hoc;
 }
 
-var version = '3.3.9';
+var version = '3.3.11';
 
 
 

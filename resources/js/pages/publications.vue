@@ -521,6 +521,8 @@ export default {
     update() {
       this.dataUser.dataAdd = this.dataAdd;
       this.dataUser.services = this.servicesSelect;
+      console.log( this.dataUser)
+      return
       var url = "/api/user/" + this.user.uuid;
       this.dataUser.price = this.price;
       axios
@@ -529,10 +531,8 @@ export default {
           this.texteMessaje = "Actualizacion exitosa";
           this.messaje = true;
           this.dataUser = {};
-          console.log(response);
         })
         .catch((error) => {
-          console.log(error);
         });
     },
     getCitiesAndBarrios() {

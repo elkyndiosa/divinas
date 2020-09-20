@@ -1,6 +1,6 @@
 <template >
   <div>
-      <banner />
+      <banner></banner>
     <articles @addFavorities="addFavorities">
     </articles>
     <about />

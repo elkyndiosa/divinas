@@ -52,7 +52,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BaseCard: function BaseCard() {
@@ -92,7 +91,7 @@ var render = function() {
         "v-img",
         {
           staticClass: "grey lighten-2",
-          attrs: { src: "/images/banner.jpg", height: "400", width: "100%" }
+          attrs: { src: "/images/banner2.jpg", width: "100%" }
         },
         [
           _c(
