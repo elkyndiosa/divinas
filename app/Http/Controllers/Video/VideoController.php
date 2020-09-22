@@ -25,7 +25,7 @@ class VideoController extends Controller
      */
     public function __construct(VideoRepository $videoRepo)
     {
-        $this->videoeRepo = $videoRepo;
+        $this->videoRepo = $videoRepo;
     }
     // public function index(){
     //     return $this->videoRepo->getImagesByUser();
@@ -33,9 +33,17 @@ class VideoController extends Controller
     // public function getByPublication(User $uuid){
     //     return $this->videoRepo->getByPublication($uuid);
     // }
+
+    public function indexUser()
+    {
+        $list = $this->videoRepo->indexByUser();
+        return response()->json(compact('list'), 200);
+    }
+
     public function create(VideoSaveRequest $request){
 
         if($request->file('file')) {
+<<<<<<< HEAD
             $file = $request->file;
             $original_name = $file->getClientOriginalName();
             $replace = array(" ", "(", ")");
@@ -52,21 +60,15 @@ class VideoController extends Controller
             $message = 'El video ha sido guardado.';
             return response()->json(compact('message'), 201);
         }
+=======
+            $this->videoRepo->create($request);
+            $message = 'El video ha sido guardado.';
+            return response()->json(compact('message'), 201);
+        }
+
+        $message = 'No ha enviado ningun video.';
+        return response()->json(compact('message'), 401);
+>>>>>>> d475f370b1eb1a1882da246d35d3a3418bed4803
     }
 
-    protected function createthumnail($video_name, $image_name)
-    {
-
-    }
-    // public function saveName($name){
-    //     return Video::create([
-    //         'path' => $name,
-    //         'image'=>
-    //         'user_id' =>Auth::user()->id,
-    //     ]);
-    // }
-    // public function destroy(Image $uuid){
-    //     $this->authorize('userIsOwner', $uuid);
-    //     return $this->imageRepo->destroy($uuid);
-    // }
 }

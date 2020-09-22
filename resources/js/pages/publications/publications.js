@@ -5,10 +5,14 @@ export default {
     components: {
         FeedCard: () => import("../../components/FeedCard.vue"),
         vueDropzone: vue2Dropzone,
+        VideoPlayer: () => import(
+            /*webpackChunckName: "VideoPlayerComponent"*/
+            '../../components/VideoPlayer.vue'
+        )
     },
     data() {
         return {
-            dropzoneOptions: {
+            imagesOption: {
                 url: "/api/upload/image",
                 thumbnailHeight: 150,
                 maxFilesize: 2,
@@ -17,9 +21,14 @@ export default {
                 },
                 dictDefaultMessage: "Click para buscar una imagen o arrastre aqui",
             },
+            videosOptions: {
+                url: '/api/upload/video',
+                thumbnailHeight: 150,
+                maxFilesize: 5,
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content},
+                dictDefaultMessage: "Click para buscar un video o arrastre aqui"
+            },
             busy: false,
-            success: false,
-            message: null,
             publications: {
                 busy: false,
                 list: []
@@ -27,7 +36,21 @@ export default {
             step: 1,
             valid_step_1: false,
             valid_step_2: false,
-            dataUser: {},
+            dataUser: {
+                name: null,
+                years: null,
+                nikc: null,
+                weight: null,
+                height: null,
+                email: null,
+                phone: null,
+                whatsapp: null,
+                city_id: null,
+                barrio_id: null,
+                delivery: false,
+                have_site: false,
+                description: null,
+            },
             price: 0,
             from_menu: false,
             to_menu: false,
@@ -35,8 +58,8 @@ export default {
                 input: null,
                 output: null,
                 every_single_day: false,
-                input_day: "Lunes",
-                output_day: "Lunes",
+                input_day: null,
+                output_day: null,
                 every_day: false,
             },
             servicesSelect: [],
@@ -48,6 +71,13 @@ export default {
             images: {
                 busy: false,
                 list: []
+            },
+            videosSelect: [],
+            videos: {
+                busy: false,
+                list: [],
+                playing: false,
+                selected: {},
             },
             cities: {
                 busy: false,
@@ -70,10 +100,11 @@ export default {
 
     created() {
         this.getPublications()
-        this.dataUser = this.user
+        //this.dataUser = this.user
         this.getCitiesList()
         this.getServices()
         this.getImages()
+        this.getVideos()
     },
 
     computed: {
@@ -83,6 +114,16 @@ export default {
             if(city)
                 return city.barrios
             return []
+        },
+        valid_step_3() {
+            if(this.imagesSelect.length > 0)
+                return true
+            return false
+        },
+        valid_step_4() {
+            if(this.videosSelect.length >0)
+                return true
+            return false
         }
     },
 
@@ -101,7 +142,7 @@ export default {
                 let response = await axios.get(url)
                 this.publications.list = response.data;
             } catch (error) {
-                console.log(error);
+                ErrorHandler.render(error)
             }
             this.publications.busy = false
         },
@@ -112,10 +153,22 @@ export default {
                 let response = await axios.get(url)
                 this.images.list = response.data;
             } catch (error) {
-                console.log(error);
+                ErrorHandler.render(error)
             }
             this.images.busy = false
         },
+        async getVideos() {
+            this.videos.busy = true
+            let url = '/api/user-videos'
+            try {
+                let response = await axios.get(url)
+                this.videos.list = response.data.list
+            } catch (error) {
+                ErrorHandler.render(error)
+            }
+            this.videos.busy = false
+        },
+
         async getCitiesList() {
             this.cities.busy = true
             let url = "/api/cities"
@@ -123,7 +176,7 @@ export default {
                 let response = await axios.get(url)
                 this.cities.list = response.data.cities
             } catch (error) {
-                console.log(error)
+                ErrorHandler.render(error)
             }
             this.cities.busy = false
         },
@@ -134,9 +187,8 @@ export default {
             try {
                 let response = await axios.get(url)
                 this.services.list = response.data.services
-                this.servicesSelect = response.data.servicesUser
             } catch (error) {
-                console
+                ErrorHandler.render(error)
             }
             this.services.busy = false
         },
@@ -148,16 +200,19 @@ export default {
             data.services = this.servicesSelect;
             data.price = this.price
             data.images = this.imagesSelect
+            data.videos = this.videosSelect
             let url = '/api/publication'
             try {
                 let response = await axios.post(url, data)
-                this.message = response.data.message
-                this.success = true
+                let msj = response.data.message
+                NotificationHandler.simpleSuccess(msj)
+                this.reset()
                 this.$nextTick(() => {
+                    this.step = 1
                     this.getPublications()
                 })
             } catch (error) {
-                console.log(error)
+                ErrorHandler.render(error)
             }
             this.busy = false
         },
@@ -167,10 +222,29 @@ export default {
             this.servicesSelect.splice(index, 1)
         },
 
-        cleanFiles() {
-            this.$refs.myVueDropzone.removeAllFiles();
+        reset() {
+            this.$refs.form_personal.reset()
+            this.$refs.form_personal.resetValidation()
+            this.$refs.form_services.reset()
+            this.$refs.form_services.resetValidation()
+            this.videosSelect = []
+            this.imagesSelect = []
+        },
+
+        imagesCleanFiles() {
+            this.$refs.imagesDropzone.removeAllFiles();
             this.getImages()
         },
+        videosCleanFiles() {
+            this.$refs.videosDropzone.removeAllFiles();
+            this.getVideos()
+        },
+        selectVideo(v) {
+            this.videos.selected = v
+            this.$nextTick(() => {
+                this.videos.playing = true
+            })
+        }
 
     }
 }

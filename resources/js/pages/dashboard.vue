@@ -80,7 +80,7 @@ export default {
           this.data[1].subtitle = response.data.click_whatsapp;
           this.data[2].subtitle = response.data.favorites;
       } catch(error) {
-        console.log(error)
+            ErrorHandler.render(error)
       }
       this.busy = false
     }

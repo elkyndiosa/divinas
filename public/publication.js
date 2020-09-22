@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["publication"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publication.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************!*\
@@ -215,13 +215,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> d475f370b1eb1a1882da246d35d3a3418bed4803
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["uuid"],
   components: {
     TableData: function TableData() {
-      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
+      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
+    },
+    VideoPlayer: function VideoPlayer() {
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
     }
   },
   data: function data() {
@@ -237,7 +291,12 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
         user: {
           uuid: ""
         },
-        servicios: []
+        servicios: [],
+        videos: []
+      },
+      video: {
+        data: {},
+        playing: false
       }
     };
   },
@@ -256,7 +315,6 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
     images: function images() {
       if (!this.data.publication.imgages_path) return [];
       var images = JSON.parse(this.data.publication.imgages_path);
-      images.splice(0, 1);
       return images;
     }
   },
@@ -316,6 +374,14 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
           }
         }, _callee, null, [[2, 11]]);
       }))();
+    },
+    openVideo: function openVideo(video) {
+      var _this2 = this;
+
+      this.video.data = video;
+      this.$nextTick(function () {
+        _this2.video.playing = true;
+      });
     }
   }
 });
@@ -1026,13 +1092,15 @@ var render = function() {
                 { attrs: { cols: "12" } },
                 [
                   _c(
-                    "transition",
-                    { attrs: { name: "slide-image" } },
+                    "v-expand-transition",
                     [
                       _vm.media == "fotos"
                         ? _c(
                             "v-sheet",
-                            { attrs: { "min-height": "200" } },
+                            {
+                              staticClass: "slide-x-transition",
+                              attrs: { "min-height": "200" }
+                            },
                             [
                               _c(
                                 "v-row",
@@ -1050,18 +1118,70 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("v-card", {
-                                        staticClass: "portrait",
-                                        attrs: {
-                                          img: "/uploads/images/" + item,
-                                          height: "150"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.openImage(index)
+                                      _c(
+                                        "v-card",
+                                        {
+                                          attrs: {
+                                            height: "150",
+                                            color: "grey lighten-1"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.openImage(index)
+                                            }
                                           }
-                                        }
-                                      })
+                                        },
+                                        [
+                                          _c("v-img", {
+                                            attrs: {
+                                              src: "/uploads/images/" + item,
+                                              height: "100%",
+                                              width: "100%",
+                                              color: "grey lighten-1"
+                                            },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "placeholder",
+                                                  fn: function() {
+                                                    return [
+                                                      _c(
+                                                        "v-row",
+                                                        {
+                                                          staticClass:
+                                                            "fill-height ma-0",
+                                                          attrs: {
+                                                            align: "center",
+                                                            justify: "center"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-progress-circular",
+                                                            {
+                                                              attrs: {
+                                                                indeterminate:
+                                                                  "",
+                                                                color:
+                                                                  "grey lighten-5"
+                                                              }
+                                                            }
+                                                          )
+                                                        ],
+                                                        1
+                                                      )
+                                                    ]
+                                                  },
+                                                  proxy: true
+                                                }
+                                              ],
+                                              null,
+                                              true
+                                            )
+                                          })
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -1124,7 +1244,158 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.media == "videos"
-                        ? _c("v-sheet", { attrs: { "min-height": "200" } })
+                        ? _c(
+                            "v-sheet",
+                            {
+                              staticClass: "slide-x-reverse-transition",
+                              attrs: { "min-height": "200" }
+                            },
+                            [
+                              _c(
+                                "v-row",
+                                { attrs: { justify: "center" } },
+                                _vm._l(_vm.data.videos, function(item, index) {
+                                  return _c(
+                                    "v-col",
+                                    {
+                                      key: index,
+                                      attrs: {
+                                        cols: "6",
+                                        sm: "4",
+                                        md: "3",
+                                        lg: "2"
+                                      }
+                                    },
+                                    [
+                                      _c("v-hover", {
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var hover = ref.hover
+                                                return [
+                                                  _c(
+                                                    "v-card",
+                                                    {
+                                                      attrs: {
+                                                        color: "black",
+                                                        height: "150"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.openVideo(
+                                                            item
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("v-img", {
+                                                        attrs: {
+                                                          src:
+                                                            "/uploads/images/" +
+                                                            item.image_path +
+                                                            ".png",
+                                                          height: "100%",
+                                                          width: "100%",
+                                                          color: "black"
+                                                        },
+                                                        scopedSlots: _vm._u(
+                                                          [
+                                                            {
+                                                              key:
+                                                                "placeholder",
+                                                              fn: function() {
+                                                                return [
+                                                                  _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "fill-height ma-0",
+                                                                      attrs: {
+                                                                        align:
+                                                                          "center",
+                                                                        justify:
+                                                                          "center"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "v-progress-circular",
+                                                                        {
+                                                                          attrs: {
+                                                                            indeterminate:
+                                                                              "",
+                                                                            color:
+                                                                              "grey lighten-5"
+                                                                          }
+                                                                        }
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  )
+                                                                ]
+                                                              },
+                                                              proxy: true
+                                                            }
+                                                          ],
+                                                          null,
+                                                          true
+                                                        )
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-overlay",
+                                                        {
+                                                          attrs: {
+                                                            absolute: "",
+                                                            value: hover
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-icon",
+                                                            {
+                                                              staticClass:
+                                                                "material-icons",
+                                                              attrs: {
+                                                                color:
+                                                                  "primary",
+                                                                large: ""
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                          play_circle_outline\n                                      "
+                                                              )
+                                                            ]
+                                                          )
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  )
+                                }),
+                                1
+                              )
+                            ],
+                            1
+                          )
                         : _vm._e()
                     ],
                     1
@@ -1134,7 +1405,16 @@ var render = function() {
               )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("VideoPlayer", {
+        attrs: { showing: _vm.video.playing, item: _vm.video.data },
+        on: {
+          close: function($event) {
+            _vm.video.playing = false
+          }
+        }
+      })
     ],
     1
   )

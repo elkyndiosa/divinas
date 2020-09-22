@@ -4,7 +4,7 @@
             <v-stepper v-model="step">
                 <v-stepper-header elevation="0">
                     <v-stepper-step
-                        :complete="step > 1"
+                        :complete="valid_step_1"
                         step="1"
                         editable
                     >
@@ -14,7 +14,7 @@
                     <v-divider></v-divider>
 
                     <v-stepper-step
-                        :complete="step > 2"
+                        :complete="valid_step_2"
                         step="2"
                         :editable="valid_step_1"
 
@@ -25,15 +25,24 @@
                     <v-divider></v-divider>
 
                     <v-stepper-step
+                        :complete="valid_step_3"
                         step="3"
                         :editable="valid_step_1 && valid_step_2"
                     >
                         Imagenes
                     </v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step
+                        :complete="valid_step_4"
+                        step="4"
+                        :editable="valid_step_1 && valid_step_2 && valid_step_3"
+                    >
+                        Videos
+                    </v-stepper-step>
                 </v-stepper-header>
                 <v-stepper-items>
                     <v-stepper-content step="1">
-                        <v-form v-model="valid_step_1">
+                        <v-form ref="form_personal" v-model="valid_step_1">
                             <v-card flat>
                                 <v-card-text>
                                     <v-row>
@@ -185,7 +194,7 @@
                         </v-form>
                     </v-stepper-content>
                     <v-stepper-content step="2">
-                        <v-form v-model="valid_step_2">
+                        <v-form ref="form_services" v-model="valid_step_2">
                             <v-card flat>
                                 <v-card-text>
                                     <v-row>
@@ -359,10 +368,10 @@
                                 <v-row>
                                     <v-col cols="12">
                                         <vue-dropzone
-                                            ref="myVueDropzone"
-                                            id="dropzone"
-                                            :options="dropzoneOptions"
-                                            @vdropzone-success="cleanFiles()"
+                                            ref="imagesDropzone"
+                                            id="images-dropzone"
+                                            :options="imagesOption"
+                                            @vdropzone-success="imagesCleanFiles()"
                                         ></vue-dropzone>
                                     </v-col>
                                 </v-row>
@@ -372,7 +381,7 @@
                                     </v-col>
                                 </v-row>
                                 <v-row v-if="images.busy">
-                                    <v-col cols="12">
+                                    <v-col cols="12" sm="8" md="6">
                                         <v-progress-linear
                                             indeterminate
                                             color="primary"
@@ -398,7 +407,7 @@
                                             elevation="6"
                                         >
                                             <v-img
-                                                :src="'uploads/images/'+img.path"
+                                                :src="'/uploads/images/'+img.path"
                                                 width="100%"
                                                 height="100%"
                                                 contain
@@ -422,8 +431,97 @@
                                 <v-btn
                                     color="primary"
                                     class="mr-0 text-capitalize"
+                                    :disabled="!valid_step_3"
+                                    @click="step = 4"
+                                    depressed
+                                >
+                                    Siguiente
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-stepper-content>
+                    <v-stepper-content step="4">
+                        <v-card>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <vue-dropzone
+                                            ref="videosDropzone"
+                                            id="videos-dropzone"
+                                            :options="videosOptions"
+                                            @vdropzone-success="videosCleanFiles()"
+                                        ></vue-dropzone>
+                                    </v-col>
+                                </v-row>
+                                <v-row v-if="!videos.busy && videos.list.length == 0">
+                                    <v-col cols="12" class="text-center text-h4 font-weight-bold">
+                                        No hay videos guardados.
+                                    </v-col>
+                                </v-row>
+                                <v-row v-if="videos.busy">
+                                    <v-col cols="12" sm="8" md="6">
+                                        <v-progress-linear
+                                            indeterminate
+                                            color="primary"
+                                        ></v-progress-linear>
+                                    </v-col>
+                                </v-row>
+                                <v-slide-group
+                                    v-model="videosSelect"
+                                    class="py-4"
+                                    multiple
+                                >
+                                    <v-slide-item
+                                        v-for="(v, i) in videos.list"
+                                        :key="i"
+                                        class="mr-4"
+                                        color="dark"
+                                        v-slot:default="{ active, toggle }"
+                                        :value="v.id"
+                                    >
+                                        <v-card
+                                            width="200"
+                                            height="200"
+                                            tile
+                                            elevation="6"
+                                        >
+                                            <v-img
+                                                :src="'/uploads/images/'+v.image_path+'.png'"
+                                                width="100%"
+                                                height="70%"
+                                                @click="toggle"
+                                                style="cursor: pointer;"
+                                            >
+                                                <v-overlay
+                                                    :value="active"
+                                                    color="rgba(0, 0, 0, 1)"
+                                                    absolute
+                                                >
+                                                    <v-icon color="primary" large>
+                                                        check_circle_outline
+                                                    </v-icon>
+                                                </v-overlay>
+                                            </v-img>
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn @click="selectVideo(v)" icon>
+                                                    <v-icon color="primary">
+                                                        play_arrow
+                                                    </v-icon>
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-slide-item>
+                                </v-slide-group>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="primary"
+                                    class="mr-0 text-capitalize"
                                     @click="store"
-                                    :disabled="busy"
+                                    :disabled="busy || !valid_step_4"
                                     :loading="busy"
                                     depressed
                                 >
@@ -462,24 +560,7 @@
                 </v-card-text>
             </v-card>
         </v-col>
-        <v-snackbar
-            v-model="success"
-            color="success"
-            timeout="4000"
-        >
-            {{ message }}
-
-            <template v-slot:action="{ attrs }">
-                <v-btn
-                    dark
-                    text
-                    v-bind="attrs"
-                    @click="success = false"
-                >
-                Cerrar
-                </v-btn>
-            </template>
-        </v-snackbar>
+        <VideoPlayer @close="videos.playing = false" :showing="videos.playing" :item="videos.selected" />
     </v-row>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-row>
-            <v-col cols="12" v-if="busy">
+        <v-row justify="center">
+            <v-col cols="12" sm="8" md="6" v-if="busy">
                 <v-progress-linear
                     indeterminate
                     color="primary"
@@ -150,7 +150,7 @@ export default {
                 var response = await axios.get(url)
                 this.images = response.data;
             } catch(error) {
-                console.log(error);
+                ErrorHandler.render(error);
             }
             this.busy = false
         }
@@ -162,7 +162,7 @@ export default {
             let response = await axios.get(url)
             this.images = response.data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.render(error);
         }
         this.busy = false
     },
@@ -174,7 +174,7 @@ export default {
           let index = _.findIndex(this.images, {'uuid': uuid})
           this.images.splice(index, 1);
       } catch (error) {
-          console.log(error);
+          ErrorHandler.render(error);
       }
       this.busy = false
     },

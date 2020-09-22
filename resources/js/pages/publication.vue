@@ -155,43 +155,93 @@
                 </v-row>
           </v-col>
           <v-col cols="12" v-else>
-            <transition name="slide-image">
-                <v-sheet v-if="media == 'fotos'" min-height="200">
-                    <v-row justify="center">
-                        <v-col cols="6" sm="4" md="3" lg="2" v-for="(item, index) in images" :key="index">
-                            <v-card
-                                class="portrait"
-                                :img="'/uploads/images/'+item"
-                                height="150"
-                                @click="openImage(index)"
-                            >
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                    <v-dialog v-model="dialog" width="700">
-                        <v-card flat>
-                            <v-carousel
-                                hide-delimiter-background
-                                v-model="indexImage"
-                            >
-                                <v-carousel-item
-                                    v-for="(slide, i) in images"
-                                    :key="i"
-                                    :src="'/uploads/images/'+slide"
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
+                <v-expand-transition>
+                    <v-sheet class="slide-x-transition" v-if="media == 'fotos'" min-height="200">
+                        <v-row justify="center">
+                            <v-col cols="6" sm="4" md="3" lg="2" v-for="(item, index) in images" :key="index">
+                                <v-card
+                                    height="150"
+                                    @click="openImage(index)"
+                                    color="grey lighten-1"
                                 >
-                                </v-carousel-item>
-                            </v-carousel>
-                        </v-card>
-                    </v-dialog>
-                </v-sheet>
-                <v-sheet v-if="media == 'videos'" min-height="200">
-
-                </v-sheet>
-            </transition>
+                                    <v-img
+                                        :src="'/uploads/images/'+item"
+                                        height="100%"
+                                        width="100%"
+                                        color="grey lighten-1"
+                                    >
+                                        <template v-slot:placeholder>
+                                            <v-row
+                                                class="fill-height ma-0"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <v-progress-circular indeterminate color="grey lighten-5">
+                                                </v-progress-circular>
+                                            </v-row>
+                                        </template>
+                                    </v-img>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                        <v-dialog v-model="dialog" width="700">
+                            <v-card flat>
+                                <v-carousel
+                                    hide-delimiter-background
+                                    v-model="indexImage"
+                                >
+                                    <v-carousel-item
+                                        v-for="(slide, i) in images"
+                                        :key="i"
+                                        :src="'/uploads/images/'+slide"
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
+                                    >
+                                    </v-carousel-item>
+                                </v-carousel>
+                            </v-card>
+                        </v-dialog>
+                    </v-sheet>
+                    <v-sheet class="slide-x-reverse-transition" v-if="media == 'videos'" min-height="200">
+                        <v-row justify="center">
+                            <v-col cols="6" sm="4" md="3" lg="2" v-for="(item, index) in data.videos" :key="index">
+                                <v-hover v-slot:default="{ hover }">
+                                    <v-card
+                                        color="black"
+                                        height="150"
+                                        @click="openVideo(item)"
+                                    >
+                                        <v-img
+                                            :src="'/uploads/images/'+item.image_path+'.png'"
+                                            height="100%"
+                                            width="100%"
+                                            color="black"
+                                        >
+                                            <template v-slot:placeholder>
+                                                <v-row
+                                                    class="fill-height ma-0"
+                                                    align="center"
+                                                    justify="center"
+                                                >
+                                                    <v-progress-circular indeterminate color="grey lighten-5">
+                                                    </v-progress-circular>
+                                                </v-row>
+                                            </template>
+                                        </v-img>
+                                        <v-overlay absolute :value="hover">
+                                            <v-icon class="material-icons" color="primary" large>
+                                                play_circle_outline
+                                            </v-icon>
+                                        </v-overlay>
+                                    </v-card>
+                                </v-hover>
+                            </v-col>
+                        </v-row>
+                    </v-sheet>
+                </v-expand-transition>
           </v-col>
         </v-row>
+        <VideoPlayer @close="video.playing = false" :showing="video.playing" :item="video.data" />
       </v-container>
 </template>
 <script>
@@ -201,6 +251,10 @@ export default {
   props: ["uuid"],
   components:{
     TableData: () => import('../components/publication/TableInfo.vue'),
+    VideoPlayer: () => import(
+        /*webpackChunckName: "VideoPlayerComponent"*/
+        '../components/VideoPlayer.vue'
+    )
   },
   data() {
     return {
@@ -215,7 +269,12 @@ export default {
             user: {
                 uuid: ""
             },
-            servicios: []
+            servicios: [],
+            videos: [],
+      },
+      video: {
+          data: {},
+          playing: false,
       }
     };
   },
@@ -236,7 +295,6 @@ export default {
         if(!this.data.publication.imgages_path)
             return []
         let images = JSON.parse(this.data.publication.imgages_path)
-        images.splice(0, 1)
         return images
     }
   },
@@ -268,6 +326,12 @@ export default {
             console.log(error)
         }
         this.busy = false
+    },
+    openVideo(video) {
+        this.video.data = video
+        this.$nextTick(() => {
+            this.video.playing = true
+        })
     }
   },
 };

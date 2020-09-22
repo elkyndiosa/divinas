@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,11 +28,11 @@ class DatabaseSeeder extends Seeder
         // factory(App\Barrio::class, 6)->create();
         factory(App\User::class, 30)->create();
         factory(App\Image::class, 60)->create();
-        factory(App\Video::class, 50)->create();
-        factory(App\Service::class, 15)->create();
+        //factory(App\Video::class, 50)->create();
+        factory(App\Service::class, 20)->create();
         factory(App\ServiceUser::class, 100)->create();
         factory(App\ScortWeek::class, 1)->create();
-        factory(App\Publication::class, 50)->create();
+        factory(App\Publication::class, 150)->create();
         factory(App\DataUser::class, 50)->create();
         factory(App\Promotion::class, 6)->create();
         factory(App\Top::class, 10)->create();
@@ -42,5 +43,19 @@ class DatabaseSeeder extends Seeder
         $publication = App\Publication::inRandomOrder()->first();
         $publication->week = true;
         $publication->save();
+
+        $publications = App\Publication::all();
+        foreach($publications as $publication) {
+            $p_id = $publication->id;
+            $count = rand(2, 10);
+            for($i = 0; $i <= $count; $i++) {
+                $s_id = rand(1, 20);
+                DB::table('publications_services')->insert([
+                    'publication_id' => $p_id,
+                    'service_id' => $s_id,
+                ]);
+            }
+        }
+
     }
 }
