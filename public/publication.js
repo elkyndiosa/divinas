@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["publication"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/publication.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************!*\
@@ -215,8 +215,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -265,17 +263,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
->>>>>>> d475f370b1eb1a1882da246d35d3a3418bed4803
+//
+//
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["uuid"],
   components: {
     TableData: function TableData() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/publication/TableInfo.vue */ "./resources/js/components/publication/TableInfo.vue"));
     },
     VideoPlayer: function VideoPlayer() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
     }
   },
   data: function data() {

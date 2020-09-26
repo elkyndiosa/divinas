@@ -14,13 +14,6 @@
     "/ation.js": "/ation.js",
     "/ations.js": "/ations.js",
     "/vendors~PublicationEditPage~images~publications~videos.js": "/vendors~PublicationEditPage~images~publications~videos.js",
-<<<<<<< HEAD
-    "/videos.js": "/videos.js",
-    "/vendors~contact.js": "/vendors~contact.js"
-=======
     "/vendors~contact.js": "/vendors~contact.js",
-    "/videos.js": "/videos.js",
-    "/vendors~PublicationEditPage~images~videos.js": "/vendors~PublicationEditPage~images~videos.js",
-    "/vendors~images~publications~videos.js": "/vendors~images~publications~videos.js"
->>>>>>> d475f370b1eb1a1882da246d35d3a3418bed4803
+    "/videos.js": "/videos.js"
 }

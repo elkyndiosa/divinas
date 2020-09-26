@@ -51,7 +51,7 @@ export default {
                 have_site: false,
                 description: null,
             },
-            price: 0,
+            price: 100000,
             from_menu: false,
             to_menu: false,
             dataAdd: {
@@ -121,9 +121,7 @@ export default {
             return false
         },
         valid_step_4() {
-            if(this.videosSelect.length >0)
-                return true
-            return false
+            return true
         }
     },
 
@@ -212,7 +210,8 @@ export default {
                     this.getPublications()
                 })
             } catch (error) {
-                ErrorHandler.render(error)
+                NotificationHandler.simpleError('Error al crear publicacion, por favor veirifica que los datos sean correctos ')
+                this.busy = false
             }
             this.busy = false
         },

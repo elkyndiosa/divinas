@@ -26,11 +26,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     FeedCard: function FeedCard() {
-      return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
     },
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default.a,
     VideoPlayer: function VideoPlayer() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
     }
   },
   data: function data() {
@@ -76,7 +76,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         have_site: false,
         description: null
       },
-      price: 0,
+      price: 100000,
       from_menu: false,
       to_menu: false,
       dataAdd: {
@@ -137,8 +137,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return false;
     },
     valid_step_4: function valid_step_4() {
-      if (this.videosSelect.length > 0) return true;
-      return false;
+      return true;
     }
   },
   watch: {
@@ -366,18 +365,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this6.getPublications();
                 });
 
-                _context6.next = 21;
+                _context6.next = 22;
                 break;
 
               case 18:
                 _context6.prev = 18;
                 _context6.t0 = _context6["catch"](8);
-                ErrorHandler.render(_context6.t0);
-
-              case 21:
+                NotificationHandler.simpleError('Error al crear publicacion, por favor veirifica que los datos sean correctos ');
                 _this6.busy = false;
 
               case 22:
+                _this6.busy = false;
+
+              case 23:
               case "end":
                 return _context6.stop();
             }
@@ -1170,6 +1170,7 @@ var render = function() {
                                                         _vm.services.busy,
                                                       "item-text": "name",
                                                       chips: "",
+                                                      "hide-selected": "",
                                                       multiple: "",
                                                       outlined: "",
                                                       large: ""
@@ -2082,50 +2083,11 @@ var render = function() {
                               )
                             ],
                             1
-                          ),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _c(
-                            "v-card-actions",
-                            [
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  staticClass: "mr-0 text-capitalize",
-                                  attrs: {
-                                    color: "primary",
-                                    disabled: !_vm.valid_step_3,
-                                    depressed: ""
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.step = 4
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Siguiente\n                            "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
                           )
                         ],
                         1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-stepper-content",
-                    { attrs: { step: "4" } },
-                    [
+                      ),
+                      _vm._v(" "),
                       _c(
                         "v-card",
                         [
@@ -2359,6 +2321,16 @@ var render = function() {
                           _c(
                             "v-card-actions",
                             [
+                              _c(
+                                "p",
+                                { staticClass: "pa-0 ma-0 font-weight-bold" },
+                                [
+                                  _vm._v(
+                                    "Selecciona al menos una imagen para esta publicacion"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
                               _c("v-spacer"),
                               _vm._v(" "),
                               _c(
@@ -2367,17 +2339,79 @@ var render = function() {
                                   staticClass: "mr-0 text-capitalize",
                                   attrs: {
                                     color: "primary",
-                                    disabled: _vm.busy || !_vm.valid_step_4,
-                                    loading: _vm.busy,
+                                    disabled: !_vm.valid_step_3,
                                     depressed: ""
                                   },
-                                  on: { click: _vm.store }
+                                  on: {
+                                    click: function($event) {
+                                      _vm.step = 4
+                                    }
+                                  }
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Crear Publicacion\n                            "
+                                    "\n                                Siguiente\n                            "
                                   )
                                 ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-content",
+                    { attrs: { step: "4" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "d-flex justify-center align-center",
+                          attrs: { height: "400" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    {
+                                      staticClass:
+                                        "d-flex justify-center align-center",
+                                      attrs: { cols: "12" }
+                                    },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass: "mr-0 text-capitalize",
+                                          attrs: {
+                                            color: "primary",
+                                            loading: _vm.busy,
+                                            depressed: "",
+                                            large: ""
+                                          },
+                                          on: { click: _vm.store }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    Crear publicacion GRATIS!\n                                "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
                             ],
                             1

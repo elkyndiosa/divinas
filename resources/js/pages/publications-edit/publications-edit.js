@@ -121,10 +121,19 @@ export default {
             try {
                 let response = await axios.get(url)
                 this.publication= response.data.publication;
-                this.servicesSelect = _.map(services, 'id')
-                this.dataAdd = response.data.times
-                this.imagesSelect = JSON.parse(response.data.publication.imgages_path)
-                this.videosSelect = JSON.parse(response.data.publication.videos_path)
+                console.log(response.data.publication)
+                for (let index = 0; index < response.data.publication.services.length; index++) {
+                    this.servicesSelect.push(response.data.publication.services[index])
+                }
+                this.dataAdd.input_day = response.data.times.input_day
+                this.dataAdd.output_day = response.data.times.output_day
+                this.dataAdd.every_day = response.data.times.every_day
+                this.dataAdd.input = response.data.times.input
+                this.dataAdd.output = response.data.times.output
+                this.dataAdd.every_single_day = response.data.times.every_single_day
+                console.log(JSON.parse(response.data.publication.imgages_path)[0])
+                this.imagesSelect.push(JSON.parse(response.data.publication.imgages_path)[0])
+                this.videosSelect.push(JSON.parse(response.data.publication.videos_path)[0])
                 let name = response.data.publication.name
                 this.$nextTick(() => {
                     document.title = 'Divinas Prepagos | Editar '+name

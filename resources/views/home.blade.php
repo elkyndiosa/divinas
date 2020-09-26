@@ -27,6 +27,11 @@
         {{-- <meta name="twitter:image" content=" "--}}
         <meta name="twitter:image:alt" content="DivinasPrepagos">
         <meta name="twitter:site" content="@website-username">
+        <meta property="og:url"                content="https://divinasprepagos.com/" />
+        <meta property="og:type"               content="web" />
+        <meta property="og:title"              content="DivinasPrepagos" />
+        <meta property="og:description"        content="Prepagos Medellin" />
+        <meta property="og:image"              content="https://divinasprepagos.com/images/logo-without.png" />
 
         <link  rel="icon"   href="{{ asset('images/favicon.png') }}" type="image/png" />
 

@@ -217,6 +217,7 @@
                                                         :readonly="services.busy"
                                                         item-text="name"
                                                         chips
+                                                        hide-selected
                                                         multiple
                                                         outlined
                                                         large
@@ -425,22 +426,8 @@
                                     </v-slide-item>
                                 </v-slide-group>
                             </v-card-text>
-                            <v-divider></v-divider>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    color="primary"
-                                    class="mr-0 text-capitalize"
-                                    :disabled="!valid_step_3"
-                                    @click="step = 4"
-                                    depressed
-                                >
-                                    Siguiente
-                                </v-btn>
-                            </v-card-actions>
+                            
                         </v-card>
-                    </v-stepper-content>
-                    <v-stepper-content step="4">
                         <v-card>
                             <v-card-text>
                                 <v-row>
@@ -516,18 +503,38 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <v-card-actions>
+                                <p class="pa-0 ma-0 font-weight-bold">Selecciona al menos una imagen para esta publicacion</p>
                                 <v-spacer></v-spacer>
                                 <v-btn
                                     color="primary"
                                     class="mr-0 text-capitalize"
-                                    @click="store"
-                                    :disabled="busy || !valid_step_4"
-                                    :loading="busy"
+                                    :disabled="!valid_step_3"
+                                    @click="step = 4"
                                     depressed
                                 >
-                                    Crear Publicacion
+                                    Siguiente
                                 </v-btn>
                             </v-card-actions>
+                        </v-card>
+                    </v-stepper-content>
+                    <v-stepper-content step="4">
+                        <v-card height="400"  class="d-flex justify-center align-center">
+                            <v-card-text>
+                                <v-row>
+                                    <v-col cols="12"  class="d-flex justify-center align-center">
+                                     <v-btn
+                                        color="primary"
+                                        class="mr-0 text-capitalize"
+                                        @click="store"
+                                        :loading="busy"
+                                        depressed
+                                        large
+                                    >
+                                        Crear publicacion GRATIS!
+                                    </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
                         </v-card>
                     </v-stepper-content>
                 </v-stepper-items>

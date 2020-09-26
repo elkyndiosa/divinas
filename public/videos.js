@@ -80,7 +80,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default.a,
     VideoPlayer: function VideoPlayer() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
     }
   },
   data: function data() {
@@ -315,7 +315,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                play_circle_outline\n                            "
+                                            "\r\n                                play_circle_outline\r\n                            "
                                           )
                                         ]
                                       )

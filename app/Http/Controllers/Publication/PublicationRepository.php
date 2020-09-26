@@ -81,12 +81,11 @@ class PublicationRepository
 
         $timeId = $data->time_id;
         $this->updateTime($timeId, $data->dataAdd);
-
         Publication::where('uuid', $uuid)->update([
             'description' => $data->description,
             'name' => $data->name,
             'price' => $data->price,
-            'imgages_path' => json_encode($data->images),
+            'imgages_path' => $data->images,
             'videos_path' => json_encode($data->videos),
             'email' => $data->email,
             'phone' => $data->phone,

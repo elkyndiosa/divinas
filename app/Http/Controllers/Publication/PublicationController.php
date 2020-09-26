@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Publication\PublicationRepository;
 use App\Http\Controllers\Publication\Requests\PublicationSaveRequest;
 use App\Publication;
+use App\PublicationService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,15 +31,12 @@ class PublicationController extends Controller
     {
         $list = $this->publicationRepo->index($request);
         return response()->json(compact('list'), 200);
-
     }
-
     public function getWeek()
     {
         $week = $this->publicationRepo->week();
         return response()->json(compact('week'), 200);
     }
-
     public function indexByUser(User $uuid){
         return $this->publicationRepo->getByUser($uuid);
     }
@@ -55,6 +53,7 @@ class PublicationController extends Controller
     public function destroy(Publication $publication){
         // $this->authorize('userIsOwner', $uuid);
         // return $this->imageRepo->destroy($uuid);
+        PublicationService::where('publication_id', '=', $publication->id)->delete();
         $publication->delete();
         $message = 'La publicacion ha sido eliminada.';
         return response()->json(compact('message', 201));

@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"0":"dashboard","1":"publication","account":"account","favorites":"favorites","form-user":"form-user","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~PublicationEditPage~images~publications~videos":"vendors~PublicationEditPage~images~publications~videos","PublicationEditPage":"PublicationEditPage","images":"images","publications":"publications","videos":"videos","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"publication":"publication","account":"account","dashboard":"dashboard","favorites":"favorites","form-user":"form-user","handler-layout":"handler-layout","home":"home","not-found-page":"not-found-page","vendors~PublicationEditPage~images~publications~videos":"vendors~PublicationEditPage~images~publications~videos","PublicationEditPage":"PublicationEditPage","images":"images","publications":"publications","videos":"videos","vendors~contact":"vendors~contact","contact":"contact"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -21469,7 +21469,7 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v10.2.0
+* sweetalert2 v10.3.3
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -21740,7 +21740,7 @@ module.exports = function (css) {
    * Show a one-time console warning about deprecated params/methods
    */
 
-  var warnAboutDepreation = function warnAboutDepreation(deprecatedParam, useInstead) {
+  var warnAboutDeprecation = function warnAboutDeprecation(deprecatedParam, useInstead) {
     warnOnce("\"".concat(deprecatedParam, "\" is deprecated and will be removed in the next major release. Please use \"").concat(useInstead, "\" instead."));
   };
   /**
@@ -22042,11 +22042,9 @@ module.exports = function (css) {
   };
   var show = function show(elem) {
     var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'flex';
-    elem.style.opacity = '';
     elem.style.display = display;
   };
   var hide = function hide(elem) {
-    elem.style.opacity = '';
     elem.style.display = 'none';
   };
   var setStyle = function setStyle(parent, selector, property, value) {
@@ -22935,8 +22933,10 @@ module.exports = function (css) {
     renderActions(instance, params);
     renderFooter(instance, params);
 
-    if (typeof params.onRender === 'function') {
-      params.onRender(getPopup());
+    if (typeof params.didRender === 'function') {
+      params.didRender(getPopup());
+    } else if (typeof params.onRender === 'function') {
+      params.onRender(getPopup()); // @deprecated
     }
   };
 
@@ -23217,15 +23217,27 @@ module.exports = function (css) {
     progressStepsDistance: undefined,
     onBeforeOpen: undefined,
     onOpen: undefined,
+    willOpen: undefined,
+    didOpen: undefined,
     onRender: undefined,
+    didRender: undefined,
     onClose: undefined,
     onAfterClose: undefined,
+    willClose: undefined,
+    didClose: undefined,
     onDestroy: undefined,
+    didDestroy: undefined,
     scrollbarPadding: true
   };
-  var updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'onAfterClose', 'onClose', 'onDestroy', 'progressSteps', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText'];
+  var updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'onAfterClose', 'onClose', 'onDestroy', 'progressSteps', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
   var deprecatedParams = {
-    animation: 'showClass" and "hideClass'
+    animation: 'showClass" and "hideClass',
+    onBeforeOpen: 'willOpen',
+    onOpen: 'didOpen',
+    onRender: 'didRender',
+    onClose: 'willClose',
+    onAfterClose: 'didClose',
+    onDestroy: 'didDestroy'
   };
   var toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'heightAuto', 'keydownListenerCapture'];
   /**
@@ -23267,7 +23279,7 @@ module.exports = function (css) {
 
   var checkIfParamIsDeprecated = function checkIfParamIsDeprecated(param) {
     if (isDeprecatedParameter(param)) {
-      warnAboutDepreation(param, isDeprecatedParameter(param));
+      warnAboutDeprecation(param, isDeprecatedParameter(param));
     }
   };
   /**
@@ -23539,12 +23551,12 @@ module.exports = function (css) {
    * Instance method to close sweetAlert
    */
 
-  function removePopupAndResetState(instance, container, isToast$$1, onAfterClose) {
+  function removePopupAndResetState(instance, container, isToast$$1, didClose) {
     if (isToast$$1) {
-      triggerOnAfterCloseAndDispose(instance, onAfterClose);
+      triggerDidCloseAndDispose(instance, didClose);
     } else {
       restoreActiveElement().then(function () {
-        return triggerOnAfterCloseAndDispose(instance, onAfterClose);
+        return triggerDidCloseAndDispose(instance, didClose);
       });
       globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
         capture: globalState.keydownListenerCapture
@@ -23617,22 +23629,29 @@ module.exports = function (css) {
 
     var animationIsSupported = animationEndEvent && hasCssAnimation(popup);
     var onClose = innerParams.onClose,
-        onAfterClose = innerParams.onAfterClose;
-
-    if (onClose !== null && typeof onClose === 'function') {
-      onClose(popup);
-    }
+        onAfterClose = innerParams.onAfterClose,
+        willClose = innerParams.willClose,
+        didClose = innerParams.didClose;
+    runDidClose(popup, willClose, onClose);
 
     if (animationIsSupported) {
-      animatePopup(instance, popup, container, onAfterClose);
+      animatePopup(instance, popup, container, didClose !== null && didClose !== void 0 ? didClose : onAfterClose);
     } else {
       // Otherwise, remove immediately
-      removePopupAndResetState(instance, container, isToast(), onAfterClose);
+      removePopupAndResetState(instance, container, isToast(), didClose !== null && didClose !== void 0 ? didClose : onAfterClose);
     }
   };
 
-  var animatePopup = function animatePopup(instance, popup, container, onAfterClose) {
-    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, isToast(), onAfterClose);
+  var runDidClose = function runDidClose(popup, willClose, onClose) {
+    if (willClose !== null && typeof willClose === 'function') {
+      willClose(popup);
+    } else if (onClose !== null && typeof onClose === 'function') {
+      onClose(popup); // @deprecated
+    }
+  };
+
+  var animatePopup = function animatePopup(instance, popup, container, didClose) {
+    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, isToast(), didClose);
     popup.addEventListener(animationEndEvent, function (e) {
       if (e.target === popup) {
         globalState.swalCloseEventFinishedCallback();
@@ -23641,10 +23660,10 @@ module.exports = function (css) {
     });
   };
 
-  var triggerOnAfterCloseAndDispose = function triggerOnAfterCloseAndDispose(instance, onAfterClose) {
+  var triggerDidCloseAndDispose = function triggerDidCloseAndDispose(instance, didClose) {
     setTimeout(function () {
-      if (typeof onAfterClose === 'function') {
-        onAfterClose();
+      if (typeof didClose === 'function') {
+        didClose();
       }
 
       instance._destroy();
@@ -23852,25 +23871,30 @@ module.exports = function (css) {
     init(params);
   }
 
+  var SHOW_CLASS_TIMEOUT = 10;
   /**
    * Open popup, add necessary classes and styles, fix scrollbar
    *
-   * @param {Array} params
+   * @param params
    */
 
   var openPopup = function openPopup(params) {
     var container = getContainer();
     var popup = getPopup();
 
-    if (typeof params.onBeforeOpen === 'function') {
-      params.onBeforeOpen(popup);
+    if (typeof params.willOpen === 'function') {
+      params.willOpen(popup);
+    } else if (typeof params.onBeforeOpen === 'function') {
+      params.onBeforeOpen(popup); // @deprecated
     }
 
     var bodyStyles = window.getComputedStyle(document.body);
     var initialBodyOverflow = bodyStyles.overflowY;
     addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
 
-    setScrollingVisibility(container, popup);
+    setTimeout(function () {
+      setScrollingVisibility(container, popup);
+    }, SHOW_CLASS_TIMEOUT);
 
     if (isModal()) {
       fixScrollContainer(container, params.scrollbarPadding, initialBodyOverflow);
@@ -23881,16 +23905,23 @@ module.exports = function (css) {
       globalState.previousActiveElement = document.activeElement;
     }
 
-    if (typeof params.onOpen === 'function') {
-      setTimeout(function () {
-        return params.onOpen(popup);
-      });
-    }
-
+    runDidOpen(popup, params);
     removeClass(container, swalClasses['no-transition']);
   };
 
-  function swalOpenAnimationFinished(event) {
+  var runDidOpen = function runDidOpen(popup, params) {
+    if (typeof params.didOpen === 'function') {
+      setTimeout(function () {
+        return params.didOpen(popup);
+      });
+    } else if (typeof params.onOpen === 'function') {
+      setTimeout(function () {
+        return params.onOpen(popup);
+      }); // @deprecated
+    }
+  };
+
+  var swalOpenAnimationFinished = function swalOpenAnimationFinished(event) {
     var popup = getPopup();
 
     if (event.target !== popup) {
@@ -23900,7 +23931,7 @@ module.exports = function (css) {
     var container = getContainer();
     popup.removeEventListener(animationEndEvent, swalOpenAnimationFinished);
     container.style.overflowY = 'auto';
-  }
+  };
 
   var setScrollingVisibility = function setScrollingVisibility(container, popup) {
     if (animationEndEvent && hasCssAnimation(popup)) {
@@ -23926,10 +23957,17 @@ module.exports = function (css) {
   };
 
   var addClasses$1 = function addClasses(container, popup, params) {
-    addClass(container, params.showClass.backdrop);
-    show(popup); // Animate popup right after showing it
+    addClass(container, params.showClass.backdrop); // the workaround with setting/unsetting opacity is needed for #2019 and 2059
 
-    addClass(popup, params.showClass.popup);
+    popup.style.setProperty('opacity', '0', 'important');
+    show(popup);
+    setTimeout(function () {
+      // Animate popup right after showing it
+      addClass(popup, params.showClass.popup); // and remove the opacity workaround
+
+      popup.style.removeProperty('opacity');
+    }, SHOW_CLASS_TIMEOUT); // 10ms in order to fix #2062
+
     addClass([document.documentElement, document.body], swalClasses.shown);
 
     if (params.heightAuto && params.backdrop && !params.toast) {
@@ -24628,12 +24666,17 @@ module.exports = function (css) {
       delete globalState.deferDisposalTimer;
     }
 
-    if (typeof innerParams.onDestroy === 'function') {
-      innerParams.onDestroy();
-    }
-
+    runDidDestroy(innerParams);
     disposeSwal(this);
   }
+
+  var runDidDestroy = function runDidDestroy(innerParams) {
+    if (typeof innerParams.didDestroy === 'function') {
+      innerParams.didDestroy();
+    } else if (typeof innerParams.onDestroy === 'function') {
+      innerParams.onDestroy(); // @deprecated
+    }
+  };
 
   var disposeSwal = function disposeSwal(instance) {
     // Unset this.params so GC will dispose it (#1569)
@@ -24746,7 +24789,7 @@ module.exports = function (css) {
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '10.2.0';
+  SweetAlert.version = '10.3.3';
 
   var Swal = SweetAlert;
   Swal["default"] = Swal;
@@ -52705,7 +52748,7 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.4.3
+  * vue-router v3.4.4
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -54612,6 +54655,7 @@ function runQueue (queue, fn, cb) {
   step(0);
 }
 
+// When changing thing, also edit router.d.ts
 var NavigationFailureType = {
   redirected: 2,
   aborted: 4,
@@ -54900,6 +54944,7 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     var this$1 = this;
 
   var current = this.current;
+  this.pending = route;
   var abort = function (err) {
     // changed after adding errors with
     // https://github.com/vuejs/vue-router/pull/3047 before that change,
@@ -54949,7 +54994,6 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     resolveAsyncComponents(activated)
   );
 
-  this.pending = route;
   var iterator = function (hook, next) {
     if (this$1.pending !== route) {
       return abort(createNavigationCancelledError(current, route))
@@ -55018,11 +55062,18 @@ History.prototype.setupListeners = function setupListeners () {
   // Default implementation is empty
 };
 
-History.prototype.teardownListeners = function teardownListeners () {
+History.prototype.teardown = function teardown () {
+  // clean up event listeners
+  // https://github.com/vuejs/vue-router/issues/2341
   this.listeners.forEach(function (cleanupListener) {
     cleanupListener();
   });
   this.listeners = [];
+
+  // reset current history route
+  // https://github.com/vuejs/vue-router/issues/3294
+  this.current = START;
+  this.pending = null;
 };
 
 function normalizeBase (base) {
@@ -55486,8 +55537,12 @@ var AbstractHistory = /*@__PURE__*/(function (History) {
     this.confirmTransition(
       route,
       function () {
+        var prev = this$1.current;
         this$1.index = targetIndex;
         this$1.updateRoute(route);
+        this$1.router.afterHooks.forEach(function (hook) {
+          hook && hook(route, prev);
+        });
       },
       function (err) {
         if (isNavigationFailure(err, NavigationFailureType.duplicated)) {
@@ -55582,11 +55637,7 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
     // we do not release the router so it can be reused
     if (this$1.app === app) { this$1.app = this$1.apps[0] || null; }
 
-    if (!this$1.app) {
-      // clean up event listeners
-      // https://github.com/vuejs/vue-router/issues/2341
-      this$1.history.teardownListeners();
-    }
+    if (!this$1.app) { this$1.history.teardown(); }
   });
 
   // main app previously initialized
@@ -55748,7 +55799,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.4.3';
+VueRouter.version = '3.4.4';
 VueRouter.isNavigationFailure = isNavigationFailure;
 VueRouter.NavigationFailureType = NavigationFailureType;
 
@@ -114205,7 +114256,7 @@ var routes = [{
   },
   beforeEnter: guardRoute,
   component: function component() {
-    return __webpack_require__.e(/*! import() | dashboard */ 0).then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
+    return __webpack_require__.e(/*! import() | dashboard */ "dashboard").then(__webpack_require__.bind(null, /*! ../pages/dashboard.vue */ "./resources/js/pages/dashboard.vue"));
   }
 }, {
   path: '/favorites',
@@ -114224,7 +114275,7 @@ var routes = [{
     layout: 'default'
   },
   component: function component() {
-    return Promise.all(/*! import() | publication */[__webpack_require__.e(6), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
+    return Promise.all(/*! import() | publication */[__webpack_require__.e(0), __webpack_require__.e("publication")]).then(__webpack_require__.bind(null, /*! ../pages/publication.vue */ "./resources/js/pages/publication.vue"));
   },
   props: true
 }, {

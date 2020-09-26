@@ -140,7 +140,8 @@ export default {
             let response = await axios.post(url, formData)
             location.href = "/dashboard";
         } catch(error){
-          ErrorHandler.render(error)
+          this.errorServer = error.response.data.message
+          this.snackbar = true;
           this.busy = false
         };
     },
@@ -156,7 +157,8 @@ export default {
             let response = await axios.post(url, formData)
             location.href = "/dashboard";
         } catch(error) {
-          ErrorHandler.render(error)
+          this.errorServer = error.response.data.message
+          this.snackbar = true;
           this.busy = false
         };
     },

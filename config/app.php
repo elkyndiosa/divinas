@@ -167,7 +167,7 @@ return [
          */
 
         //Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
-        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+        // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
         /*
@@ -230,7 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         //'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
-        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
+        // 'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ],
 

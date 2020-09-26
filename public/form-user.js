@@ -423,19 +423,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 response = _context.sent;
                 location.href = "/dashboard";
-                _context.next = 17;
+                _context.next = 18;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](6);
-                ErrorHandler.render(_context.t0);
+                _this2.errorServer = _context.t0.response.data.message;
+                _this2.snackbar = true;
                 _this2.busy = false;
 
-              case 17:
+              case 18:
                 ;
 
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -466,19 +467,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 10:
                 response = _context2.sent;
                 location.href = "/dashboard";
-                _context2.next = 18;
+                _context2.next = 19;
                 break;
 
               case 14:
                 _context2.prev = 14;
                 _context2.t0 = _context2["catch"](7);
-                ErrorHandler.render(_context2.t0);
+                _this3.errorServer = _context2.t0.response.data.message;
+                _this3.snackbar = true;
                 _this3.busy = false;
 
-              case 18:
+              case 19:
                 ;
 
-              case 19:
+              case 20:
               case "end":
                 return _context2.stop();
             }

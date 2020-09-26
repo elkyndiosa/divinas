@@ -40,8 +40,8 @@ class ImageController extends Controller
             $replace = array(" ", "(", ")");
             $name = time().str_replace($replace, "", $original_name);
             $image = ImageEditor::make($file);
-            $image->insert(public_path('images/marca.png'), 'center');
-            $image->save(public_path('uploads/images/'.$name));
+            $image->insert('https://divinasprepagos.com/images/marca.png', 'center');
+            $image->save('uploads/images/'.$name);
             return $this->saveName($name);
         }
 

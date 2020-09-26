@@ -10,7 +10,7 @@ use App\Video;
 use App\User;
 //use VideoThumbnail;
 use Illuminate\Support\Facades\Auth;
-use FFMpeg;
+// use FFMpeg;
 
 class VideoController extends Controller
 {
@@ -27,12 +27,12 @@ class VideoController extends Controller
     {
         $this->videoRepo = $videoRepo;
     }
-    // public function index(){
-    //     return $this->videoRepo->getImagesByUser();
-    // }
-    // public function getByPublication(User $uuid){
-    //     return $this->videoRepo->getByPublication($uuid);
-    // }
+    public function index(){
+        return $this->videoRepo->getImagesByUser();
+    }
+    public function getByPublication(User $uuid){
+        return $this->videoRepo->getByPublication($uuid);
+    }
 
     public function indexUser()
     {
@@ -41,9 +41,7 @@ class VideoController extends Controller
     }
 
     public function create(VideoSaveRequest $request){
-
         if($request->file('file')) {
-<<<<<<< HEAD
             $file = $request->file;
             $original_name = $file->getClientOriginalName();
             $replace = array(" ", "(", ")");
@@ -51,24 +49,15 @@ class VideoController extends Controller
             $name = time().str_replace($replace, "", $original_name);
             $image_name = str_replace(".".$extension, "", $name);
             $file->storeAs('videos/', $name, 'uploads');
-            FFMpeg::fromDisk('videos')
-                ->open($name)
-                ->getFrameFromSeconds(2)
-                ->export()
-                ->toDisk('images')
-                ->save($image_name.'.png');
+            // FFMpeg::fromDisk('videos')
+            //     ->open($name)
+            //     ->getFrameFromSeconds(2)
+            //     ->export()
+            //     ->toDisk('images')
+            //     ->save($image_name.'.png');
             $message = 'El video ha sido guardado.';
-            return response()->json(compact('message'), 201);
-        }
-=======
             $this->videoRepo->create($request);
-            $message = 'El video ha sido guardado.';
             return response()->json(compact('message'), 201);
-        }
-
-        $message = 'No ha enviado ningun video.';
-        return response()->json(compact('message'), 401);
->>>>>>> d475f370b1eb1a1882da246d35d3a3418bed4803
+        };
     }
-
 }

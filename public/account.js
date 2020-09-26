@@ -64,7 +64,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ImageSelect: function ImageSelect() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/ImagesSelect.vue */ "./resources/js/components/ImagesSelect.vue"));
     }
   },
   data: function data() {

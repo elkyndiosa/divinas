@@ -1,18 +1,19 @@
 <template>
   <base-card dark>
     <v-img
-      src="/images/banner2.jpg"
-      class="grey lighten-2"
+      src="/images/logo-without.png"
+      class="black"
       width="100%"
     >
       <v-row
         class="fill-height pa-3 px-md-16"
         align="center"
+        style="background: rgb(0 0 0 / 50%);"
       >
         <v-col
           cols="12"
           md="6" 
-          class="d-flex justify-start flex-wrap black--text"
+          class="d-flex justify-start flex-wrap white--text"
         >
           <h1 class="text-primary-headers" style="width: 100%">
             Las mejores prepagos y escorts de Medellin
@@ -30,7 +31,7 @@
           filled
           hide-details
           dense
-          light
+          dark
           append-icon="search"
           style="max-width: 300px;"
           class=""

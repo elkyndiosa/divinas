@@ -38,7 +38,7 @@ class VideoRepository
     {
         $file = $request->file;
         $data = $this->saveFile($file);
-        $this->createThumbnail($data);
+        // $this->createThumbnail($data);
         $user = Auth::user();
         Video::create([
             'path' => $data['name'],

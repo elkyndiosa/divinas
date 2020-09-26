@@ -26,11 +26,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     FeedCard: function FeedCard() {
-      return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../components/FeedCard.vue */ "./resources/js/components/FeedCard.vue"));
     },
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default.a,
     VideoPlayer: function VideoPlayer() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../../components/VideoPlayer.vue */ "./resources/js/components/VideoPlayer.vue"));
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -136,7 +136,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var url, response, name;
+        var url, response, index, name;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -150,33 +150,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 5:
                 response = _context.sent;
                 _this.publication = response.data.publication;
-                _this.servicesSelect = _.map(services, 'id');
-                _this.dataAdd = response.data.times;
-                _this.imagesSelect = JSON.parse(response.data.publication.imgages_path);
-                _this.videosSelect = JSON.parse(response.data.publication.videos_path);
+                console.log(response.data.publication);
+
+                for (index = 0; index < response.data.publication.services.length; index++) {
+                  _this.servicesSelect.push(response.data.publication.services[index]);
+                }
+
+                _this.dataAdd.input_day = response.data.times.input_day;
+                _this.dataAdd.output_day = response.data.times.output_day;
+                _this.dataAdd.every_day = response.data.times.every_day;
+                _this.dataAdd.input = response.data.times.input;
+                _this.dataAdd.output = response.data.times.output;
+                _this.dataAdd.every_single_day = response.data.times.every_single_day;
+                console.log(JSON.parse(response.data.publication.imgages_path)[0]);
+
+                _this.imagesSelect.push(JSON.parse(response.data.publication.imgages_path)[0]);
+
+                _this.videosSelect.push(JSON.parse(response.data.publication.videos_path)[0]);
+
                 name = response.data.publication.name;
 
                 _this.$nextTick(function () {
                   document.title = 'Divinas Prepagos | Editar ' + name;
                 });
 
-                _context.next = 18;
+                _context.next = 25;
                 break;
 
-              case 15:
-                _context.prev = 15;
+              case 22:
+                _context.prev = 22;
                 _context.t0 = _context["catch"](2);
                 ErrorHandler.render(_context.t0);
 
-              case 18:
+              case 25:
                 _this.busy = false;
 
-              case 19:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 15]]);
+        }, _callee, null, [[2, 22]]);
       }))();
     },
     getImages: function getImages() {
