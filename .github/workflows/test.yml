@@ -7,6 +7,4 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: build and push to docker
-      run: mv public ../public_html
-    - name: Move 1
-      run: git status
+      run: mkdir -p test
