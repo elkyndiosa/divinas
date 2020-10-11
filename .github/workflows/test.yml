@@ -1,0 +1,12 @@
+name: CICD
+
+on: [pull]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Move public to public_html
+        run: mv public public_html
